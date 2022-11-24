@@ -12,11 +12,13 @@ const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = data => {
-    const { email, password, confirm, name } = data;
+    const { email, password, confirm, name, accountType } = data;
 
     if (password !== confirm) {
       return toast.error("Password didn't matched.");
     }
+
+    console.log(accountType);
 
     createUser(email, password)
       .then(result => {
@@ -52,7 +54,14 @@ const Register = () => {
     googleLogin()
       .then(result => {
         const user = result.user;
-        console.log(user);
+
+        const userInfo = {
+          name: user.displayName,
+          email: user.email,
+          accountType: 'buyer'
+        };
+        console.log(userInfo);
+
         toast.success("Successfully register with google.");
         setRegisterError("");
       })
@@ -95,6 +104,15 @@ const Register = () => {
               </label>
               <input {...register('confirm', { required: "Confirm password is required" })} type="password" className="input input-bordered w-full" required />
               <p className='text-red-500'>{errors.confirm?.message}</p>
+            </div>
+            <div className='form-control w-full'>
+              <label className="label">
+                <span className="label-text font-medium">Account Type</span>
+              </label>
+              <select {...register('accountType')} className="select select-bordered w-full">
+                <option value={`buyer`}>Buyer</option>
+                <option value={`seller`}>Seller</option>
+              </select>
             </div>
             <p className='text-red-500 mt-2'> {registerError} </p>
             <div className='form-control w-full mt-5'>
