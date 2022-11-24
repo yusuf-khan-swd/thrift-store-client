@@ -9,7 +9,7 @@ const Register = () => {
   const { createUser, updateUserInfo, googleLogin } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const onSubmit = data => {
     const { email, password, confirm, name, accountType } = data;
@@ -21,15 +21,28 @@ const Register = () => {
     createUser(email, password)
       .then(result => {
         const user = result.user;
+        reset();
 
         const userInfo = {
           userName: name,
           userEmail: user.email,
           userType: accountType
         };
-        console.log(userInfo)
 
-        toast.success(`Registration was successful`);
+        fetch('http://localhost:5000/user', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(userInfo)
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.acknowledged) {
+              toast.success(`Registration was successful`);
+            }
+          })
+
         handleUpdateUserInfo(name);
         setRegisterError("");
       })
@@ -37,7 +50,6 @@ const Register = () => {
         console.log("Register error: ", error);
         setRegisterError(error.message);
       })
-
   };
 
   const handleUpdateUserInfo = (name) => {
