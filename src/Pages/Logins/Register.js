@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -6,11 +6,16 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
   const { createUser, updateUserInfo } = useContext(AuthContext);
+  const [registerError, setRegisterError] = useState("");
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = data => {
-    const { email, password, name } = data;
+    const { email, password, confirm, name } = data;
+
+    if (password !== confirm) {
+      return toast.error("Password didn't matched.");
+    }
 
     createUser(email, password)
       .then(result => {
@@ -19,8 +24,9 @@ const Register = () => {
         toast.success(`Registration was successful`);
         handleUpdateUserInfo(name);
       })
-      .catch(err => {
-        console.log("Register error: ", err);
+      .catch(error => {
+        console.log("Register error: ", error);
+        setRegisterError(error.message);
       })
 
   };
@@ -35,6 +41,7 @@ const Register = () => {
       })
       .catch((error) => {
         console.log("Update profile error: ", error);
+        setRegisterError(error.message)
       })
   };
 
@@ -48,23 +55,31 @@ const Register = () => {
               <label className="label">
                 <span className="label-text font-medium">Name</span>
               </label>
-              <input {...register('name', { required: "Name is required" })} type="text" className="input input-bordered w-full" />
+              <input {...register('name', { required: "Name is required" })} type="text" className="input input-bordered w-full" required />
               <p className='text-red-500'>{errors.name?.message}</p>
             </div>
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text font-medium">Email</span>
               </label>
-              <input {...register('email', { required: "Email is required" })} type="email" className="input input-bordered w-full" />
+              <input {...register('email', { required: "Email is required" })} type="email" className="input input-bordered w-full" required />
               <p className='text-red-500'>{errors.email?.message}</p>
             </div>
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text font-medium">Password</span>
               </label>
-              <input {...register('password', { required: "Email is required" })} type="password" className="input input-bordered w-full" />
+              <input {...register('password', { required: "Password is required" })} type="password" className="input input-bordered w-full" required />
               <p className='text-red-500'>{errors.password?.message}</p>
             </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text font-medium">Confirm Password</span>
+              </label>
+              <input {...register('confirm', { required: "Confirm password is required" })} type="password" className="input input-bordered w-full" required />
+              <p className='text-red-500'>{errors.confirm?.message}</p>
+            </div>
+            <p className='text-red-500 mt-2'> {registerError} </p>
             <div className='form-control w-full mt-5'>
               <button className='btn' type={'submit'}>Register</button>
             </div>
