@@ -22,12 +22,12 @@ const Register = () => {
       .then(result => {
         const user = result.user;
 
-        const accountInfo = {
-          user: name,
-          email: user.email,
-          accountType
+        const userInfo = {
+          userName: name,
+          userEmail: user.email,
+          userType: accountType
         };
-        console.log(accountInfo)
+        console.log(userInfo)
 
         toast.success(`Registration was successful`);
         handleUpdateUserInfo(name);
@@ -60,12 +60,12 @@ const Register = () => {
       .then(result => {
         const user = result.user;
 
-        const accountInfo = {
-          name: user.displayName,
-          email: user.email,
-          accountType: 'buyer'
+        const userInfo = {
+          userName: user.displayName,
+          userEmail: user.email,
+          userType: 'buyer'
         };
-        console.log(accountInfo);
+        console.log(userInfo);
 
         toast.success("Successfully register with google.");
         setRegisterError("");
