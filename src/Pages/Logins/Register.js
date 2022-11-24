@@ -4,10 +4,14 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import googleLogo from '../../assets/google.png';
+import useToken from '../../hooks/useToken';
 
 const Register = () => {
   const { createUser, updateUserInfo, googleLogin } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
+  const [registerUserEmail, setRegisterUserEmail] = useState("");
+
+  useToken(registerUserEmail);
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -40,6 +44,7 @@ const Register = () => {
           .then(data => {
             if (data.acknowledged) {
               toast.success(`Registration was successful`);
+              setRegisterUserEmail(user.email)
             }
           })
 
@@ -89,6 +94,7 @@ const Register = () => {
           .then(data => {
             if (data.acknowledged) {
               toast.success("Successfully register with google.");
+              setRegisterUserEmail(user.email);
             }
           })
         setRegisterError("");
