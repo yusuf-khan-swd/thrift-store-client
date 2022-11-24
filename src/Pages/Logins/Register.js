@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import googleLogo from '../../assets/google.png';
 
 const Register = () => {
   const { createUser, updateUserInfo } = useContext(AuthContext);
@@ -45,6 +46,10 @@ const Register = () => {
       })
   };
 
+  const handleGoogleLogin = () => {
+    console.log("google");
+  };
+
   return (
     <div className='container mx-auto p-3'>
       <div className='card max-w-lg mx-auto'>
@@ -84,6 +89,13 @@ const Register = () => {
               <button className='btn' type={'submit'}>Register</button>
             </div>
           </form>
+          <div className="divider">OR</div>
+          <div className='form-control w-full'>
+            <button onClick={handleGoogleLogin} className='btn'>
+              <img src={googleLogo} className="w-9 mr-3" alt="" />
+              Google Register
+            </button>
+          </div>
         </div>
       </div>
       <p className='text-center mt-2'>Already have an account? Please <Link to="/login" className='text-blue-600'>Login</Link> </p>
