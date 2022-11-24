@@ -4,12 +4,14 @@ import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Logins/Login";
 import Register from "../../Pages/Logins/Register";
 import Blog from "../../Pages/Others/Blog/Blog";
+import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const routes = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
+    errorElement: <DisplayError></DisplayError>,
     children: [
       {
         path: '/',
