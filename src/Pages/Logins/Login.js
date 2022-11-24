@@ -4,10 +4,14 @@ import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import googleLogo from '../../assets/google.png';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
   const { userLogin, googleLogin, logOut } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+
+  useToken(loginUserEmail);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,16 +25,8 @@ const Login = () => {
     userLogin(email, password)
       .then(result => {
         const user = result.user;
+        setLoginUserEmail(user.email);
         toast.success(`Successfully Login.`);
-
-        fetch(`http://localhost:5000/jwt?email=${user.email}`)
-          .then(res => res.json())
-          .then(data => {
-            if (data.token) {
-              localStorage.setItem("thrift-token", data.token);
-            }
-          })
-
         setLoginError("");
         navigate(from, { replace: true });
       })
@@ -51,6 +47,7 @@ const Login = () => {
           .then(data => {
 
             if (data?.result?.userEmail) {
+              setLoginUserEmail(user.email);
               toast.success("Successfully login with google.");
               navigate(from, { replace: true });
             }
