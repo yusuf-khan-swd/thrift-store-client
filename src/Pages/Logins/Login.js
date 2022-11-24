@@ -6,7 +6,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import googleLogo from '../../assets/google.png';
 
 const Login = () => {
-  const { userLogin, googleLogin } = useContext(AuthContext);
+  const { userLogin, googleLogin, logOut } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
 
   const navigate = useNavigate();
@@ -37,10 +37,29 @@ const Login = () => {
     googleLogin()
       .then(result => {
         const user = result.user;
-        console.log(user);
-        toast.success("Successfully login with google.");
+
+        fetch(`http://localhost:5000/user?email=${user.email}`)
+          .then(res => res.json())
+          .then(data => {
+
+            if (data?.result?.userEmail) {
+              toast.success("Successfully login with google.");
+              navigate(from, { replace: true });
+            }
+            else {
+              toast.error("Please Register First");
+              logOut()
+                .then(() => {
+                  navigate("/register");
+                })
+                .catch(error => {
+                  console.log("logout error: ", error);
+                  setLoginError(error.message);
+                })
+            }
+          })
+
         setLoginError("");
-        navigate(from, { replace: true });
       })
       .catch(error => {
         console.log("Google Error: ", error);
