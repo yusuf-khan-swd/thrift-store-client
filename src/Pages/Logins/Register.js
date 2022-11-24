@@ -6,7 +6,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import googleLogo from '../../assets/google.png';
 
 const Register = () => {
-  const { createUser, updateUserInfo } = useContext(AuthContext);
+  const { createUser, updateUserInfo, googleLogin } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
 
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -24,6 +24,7 @@ const Register = () => {
         console.log(user);
         toast.success(`Registration was successful`);
         handleUpdateUserInfo(name);
+        setRegisterError("");
       })
       .catch(error => {
         console.log("Register error: ", error);
@@ -39,6 +40,7 @@ const Register = () => {
 
     updateUserInfo(profile)
       .then(() => {
+        setRegisterError("");
       })
       .catch((error) => {
         console.log("Update profile error: ", error);
@@ -47,7 +49,17 @@ const Register = () => {
   };
 
   const handleGoogleLogin = () => {
-    console.log("google");
+    googleLogin()
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        toast.success("Successfully register with google.");
+        setRegisterError("");
+      })
+      .catch(error => {
+        console.log("Google Error: ", error);
+        setRegisterError(error.message);
+      })
   };
 
   return (
