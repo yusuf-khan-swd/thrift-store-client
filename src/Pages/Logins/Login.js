@@ -9,13 +9,17 @@ import useToken from '../../hooks/useToken';
 const Login = () => {
   const { userLogin, googleLogin, logOut } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
-  const [loginUserEmail, setLoginUserEmail] = useState("");
 
-  useToken(loginUserEmail);
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -25,16 +29,14 @@ const Login = () => {
     userLogin(email, password)
       .then(result => {
         const user = result.user;
-        setLoginUserEmail(user.email);
         toast.success(`Successfully Login.`);
         setLoginError("");
-        navigate(from, { replace: true });
+        setLoginUserEmail(user.email);
       })
       .catch(error => {
         console.log("Login error: ", error);
         setLoginError(error.message);
       })
-
   };
 
   const handleGoogleLogin = () => {
@@ -49,7 +51,6 @@ const Login = () => {
             if (data?.result?.userEmail) {
               setLoginUserEmail(user.email);
               toast.success("Successfully login with google.");
-              navigate(from, { replace: true });
             }
             else {
               toast.error("Please Register First");
