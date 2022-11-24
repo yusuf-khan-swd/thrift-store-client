@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthProvider/AuthProvider';
+import useAccount from '../hooks/useAccount';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
 
 const DashboardLayout = () => {
+  const { user } = useContext(AuthContext);
+
+  const [userType] = useAccount(user.email);
+
+  console.log(userType);
+
   const dashboardItems = <>
     <li className='border rounded-lg m-1'><Link to='/dashboard/my-orders'>My Orders</Link></li>
     <li className='border rounded-lg m-1'><Link to='/dashboard/add-product'>Add A Product</Link></li>

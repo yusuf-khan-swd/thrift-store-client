@@ -1,17 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import googleLogo from '../../assets/google.png';
 import useToken from '../../hooks/useToken';
 
 const Register = () => {
-  const { createUser, updateUserInfo, googleLogin } = useContext(AuthContext);
+  const { createUser, updateUserInfo, googleLogin, logOut } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
-  const [registerUserEmail, setRegisterUserEmail] = useState("");
 
-  useToken(registerUserEmail);
+  const [registerUserEmail, setRegisterUserEmail] = useState("");
+  const [token] = useToken(registerUserEmail);
+  const navigate = useNavigate();
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -44,7 +45,7 @@ const Register = () => {
           .then(data => {
             if (data.acknowledged) {
               toast.success(`Registration was successful`);
-              setRegisterUserEmail(user.email)
+              setRegisterUserEmail(user.email);
             }
           })
 
@@ -92,10 +93,22 @@ const Register = () => {
         })
           .then(res => res.json())
           .then(data => {
-            if (data.acknowledged) {
-              toast.success("Successfully register with google.");
-              setRegisterUserEmail(user.email);
+            if (data.success) {
+              if (data.data?.acknowledged) {
+                toast.success("Successfully register with Google.");
+              }
             }
+            else {
+              toast.error(data.message);
+              logOut()
+                .then(() => {
+                  navigate("/login");
+                })
+                .catch(error => {
+                  console.log('logout error: ', error);
+                })
+            }
+            setRegisterUserEmail(user.email);
           })
         setRegisterError("");
       })
@@ -107,6 +120,10 @@ const Register = () => {
 
   return (
     <div className='container mx-auto p-3'>
+      {
+        token &&
+        <Navigate to="/"></Navigate>
+      }
       <div className='card max-w-lg mx-auto'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl underline underline-offset-2 cursor-pointer'>Create an Account</h2>
