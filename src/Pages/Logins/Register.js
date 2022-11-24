@@ -66,7 +66,7 @@ const Register = () => {
     <div className='container mx-auto p-3'>
       <div className='card max-w-lg mx-auto'>
         <div className='card-body border rounded-md'>
-          <h2 className='font-bold card-title'>Create an account</h2>
+          <h2 className='card-title justify-center text-2xl underline underline-offset-2 cursor-pointer'>Create an Account</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control w-full">
               <label className="label">
