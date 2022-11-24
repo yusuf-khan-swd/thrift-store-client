@@ -18,12 +18,17 @@ const Register = () => {
       return toast.error("Password didn't matched.");
     }
 
-    console.log(accountType);
-
     createUser(email, password)
       .then(result => {
         const user = result.user;
-        console.log(user);
+
+        const accountInfo = {
+          user: name,
+          email: user.email,
+          accountType
+        };
+        console.log(accountInfo)
+
         toast.success(`Registration was successful`);
         handleUpdateUserInfo(name);
         setRegisterError("");
@@ -55,12 +60,12 @@ const Register = () => {
       .then(result => {
         const user = result.user;
 
-        const userInfo = {
+        const accountInfo = {
           name: user.displayName,
           email: user.email,
           accountType: 'buyer'
         };
-        console.log(userInfo);
+        console.log(accountInfo);
 
         toast.success("Successfully register with google.");
         setRegisterError("");
