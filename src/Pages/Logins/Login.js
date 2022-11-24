@@ -1,13 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import googleLogo from '../../assets/google.png';
 
 const Login = () => {
   const { userLogin, googleLogin } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -20,6 +24,7 @@ const Login = () => {
         console.log(user);
         toast.success(`Successfully Login.`);
         setLoginError("");
+        navigate(from, { replace: true });
       })
       .catch(error => {
         console.log("Login error: ", error);
@@ -35,6 +40,7 @@ const Login = () => {
         console.log(user);
         toast.success("Successfully login with google.");
         setLoginError("");
+        navigate(from, { replace: true });
       })
       .catch(error => {
         console.log("Google Error: ", error);
