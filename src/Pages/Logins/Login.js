@@ -21,10 +21,16 @@ const Login = () => {
     userLogin(email, password)
       .then(result => {
         const user = result.user;
-        console.log(user);
         toast.success(`Successfully Login.`);
+
+        fetch(`http://localhost:5000/jwt?email=${user.email}`)
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+          })
+
         setLoginError("");
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
       })
       .catch(error => {
         console.log("Login error: ", error);
