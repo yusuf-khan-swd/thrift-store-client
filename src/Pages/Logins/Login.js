@@ -26,11 +26,13 @@ const Login = () => {
         fetch(`http://localhost:5000/jwt?email=${user.email}`)
           .then(res => res.json())
           .then(data => {
-            console.log(data);
+            if (data.token) {
+              localStorage.setItem("thrift-token", data.token);
+            }
           })
 
         setLoginError("");
-        // navigate(from, { replace: true });
+        navigate(from, { replace: true });
       })
       .catch(error => {
         console.log("Login error: ", error);
