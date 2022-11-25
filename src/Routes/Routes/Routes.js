@@ -59,11 +59,11 @@ const routes = createBrowserRouter([
       },
       {
         path: '/dashboard/my-products',
-        element: <MyProducts></MyProducts>
+        element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
       },
       {
         path: '/dashboard/my-buyers',
-        element: <MyBuyers></MyBuyers>
+        element: <SellerRoute><MyBuyers></MyBuyers></SellerRoute>
       },
       {
         path: '/dashboard/all-sellers',
