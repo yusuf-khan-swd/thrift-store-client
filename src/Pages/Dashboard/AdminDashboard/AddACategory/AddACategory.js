@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 const AddACategory = () => {
+  const [isAdding, setIsAdding] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const imageHostKey = process.env.REACT_APP_imgbbKey;
 
@@ -11,6 +12,7 @@ const AddACategory = () => {
     const formData = new FormData();
     formData.append('image', image);
 
+    setIsAdding(true);
     fetch(`https://api.imgbb.com/1/upload?key=${imageHostKey}`, {
       method: 'POST',
       body: formData
@@ -36,16 +38,16 @@ const AddACategory = () => {
               if (data.acknowledged) {
                 toast.success(`Successfully added ${category.category} to categories`);
                 reset();
+                setIsAdding(false)
               }
             })
         }
       })
-
   };
 
   return (
     <div className='container mx-auto p-3'>
-      <div className='card max-w-xs mx-auto'>
+      <div className='card max-w-lg mx-auto'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl cursor-pointer'>Category</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -64,7 +66,7 @@ const AddACategory = () => {
               <p className='text-red-500'>{errors.image?.message}</p>
             </div>
             <div className='form-control w-full mt-5'>
-              <button className='btn' type={'submit'}>Add Category</button>
+              <button className='btn' type={'submit'} disabled={isAdding}>Add Category</button>
             </div>
           </form>
         </div>
