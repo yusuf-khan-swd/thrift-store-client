@@ -1,17 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CategoryCard = ({ category }) => {
-  const { name, image } = category;
-
+  const { name, image, _id } = category;
   return (
-    <div>
-      <div className="card card-compact w-96 bg-base-100 shadow-xl">
+    <div className='m-2'>
+      <div className="card card-compact w-full bg-base-100 shadow-xl border">
         <figure><img src={image} className="w-full h-80" alt={name} /></figure>
         <div className="card-body">
-          <h2 className="card-title uppercase">{name}</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
+          <Link to={`/category/${_id}`}><h2 className="card-title uppercase justify-center">{name}</h2></Link>
+          <div className="card-actions justify-center">
+            <Link to={`/category/${_id}`}><button className="btn btn-primary btn-sm">Details</button></Link>
           </div>
         </div>
       </div>
