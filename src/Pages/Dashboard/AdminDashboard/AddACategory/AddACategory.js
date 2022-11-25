@@ -66,7 +66,7 @@ const AddACategory = () => {
               <p className='text-red-500'>{errors.image?.message}</p>
             </div>
             <div className='form-control w-full mt-5'>
-              <button className='btn' type={'submit'} disabled={isAdding}>Add Category</button>
+              <button className='btn' type={'submit'} disabled={isAdding}>Add to Categories</button>
             </div>
           </form>
         </div>
