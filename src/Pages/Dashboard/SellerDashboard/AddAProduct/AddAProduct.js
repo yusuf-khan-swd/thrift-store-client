@@ -49,8 +49,8 @@ const AddAProduct = () => {
   };
 
   return (
-    <div className='container mx-auto p-3'>
-      <div className='card max-w-lg mx-auto'>
+    <div className='container mx-auto p-3 my-16'>
+      <div className='card max-w-lg mx-auto bg-white'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl cursor-pointer'>Add a Product</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
