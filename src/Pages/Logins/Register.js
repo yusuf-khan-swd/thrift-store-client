@@ -33,7 +33,7 @@ const Register = () => {
           userType: accountType
         };
 
-        fetch('https://thrift-store-server.vercel.app/user', {
+        fetch('http://localhost:5000/user', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -85,7 +85,7 @@ const Register = () => {
           userType: 'buyer'
         };
 
-        fetch('https://thrift-store-server.vercel.app/user', {
+        fetch('http://localhost:5000/user', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
