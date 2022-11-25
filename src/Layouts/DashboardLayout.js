@@ -12,12 +12,25 @@ const DashboardLayout = () => {
   console.log(userType);
 
   const dashboardItems = <>
-    <li className='border rounded-lg m-1'><Link to='/dashboard/my-orders'>My Orders</Link></li>
-    <li className='border rounded-lg m-1'><Link to='/dashboard/add-product'>Add A Product</Link></li>
-    <li className='border rounded-lg m-1'><Link to='/dashboard/my-products'>My Products</Link></li>
-    <li className='border rounded-lg m-1'><Link to='/dashboard/my-buyers'>My Buyers</Link></li>
-    <li className='border rounded-lg m-1'><Link to='/dashboard/all-sellers'>All Sellers</Link></li>
-    <li className='border rounded-lg m-1'><Link to='/dashboard/all-Buyers'>All Buyers</Link></li>
+    {
+      userType === "buyer" &&
+      <li className='border rounded-lg m-1'><Link to='/dashboard/my-orders'>My Orders</Link></li>
+    }
+    {
+      userType === "seller" &&
+      <>
+        <li className='border rounded-lg m-1'><Link to='/dashboard/add-product'>Add A Product</Link></li>
+        <li className='border rounded-lg m-1'><Link to='/dashboard/my-products'>My Products</Link></li>
+        <li className='border rounded-lg m-1'><Link to='/dashboard/my-buyers'>My Buyers</Link></li>
+      </>
+    }
+    {
+      userType === "admin" &&
+      <>
+        <li className='border rounded-lg m-1'><Link to='/dashboard/all-sellers'>All Sellers</Link></li>
+        <li className='border rounded-lg m-1'><Link to='/dashboard/all-Buyers'>All Buyers</Link></li>
+      </>
+    }
   </>
   return (
     <div>
