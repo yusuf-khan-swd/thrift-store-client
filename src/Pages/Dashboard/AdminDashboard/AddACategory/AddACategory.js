@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 const AddACategory = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const imageHostKey = process.env.REACT_APP_imgbbKey;
 
   const onSubmit = data => {
@@ -34,7 +34,8 @@ const AddACategory = () => {
             .then(res => res.json())
             .then(data => {
               if (data.acknowledged) {
-                toast.success(`Successfully added ${category.category} to categories`)
+                toast.success(`Successfully added ${category.category} to categories`);
+                reset();
               }
             })
         }
