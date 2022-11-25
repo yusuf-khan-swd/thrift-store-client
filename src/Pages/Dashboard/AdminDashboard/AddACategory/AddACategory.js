@@ -3,9 +3,24 @@ import { useForm } from 'react-hook-form';
 
 const AddACategory = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const imageHostKey = process.env.REACT_APP_imgbbKey;
 
-  const onSubmit = value => {
-    console.log(value);
+  const onSubmit = data => {
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append('image', image);
+
+    fetch(`https://api.imgbb.com/1/upload?key=${imageHostKey}`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(res => res.json())
+      .then(imageData => {
+        if (imageData.success) {
+          console.log(imageData);
+        }
+      })
+
   };
 
   return (
