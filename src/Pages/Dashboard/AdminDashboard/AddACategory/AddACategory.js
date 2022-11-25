@@ -21,10 +21,7 @@ const AddACategory = () => {
       .then(imageData => {
         if (imageData.success) {
 
-          const category = {
-            name: data.name,
-            image: imageData.data.url
-          }
+          const category = { ...data, categoryImage: imageData.data.url }
 
           fetch('http://localhost:5000/categories', {
             method: 'POST',
@@ -56,8 +53,8 @@ const AddACategory = () => {
               <label className="label">
                 <span className="label-text font-medium">Category Name</span>
               </label>
-              <input {...register('name', { required: "Category is required" })} type="text" className="input input-bordered w-full" required />
-              <p className='text-red-500'>{errors.name?.message}</p>
+              <input {...register('categoryName', { required: "Category is required" })} type="text" className="input input-bordered w-full" required />
+              <p className='text-red-500'>{errors.categoryName?.message}</p>
             </div>
             <div className="form-control w-full">
               <label className="label">
