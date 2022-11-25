@@ -18,10 +18,6 @@ const SellerRoute = ({ children }) => {
   if (user && (userType === "seller")) {
     return children;
   }
-  else {
-    toast.error("Please login with seller account");
-  }
-
 
   return <Navigate to="/login" state={{ from: location }} replace></Navigate>
 };
