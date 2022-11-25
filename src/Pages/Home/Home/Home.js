@@ -1,10 +1,11 @@
 import React from 'react';
+import Banner from '../Banner/Banner';
 import Categories from '../Categories/Categories';
 
 const Home = () => {
   return (
     <div className='container mx-auto'>
-      <h2 className='text-2xl font-semibold'>Home Page</h2>
+      <Banner></Banner>
       <Categories></Categories>
     </div>
   );
