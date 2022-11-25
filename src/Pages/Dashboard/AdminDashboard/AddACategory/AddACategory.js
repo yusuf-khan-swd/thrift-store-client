@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 const AddACategory = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -17,7 +18,25 @@ const AddACategory = () => {
       .then(res => res.json())
       .then(imageData => {
         if (imageData.success) {
-          console.log(imageData);
+
+          const category = {
+            category: data.category,
+            image: imageData.data.url
+          }
+
+          fetch('http://localhost:5000/categories', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(category)
+          })
+            .then(res => res.json())
+            .then(data => {
+              if (data.acknowledged) {
+                toast.success(`Successfully added ${category.category} to categories`)
+              }
+            })
         }
       })
 
