@@ -93,10 +93,10 @@ const AddAProduct = () => {
             <div className='form-control w-full mt-5'>
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text font-medium">Years of Use</span>
+                  <span className="label-text font-medium">Month of Use</span>
                 </label>
-                <input {...register('years', { required: "Years of use is required" })} type="text" className="input input-bordered w-full" required />
-                <p className='text-red-500'>{errors.years?.message}</p>
+                <input {...register('months', { required: "Months of use is required" })} type="text" className="input input-bordered w-full" required />
+                <p className='text-red-500'>{errors.months?.message}</p>
               </div>
             </div>
             <div className='form-control w-full mt-5'>
