@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useNavigate, useRouteError } from 'react-router-dom';
+import { Link, useNavigate, useRouteError } from 'react-router-dom';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
@@ -33,7 +33,8 @@ const DisplayError = () => {
           </h2>
           <p className='text-red-600 font-bold mb-3'>{error.statusText || error.message}</p>
           <p className="text-2xl font-semibold md:text-3xl mb-8">Sorry, we couldn't find this page.</p>
-          <button onClick={handleLogOut} className="px-8 py-1 font-semibold rounded bg-gray-400 text-gray-900 hover:bg-gray-300">Logout</button>
+          <button onClick={handleLogOut} className="px-8 py-1 font-semibold rounded bg-gray-400 text-gray-900 hover:bg-gray-300 mr-2">Logout</button>
+          <Link to="/home" className="px-8 py-1 font-semibold rounded bg-gray-400 text-gray-900 hover:bg-gray-300">Go Back</Link>
         </div>
       </div>
     </section>
