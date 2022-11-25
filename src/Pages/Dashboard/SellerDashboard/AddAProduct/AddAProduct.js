@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
 
 const AddAProduct = () => {
+  const { user } = useContext(AuthContext);
   const [isAdding, setIsAdding] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const imageHostKey = process.env.REACT_APP_imgbbKey;
@@ -21,25 +23,24 @@ const AddAProduct = () => {
       .then(imageData => {
         if (imageData.success) {
 
-          const product = {
-            name: data.name,
-            image: imageData.data.url
-          }
+          const time = new Date();
+
+          const product = { ...data, image: imageData.data.url, time: new Date(), sellerName: user.displayName }
 
           console.log(product)
           setIsAdding(false)
 
-          // fetch('http://localhost:5000/categories', {
+          // fetch('http://localhost:5000/products', {
           //   method: 'POST',
           //   headers: {
           //     'content-type': 'application/json'
           //   },
-          //   body: JSON.stringify(category)
+          //   body: JSON.stringify(product)
           // })
           //   .then(res => res.json())
           //   .then(data => {
           //     if (data.acknowledged) {
-          //       toast.success(`Successfully added ${category.category} to categories`);
+          //       toast.success(`Successfully added ${product.name} to products`);
           //       reset();
           //       setIsAdding(false)
           //     }
@@ -58,8 +59,8 @@ const AddAProduct = () => {
               <label className="label">
                 <span className="label-text font-medium">Product Name</span>
               </label>
-              <input {...register('name', { required: "Category is required" })} type="text" className="input input-bordered w-full" required />
-              <p className='text-red-500'>{errors.name?.message}</p>
+              <input {...register('productName', { required: "Product name is required" })} type="text" className="input input-bordered w-full" required />
+              <p className='text-red-500'>{errors.productName?.message}</p>
             </div>
             <div className="form-control w-full">
               <label className="label">
@@ -67,6 +68,36 @@ const AddAProduct = () => {
               </label>
               <input {...register('image', { required: "Image is required" })} type="file" className="file-input file-input-bordered file-input-sm w-full" required />
               <p className='text-red-500'>{errors.image?.message}</p>
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text font-medium">Location</span>
+              </label>
+              <input {...register('location', { required: "Location is required" })} type="text" className="input input-bordered w-full" required />
+              <p className='text-red-500'>{errors.location?.message}</p>
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text font-medium">Resale Price</span>
+              </label>
+              <input {...register('resale', { required: "Resale price is required" })} type="text" className="input input-bordered w-full" required />
+              <p className='text-red-500'>{errors.resale?.message}</p>
+            </div>
+            <div className="form-control w-full">
+              <label className="label">
+                <span className="label-text font-medium">Original Price</span>
+              </label>
+              <input {...register('original', { required: "Original price is required" })} type="text" className="input input-bordered w-full" required />
+              <p className='text-red-500'>{errors.original?.message}</p>
+            </div>
+            <div className='form-control w-full mt-5'>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text font-medium">Years of Use</span>
+                </label>
+                <input {...register('years', { required: "Years of use is required" })} type="text" className="input input-bordered w-full" required />
+                <p className='text-red-500'>{errors.years?.message}</p>
+              </div>
             </div>
             <div className='form-control w-full mt-5'>
               <button className='btn' type={'submit'} disabled={isAdding}>Add to Products</button>
