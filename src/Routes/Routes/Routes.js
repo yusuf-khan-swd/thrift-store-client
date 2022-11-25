@@ -13,6 +13,7 @@ import Login from "../../Pages/Logins/Login";
 import Register from "../../Pages/Logins/Register";
 import Blog from "../../Pages/Others/Blog/Blog";
 import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 
@@ -67,15 +68,15 @@ const routes = createBrowserRouter([
       },
       {
         path: '/dashboard/all-sellers',
-        element: <AllSellers></AllSellers>
+        element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
       },
       {
-        path: '/dashboard/all-Buyers',
-        element: <AllBuyers></AllBuyers>
+        path: '/dashboard/all-buyers',
+        element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
       },
       {
         path: '/dashboard/reported-items',
-        element: <ReportedItems></ReportedItems>
+        element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
       },
     ],
   }
