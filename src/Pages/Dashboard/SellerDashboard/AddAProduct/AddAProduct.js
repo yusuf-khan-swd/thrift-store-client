@@ -1,13 +1,28 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
+import Loading from '../../../Shared/Loading/Loading';
 
 const AddAProduct = () => {
   const { user } = useContext(AuthContext);
   const [isAdding, setIsAdding] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const imageHostKey = process.env.REACT_APP_imgbbKey;
+
+  const { data: categories, isLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const res = await fetch('http://localhost:5000/categories');
+      const data = await res.json();
+      return data;
+    }
+  });
+
+  if (isLoading) {
+    return <Loading></Loading>
+  }
 
   const onSubmit = data => {
     const image = data.image[0];
@@ -125,9 +140,9 @@ const AddAProduct = () => {
                   <span className="label-text font-medium">Product Category</span>
                 </label>
                 <select {...register('productCategory', { required: "Condition type is required" })} className="select select-bordered w-full  ">
-                  <option>Jean</option>
-                  <option>Shirt</option>
-                  <option>Polo</option>
+                  {
+                    categories.map(category => <option key={category._id}> {category.categoryName} </option>)
+                  }
                 </select>
                 <p className='text-red-500'>{errors.productCategory?.message}</p>
               </div>
@@ -137,8 +152,7 @@ const AddAProduct = () => {
                 <label className="label">
                   <span className="label-text font-medium">Description</span>
                 </label>
-                <textarea className='textarea textarea-bordered' rows="5"></textarea>
-                <input {...register('description', { required: "Seller mobile number is required" })} type="text" className="input input-bordered w-full" required />
+                <textarea {...register('description', { required: "Description is required" })} className='textarea textarea-bordered' rows="5"></textarea>
                 <p className='text-red-500'>{errors.description?.message}</p>
               </div>
             </div>
