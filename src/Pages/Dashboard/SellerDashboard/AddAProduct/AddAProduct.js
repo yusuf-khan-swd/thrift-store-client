@@ -23,8 +23,6 @@ const AddAProduct = () => {
       .then(imageData => {
         if (imageData.success) {
 
-          const time = new Date();
-
           const product = { ...data, image: imageData.data.url, time: new Date(), sellerName: user.displayName }
 
           console.log(product)
@@ -80,23 +78,68 @@ const AddAProduct = () => {
               <label className="label">
                 <span className="label-text font-medium">Resale Price</span>
               </label>
-              <input {...register('resale', { required: "Resale price is required" })} type="text" className="input input-bordered w-full" required />
-              <p className='text-red-500'>{errors.resale?.message}</p>
+              <input {...register('resalePrice', { required: "Resale price is required" })} type="text" className="input input-bordered w-full" required />
+              <p className='text-red-500'>{errors.resalePrice?.message}</p>
             </div>
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text font-medium">Original Price</span>
               </label>
-              <input {...register('original', { required: "Original price is required" })} type="text" className="input input-bordered w-full" required />
-              <p className='text-red-500'>{errors.original?.message}</p>
+              <input {...register('originalPrice', { required: "Original price is required" })} type="text" className="input input-bordered w-full" required />
+              <p className='text-red-500'>{errors.originalPrice?.message}</p>
             </div>
             <div className='form-control w-full mt-5'>
               <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text font-medium">Month of Use</span>
                 </label>
-                <input {...register('months', { required: "Months of use is required" })} type="text" className="input input-bordered w-full" required />
-                <p className='text-red-500'>{errors.months?.message}</p>
+                <input {...register('monthsUsed', { required: "Months of use is required" })} type="text" className="input input-bordered w-full" required />
+                <p className='text-red-500'>{errors.monthsUsed?.message}</p>
+              </div>
+            </div>
+            <div className='form-control w-full mt-5'>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text font-medium">Condition Type</span>
+                </label>
+                <select {...register('conditionType', { required: "Condition type is required" })} className="select select-bordered w-full  ">
+                  <option>Excellent</option>
+                  <option>Good</option>
+                  <option>Fair</option>
+                </select>
+                <p className='text-red-500'>{errors.monthsUsed?.message}</p>
+              </div>
+            </div>
+            <div className='form-control w-full mt-5'>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text font-medium">Seller Mobile Number</span>
+                </label>
+                <input {...register('sellerNumber', { required: "Seller mobile number is required" })} type="text" className="input input-bordered w-full" required />
+                <p className='text-red-500'>{errors.sellerNumber?.message}</p>
+              </div>
+            </div>
+            <div className='form-control w-full mt-5'>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text font-medium">Product Category</span>
+                </label>
+                <select {...register('productCategory', { required: "Condition type is required" })} className="select select-bordered w-full  ">
+                  <option>Jean</option>
+                  <option>Shirt</option>
+                  <option>Polo</option>
+                </select>
+                <p className='text-red-500'>{errors.productCategory?.message}</p>
+              </div>
+            </div>
+            <div className='form-control w-full mt-5'>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text font-medium">Description</span>
+                </label>
+                <textarea className='textarea textarea-bordered' rows="5"></textarea>
+                <input {...register('description', { required: "Seller mobile number is required" })} type="text" className="input input-bordered w-full" required />
+                <p className='text-red-500'>{errors.description?.message}</p>
               </div>
             </div>
             <div className='form-control w-full mt-5'>
