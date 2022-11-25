@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const useAccount = (email) => {
   const [userType, setUserType] = useState("");
+  const [isAccountLoading, setIsAccountLoading] = useState(true);
 
   useEffect(() => {
     if (email) {
@@ -13,13 +14,14 @@ const useAccount = (email) => {
         .then(res => res.json())
         .then(data => {
           if (data?.result) {
-            setUserType(data.result.userType)
+            setUserType(data.result.userType);
+            setIsAccountLoading(false);
           }
         })
     }
   }, [email])
 
-  return [userType];
+  return [userType, isAccountLoading];
 };
 
 export default useAccount;

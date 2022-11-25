@@ -14,6 +14,7 @@ import Register from "../../Pages/Logins/Register";
 import Blog from "../../Pages/Others/Blog/Blog";
 import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 const routes = createBrowserRouter([
   {
@@ -54,7 +55,7 @@ const routes = createBrowserRouter([
       },
       {
         path: '/dashboard/add-product',
-        element: <AddAProduct></AddAProduct>
+        element: <SellerRoute><AddAProduct></AddAProduct></SellerRoute>
       },
       {
         path: '/dashboard/my-products',
