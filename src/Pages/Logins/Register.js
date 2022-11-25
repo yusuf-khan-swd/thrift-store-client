@@ -26,7 +26,6 @@ const Register = () => {
     createUser(email, password)
       .then(result => {
         const user = result.user;
-        reset();
 
         const userInfo = {
           userName: name,
@@ -34,7 +33,7 @@ const Register = () => {
           userType: accountType
         };
 
-        fetch('http://localhost:5000/user', {
+        fetch('https://thrift-store-server.vercel.app/user', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -43,18 +42,20 @@ const Register = () => {
         })
           .then(res => res.json())
           .then(data => {
-            if (data.acknowledged) {
-              toast.success(`Registration was successful`);
+            if (data?.data?.acknowledged) {
+              toast.success("Successfully Register ")
               setRegisterUserEmail(user.email);
+              handleUpdateUserInfo(name);
+              setRegisterError("");
+              reset();
             }
           })
-
-        handleUpdateUserInfo(name);
-        setRegisterError("");
       })
       .catch(error => {
         console.log("Register error: ", error);
         setRegisterError(error.message);
+        toast.error(error.message)
+        reset();
       })
   };
 
@@ -84,7 +85,7 @@ const Register = () => {
           userType: 'buyer'
         };
 
-        fetch('http://localhost:5000/user', {
+        fetch('https://thrift-store-server.vercel.app/user', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -96,6 +97,8 @@ const Register = () => {
             if (data.success) {
               if (data.data?.acknowledged) {
                 toast.success("Successfully register with Google.");
+                setRegisterUserEmail(user.email);
+                setRegisterError("");
               }
             }
             else {
@@ -108,9 +111,7 @@ const Register = () => {
                   console.log('logout error: ', error);
                 })
             }
-            setRegisterUserEmail(user.email);
           })
-        setRegisterError("");
       })
       .catch(error => {
         console.log("Google Error: ", error);

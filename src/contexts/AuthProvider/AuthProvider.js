@@ -32,6 +32,7 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
+    localStorage.removeItem("thrift-token");
     return signOut(auth);
   };
 
