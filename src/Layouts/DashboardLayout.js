@@ -9,8 +9,6 @@ const DashboardLayout = () => {
 
   const [userType] = useAccount(user.email);
 
-  console.log(userType);
-
   const dashboardItems = <>
     {
       userType === "buyer" &&
@@ -30,6 +28,7 @@ const DashboardLayout = () => {
         <li className='border rounded-lg m-1'><Link to='/dashboard/all-sellers'>All Sellers</Link></li>
         <li className='border rounded-lg m-1'><Link to='/dashboard/all-buyers'>All Buyers</Link></li>
         <li className='border rounded-lg m-1'><Link to='/dashboard/reported-items'>Reported Items</Link></li>
+        <li className='border rounded-lg m-1'><Link to='/dashboard/add-category'>Add a Category</Link></li>
       </>
     }
   </>
