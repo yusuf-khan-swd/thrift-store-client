@@ -74,8 +74,8 @@ const Login = () => {
   };
 
   return (
-    <div className='container mx-auto p-3'>
-      <div className='card max-w-sm mx-auto'>
+    <div className='container mx-auto p-3 my-16'>
+      <div className='card max-w-sm mx-auto bg-white'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl cursor-pointer'>Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>

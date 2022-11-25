@@ -120,12 +120,12 @@ const Register = () => {
   };
 
   return (
-    <div className='container mx-auto p-3'>
+    <div className='container mx-auto p-3 my-16'>
       {
         token &&
         <Navigate to="/"></Navigate>
       }
-      <div className='card max-w-lg mx-auto'>
+      <div className='card max-w-lg mx-auto bg-white'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl underline underline-offset-2 cursor-pointer'>Create an Account</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
