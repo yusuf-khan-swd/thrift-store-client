@@ -32,7 +32,20 @@ const AllSellers = () => {
   }
 
   const handleVerifySeller = (id) => {
-    console.log(id);
+    fetch(`http://localhost:5000/all-sellers/${id}`, {
+      method: 'PUT',
+      headers: {
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.modifiedCount) {
+          toast.success("Seller is verified..");
+          refetch();
+        }
+      })
   };
 
   const handleDeleteSeller = (id) => {
@@ -76,7 +89,7 @@ const AllSellers = () => {
                 <td>{seller.userEmail}</td>
                 <td>
                   <button onClick={() => handleDeleteSeller(seller._id)} className="btn btn-error btn-xs text-gray-600 font-bold mr-4">Delete</button>
-                  <button onClick={() => handleVerifySeller(seller._id)} className="btn btn-primary btn-xs text-gray-600 font-bold">Verify</button>
+                  <button onClick={() => handleVerifySeller(seller._id)} className="btn btn-primary btn-xs text-gray-600 font-bold">{seller.userIsVerified ? 'Already Verified' : 'Verify'}</button>
                 </td>
               </tr>
               )
