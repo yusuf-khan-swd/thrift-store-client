@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 import CategoryCard from './CategoryCard';
+import axios from 'axios';
 
 const Categories = () => {
   const location = useLocation();
@@ -11,8 +12,8 @@ const Categories = () => {
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/categories');
-      const data = await res.json();
+      const res = await axios.get('http://localhost:5000/categories');
+      const data = await res.data;
       return data;
     }
   });
@@ -29,7 +30,7 @@ const Categories = () => {
           isItCategoriesRoute &&
           <ul className='hidden md:block md:col-span-1'>
             {
-              categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-ghost' to={`/category/${category._id}`}>{category.name}</Link> </li>)
+              categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
             }
           </ul>
         }
