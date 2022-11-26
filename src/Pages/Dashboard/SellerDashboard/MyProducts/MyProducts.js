@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
 import Loading from '../../../Shared/Loading/Loading';
 
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
-  const { data: products, isLoading } = useQuery({
+  const { data: products, isLoading, refetch } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/products?email=${user.email}`, {
@@ -28,6 +29,22 @@ const MyProducts = () => {
       <h2 className="text-5xl font-bold">Your Have <span className='text-teal-500'>0</span> Items</h2>
     </div>
   }
+
+  const handleAdvertised = (id) => {
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount) {
+          toast.success("Product on advertised list.");
+          refetch();
+        }
+      })
+  };
 
   return (
     <div>
@@ -65,7 +82,7 @@ const MyProducts = () => {
                     <td>${product.resalePrice}</td>
                     <td className='uppercase font-medium'>{product.saleStatus}</td>
                     <th>
-                      <button className="btn btn-primary btn-xs">Advertise</button>
+                      <button onClick={() => handleAdvertised(product._id)} className="btn btn-primary btn-xs" disabled={product.advertised}>Advertise</button>
                     </th>
                     <td>
                       <button className='btn btn-error btn-sm text-gray-600 font-bold'>Delete</button>
