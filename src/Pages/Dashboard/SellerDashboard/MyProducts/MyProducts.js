@@ -58,10 +58,33 @@ const MyProducts = () => {
       });
   };
 
+  const handleDeleteProduct = (id) => {
+    const isConfirm = window.confirm("Are you sure you want to delete this product");
+
+    if (!isConfirm) {
+      return;
+    }
+
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.deletedCount) {
+          toast.success("Your product remove from sales");
+          refetch();
+        }
+      })
+  };
+
   return (
     <div>
       <h2 className="text-3xl font-bold text-center cursor-pointer underline underline-offset-4 py-8 uppercase">
-        My Products {products.length}
+        My Products: <span className="text-teal-500">{products.length}</span>
       </h2>
       <div className="overflow-x-auto m-2 lg:m-5">
         <div className="overflow-x-auto w-full">
@@ -109,7 +132,7 @@ const MyProducts = () => {
                     </button>
                   </th>
                   <td>
-                    <button className="btn btn-error btn-sm text-gray-600 font-bold">
+                    <button onClick={() => handleDeleteProduct(product._id)} className="btn btn-error btn-sm text-gray-600 font-bold">
                       Delete
                     </button>
                   </td>
