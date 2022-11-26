@@ -16,6 +16,7 @@ import Register from "../../Pages/Logins/Register";
 import Blog from "../../Pages/Others/Blog/Blog";
 import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
 import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 
@@ -58,7 +59,7 @@ const routes = createBrowserRouter([
     children: [
       {
         path: '/dashboard/my-orders',
-        element: <MyOrders></MyOrders>
+        element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
       },
       {
         path: '/dashboard/add-product',
