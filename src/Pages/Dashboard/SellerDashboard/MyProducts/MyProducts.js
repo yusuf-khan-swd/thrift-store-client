@@ -74,7 +74,6 @@ const MyProducts = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.deletedCount) {
           toast.success("Your product remove from sales");
           refetch();
