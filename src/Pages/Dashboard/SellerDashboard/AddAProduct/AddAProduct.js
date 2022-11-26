@@ -238,7 +238,7 @@ const AddAProduct = () => {
                 </label>
                 <textarea
                   {...register("description", {
-                    required: "Description is required",
+                    required: "Description is required", maxLength: { value: 200, message: "Please short your message under 200 character" }
                   })}
                   className="textarea textarea-bordered"
                   rows="5"
