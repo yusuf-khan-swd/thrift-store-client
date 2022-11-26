@@ -77,8 +77,6 @@ const AllSellers = () => {
       });
   };
 
-  console.log(sellers);
-
   return (
     <div>
       <div className="text-center py-8">
