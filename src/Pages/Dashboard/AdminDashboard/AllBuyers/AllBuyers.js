@@ -1,9 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import Loading from '../../../Shared/Loading/Loading';
+import Spinner from '../../../Shared/Spinner/Spinner';
 
 const AllBuyers = () => {
+  const [isDataLoading, setIsDataLoading] = useState(false);
+
   const { data: buyers, isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -32,6 +35,7 @@ const AllBuyers = () => {
   }
 
   const handleDeleteBuyers = (id) => {
+    setIsDataLoading(true);
     fetch(`http://localhost:5000/all-buyers/${id}`, {
       method: 'DELETE',
       headers: {
@@ -43,9 +47,14 @@ const AllBuyers = () => {
         if (data.deletedCount) {
           toast.success("User deleted successfully.");
           refetch();
+          setIsDataLoading(false)
         }
       })
   };
+
+  if (isDataLoading) {
+    <Spinner></Spinner>
+  }
 
 
   return (
