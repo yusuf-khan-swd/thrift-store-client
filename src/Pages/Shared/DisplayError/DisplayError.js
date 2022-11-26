@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate, useRouteError } from 'react-router-dom';
+import { useNavigate, useRouteError } from 'react-router-dom';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
