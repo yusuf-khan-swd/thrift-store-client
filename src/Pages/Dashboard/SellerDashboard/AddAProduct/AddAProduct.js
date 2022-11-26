@@ -2,19 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../contexts/AuthProvider/AuthProvider";
 import Loading from "../../../Shared/Loading/Loading";
 
 const AddAProduct = () => {
   const { user } = useContext(AuthContext);
   const [isAdding, setIsAdding] = useState(false);
+  const imageHostKey = process.env.REACT_APP_imgbbKey;
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-  const imageHostKey = process.env.REACT_APP_imgbbKey;
 
   const { data: categories, isLoading } = useQuery({
     queryKey: ["categories"],
@@ -60,23 +63,24 @@ const AddAProduct = () => {
             sellerIsVerified: false,
           };
 
-          console.log(product);
-
-          // fetch('http://localhost:5000/products', {
-          //   method: 'POST',
-          //   headers: {
-          //     'content-type': 'application/json'
-          //   },
-          //   body: JSON.stringify(product)
-          // })
-          //   .then(res => res.json())
-          //   .then(data => {
-          //     if (data.acknowledged) {
-          //       toast.success(`Successfully added ${product.name} to products`);
-          //       reset();
-          //       setIsAdding(false)
-          //     }
-          //   })
+          setIsAdding(true);
+          fetch('http://localhost:5000/products', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              authorization: `bearer ${localStorage.getItem("thrift-token")}`
+            },
+            body: JSON.stringify(product)
+          })
+            .then(res => res.json())
+            .then(data => {
+              if (data.acknowledged) {
+                toast.success(`Successfully added ${product.name} to products`);
+                reset();
+                setIsAdding(false);
+                navigate("/dashboard/my-products");
+              }
+            });
         }
       });
   };
