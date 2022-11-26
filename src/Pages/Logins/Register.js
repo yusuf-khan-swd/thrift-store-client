@@ -18,6 +18,7 @@ const Register = () => {
 
   const onSubmit = data => {
     const { email, password, confirm, name, accountType } = data;
+    setRegisterError("");
 
     if (password !== confirm) {
       return toast.error("Password didn't matched.");
