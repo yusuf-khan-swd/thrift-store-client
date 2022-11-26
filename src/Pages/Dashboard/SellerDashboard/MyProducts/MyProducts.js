@@ -41,18 +41,19 @@ const MyProducts = () => {
     );
   }
 
-  const handleAdvertised = (id) => {
+  const handleAdvertised = (id, advertise) => {
     fetch(`http://localhost:5000/products/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
         authorization: `bearer ${localStorage.getItem("thrift-token")}`
       },
+      body: JSON.stringify({ advertise })
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
-          toast.success("Product on advertised list.");
+          toast.success(`${advertise ? 'Product remove from advertised list' : 'Product on advertised list.'}`);
           refetch();
         }
       });
@@ -102,7 +103,7 @@ const MyProducts = () => {
             <tbody>
               {products.map((product, index) => (
                 <tr key={product._id}>
-                  <th>{index}</th>
+                  <th>{(index + 1) < 10 && ('0' + (index + 1))}</th>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
@@ -124,11 +125,11 @@ const MyProducts = () => {
                   </td>
                   <th>
                     <button
-                      onClick={() => handleAdvertised(product._id)}
-                      className="btn btn-primary btn-xs"
-                      disabled={product.advertised}
+                      onClick={() => handleAdvertised(product._id, product.advertised)}
+                      className={`btn btn-xs ${product.advertised ? 'btn-success' : 'btn-primary'}`}
+                      disabled={(product.saleStatus === 'available') ? false : true}
                     >
-                      Advertise
+                      {`${product.advertised ? 'Remove Advertise' : 'Advertise'}`}
                     </button>
                   </th>
                   <td>
