@@ -52,7 +52,9 @@ const AllSellers = () => {
       .then((data) => {
         console.log(data);
         if (data.modifiedCount) {
-          toast.success(`${verified ? 'Seller verification remove' : 'Seller is verified'}`);
+          toast.success(
+            `${verified ? "Seller verification remove" : "Seller is verified"}`
+          );
           refetch();
           setIsDataLoading(false);
         }
@@ -80,9 +82,8 @@ const AllSellers = () => {
   return (
     <div>
       <div className="text-center py-8">
-        <h2 className="text-3xl font-bold uppercase cursor-pointer">
-          <span className="underline">All Sellers:</span>
-          <span className="text-teal-400">{sellers.length}</span>
+        <h2 className="text-3xl font-bold uppercase cursor-pointer text-teal-400 underline">
+          All Sellers Total - {sellers.length}
         </h2>
       </div>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
