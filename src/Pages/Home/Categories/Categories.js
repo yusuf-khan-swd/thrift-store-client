@@ -23,14 +23,14 @@ const Categories = () => {
   }
 
   return (
-    <div className='container mx-auto'>
-      <h2 className='text-3xl font-bold text-center mb-8'>Categories</h2>
+    <div className='container mx-auto mb-24 md:border-2 md:border-primary rounded-lg mt-8 p-3'>
+      <h2 className='text-3xl font-bold text-center my-8 uppercase underline cursor-pointer'>Categories</h2>
       <div className={`${isItCategoriesRoute && 'grid grid-cols-5'}`}>
         {
           isItCategoriesRoute &&
-          <ul className='hidden md:block md:col-span-1'>
+          <ul className='hidden md:block md:col-span-1 md:mr-2 lg:mr-8'>
             {
-              categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
+              categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary w-full' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
             }
           </ul>
         }
