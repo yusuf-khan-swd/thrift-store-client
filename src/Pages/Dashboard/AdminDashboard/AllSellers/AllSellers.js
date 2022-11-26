@@ -52,7 +52,7 @@ const AllSellers = () => {
       .then((data) => {
         console.log(data);
         if (data.modifiedCount) {
-          toast.success("Seller is verified..");
+          toast.success(`${verified ? 'Seller verification remove' : 'Seller is verified'}`);
           refetch();
           setIsDataLoading(false);
         }
