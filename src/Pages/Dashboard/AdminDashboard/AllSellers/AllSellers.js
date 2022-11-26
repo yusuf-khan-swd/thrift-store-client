@@ -7,13 +7,17 @@ import Spinner from "../../../Shared/Spinner/Spinner";
 const AllSellers = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
 
-  const { data: sellers, isLoading, refetch } = useQuery({
+  const {
+    data: sellers,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/all-sellers", {
         headers: {
-          authorization: `bearer ${localStorage.getItem('thrift-token')}`
-        }
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
       });
       const data = await res.json();
       return data;
@@ -34,55 +38,56 @@ const AllSellers = () => {
     );
   }
 
-  const handleVerifySeller = (id) => {
+  const handleVerifySeller = (id, verified) => {
     setIsDataLoading(true);
     fetch(`http://localhost:5000/all-sellers/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`
-      }
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+      },
+      body: JSON.stringify({ verified }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
         if (data.modifiedCount) {
           toast.success("Seller is verified..");
           refetch();
           setIsDataLoading(false);
         }
-      })
+      });
   };
 
   const handleDeleteSeller = (id) => {
     setIsDataLoading(true);
     fetch(`http://localhost:5000/all-sellers/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`
-      }
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+      },
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.deletedCount) {
           toast.success("User deleted successfully.");
           refetch();
           setIsDataLoading(false);
         }
-      })
+      });
   };
+
+  console.log(sellers);
 
   return (
     <div>
       <div className="text-center py-8">
         <h2 className="text-3xl font-bold uppercase cursor-pointer">
-          <span className="underline">All Sellers:</span> <span className="text-teal-400">{sellers.length}</span>
+          <span className="underline">All Sellers:</span>
+          <span className="text-teal-400">{sellers.length}</span>
         </h2>
       </div>
-      <div className="h-8">
-        {
-          isDataLoading &&
-          <Spinner></Spinner>
-        }
-      </div>
+      <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
       <div className="overflow-x-auto m-2 lg:m-5">
         <table className="table table-zebra w-full">
           <thead>
@@ -94,18 +99,31 @@ const AllSellers = () => {
             </tr>
           </thead>
           <tbody>
-            {
-              sellers.map((seller, index) => <tr key={seller._id}>
-                <th>{(index + 1) < 10 ? ('0' + (index + 1)) : (index + 1)}</th>
+            {sellers.map((seller, index) => (
+              <tr key={seller._id}>
+                <th>{index + 1 < 10 ? "0" + (index + 1) : index + 1}</th>
                 <td>{seller.userName}</td>
                 <td>{seller.userEmail}</td>
                 <td>
-                  <button onClick={() => handleDeleteSeller(seller._id)} className="btn btn-error btn-xs text-gray-600 font-bold mr-4">Delete</button>
-                  <button onClick={() => handleVerifySeller(seller._id)} className="btn btn-primary btn-xs text-gray-600 font-bold">{seller.userIsVerified ? 'Already Verified' : 'Verify'}</button>
+                  <button
+                    onClick={() => handleDeleteSeller(seller._id)}
+                    className="btn btn-error btn-xs text-gray-600 font-bold mr-4"
+                    disabled={isDataLoading}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleVerifySeller(seller._id, seller.userIsVerified)
+                    }
+                    className="btn btn-primary btn-xs text-gray-600 font-bold"
+                    disabled={isDataLoading}
+                  >
+                    {seller.userIsVerified ? "Remove Verification" : "Verify"}
+                  </button>
                 </td>
               </tr>
-              )
-            }
+            ))}
           </tbody>
         </table>
       </div>
