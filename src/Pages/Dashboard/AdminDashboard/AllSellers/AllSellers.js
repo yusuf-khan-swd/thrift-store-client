@@ -71,7 +71,7 @@ const AllSellers = () => {
           <tbody>
             {
               sellers.map((seller, index) => <tr key={seller._id}>
-                <th>{(index + 1) < 10 && ('0' + (index + 1))}</th>
+                <th>{(index + 1) < 10 ? ('0' + (index + 1)) : (index + 1)}</th>
                 <td>{seller.userName}</td>
                 <td>{seller.userEmail}</td>
                 <td>
