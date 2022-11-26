@@ -14,6 +14,7 @@ import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Logins/Login";
 import Register from "../../Pages/Logins/Register";
 import Blog from "../../Pages/Others/Blog/Blog";
+import Products from "../../Pages/Products/Products";
 import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import BuyerRoute from "../BuyerRoute/BuyerRoute";
@@ -37,6 +38,11 @@ const routes = createBrowserRouter([
       {
         path: '/categories',
         element: <Categories></Categories>
+      },
+      {
+        path: '/category/:id',
+        element: <Products></Products>,
+        loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
       },
       {
         path: '/blog',
