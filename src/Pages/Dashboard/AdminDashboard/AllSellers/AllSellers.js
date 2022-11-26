@@ -1,9 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Loading from "../../../Shared/Loading/Loading";
+import Spinner from "../../../Shared/Spinner/Spinner";
 
 const AllSellers = () => {
+  const [isDataLoading, setIsDataLoading] = useState(false);
+
   const { data: sellers, isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -32,6 +35,7 @@ const AllSellers = () => {
   }
 
   const handleVerifySeller = (id) => {
+    setIsDataLoading(true);
     fetch(`http://localhost:5000/all-sellers/${id}`, {
       method: 'PUT',
       headers: {
@@ -43,11 +47,13 @@ const AllSellers = () => {
         if (data.modifiedCount) {
           toast.success("Seller is verified..");
           refetch();
+          setIsDataLoading(false);
         }
       })
   };
 
   const handleDeleteSeller = (id) => {
+    setIsDataLoading(true);
     fetch(`http://localhost:5000/all-sellers/${id}`, {
       method: 'DELETE',
       headers: {
@@ -59,6 +65,7 @@ const AllSellers = () => {
         if (data.deletedCount) {
           toast.success("User deleted successfully.");
           refetch();
+          setIsDataLoading(false);
         }
       })
   };
@@ -69,6 +76,12 @@ const AllSellers = () => {
         <h2 className="text-3xl font-bold uppercase cursor-pointer">
           <span className="underline">All Sellers:</span> <span className="text-teal-400">{sellers.length}</span>
         </h2>
+      </div>
+      <div className="h-8">
+        {
+          isDataLoading &&
+          <Spinner></Spinner>
+        }
       </div>
       <div className="overflow-x-auto m-2 lg:m-5">
         <table className="table table-zebra w-full">

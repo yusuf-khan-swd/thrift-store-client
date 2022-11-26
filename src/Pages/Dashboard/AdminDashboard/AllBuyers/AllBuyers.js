@@ -52,17 +52,18 @@ const AllBuyers = () => {
       })
   };
 
-  if (isDataLoading) {
-    <Spinner></Spinner>
-  }
-
-
   return (
     <div>
       <div className="text-center py-8">
         <h2 className="text-3xl font-bold uppercase cursor-pointer">
           <span className="underline">All Buyers:</span> <span className="text-teal-400">{buyers.length}</span>
         </h2>
+      </div>
+      <div className="h-8">
+        {
+          isDataLoading &&
+          <Spinner></Spinner>
+        }
       </div>
       <div className="overflow-x-auto m-2 lg:m-5">
         <table className="table table-zebra w-full">
