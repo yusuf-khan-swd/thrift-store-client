@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import googleLogo from '../../assets/google.png';
 import useToken from '../../hooks/useToken';
@@ -17,9 +17,9 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  if (token) {
-    navigate(from, { replace: true });
-  }
+  // if (token) {
+  //   navigate(from, { replace: true });
+  // }
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -77,6 +77,10 @@ const Login = () => {
 
   return (
     <div className='container mx-auto p-3 my-16'>
+      {
+        token &&
+        <Navigate to={`${from}`}></Navigate>
+      }
       <div className='card max-w-sm mx-auto bg-white'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl cursor-pointer'>Login</h2>
