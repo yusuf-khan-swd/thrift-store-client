@@ -252,6 +252,10 @@ const AddAProduct = () => {
                       value: 200,
                       message: "Please short your message under 200 character",
                     },
+                    minLength: {
+                      value: 10,
+                      message: "Please write something about your product at least 10 character"
+                    }
                   })}
                   className="textarea textarea-bordered"
                   rows="5"
