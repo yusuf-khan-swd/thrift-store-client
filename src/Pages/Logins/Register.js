@@ -31,7 +31,8 @@ const Register = () => {
         const userInfo = {
           userName: name,
           userEmail: user.email,
-          userType: accountType
+          userType: accountType,
+          userIsVerified: false
         };
 
         fetch('http://localhost:5000/user', {

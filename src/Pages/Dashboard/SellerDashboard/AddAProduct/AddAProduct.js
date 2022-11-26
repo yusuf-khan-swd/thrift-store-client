@@ -51,42 +51,50 @@ const AddAProduct = () => {
             (category) => category.categoryName === data.productCategory
           );
 
-          const product = {
-            ...data,
-            image: imageData.data.url,
-            time: new Date(),
-            sellerName: user.displayName,
-            sellerEmail: user.email,
-            categoryId: category._id,
-            saleStatus: "available",
-            advertised: false,
-            sellerIsVerified: false,
-          };
+          fetch(`http://localhost:5000/user?email=${user.email}`)
+            .then((res) => res.json())
+            .then((userData) => {
+              const userInfo = userData.result;
+              const product = {
+                ...data,
+                image: imageData.data.url,
+                time: new Date(),
+                sellerName: userInfo.userName,
+                sellerEmail: userInfo.userEmail,
+                sellerIsVerified: userInfo.userIsVerified,
+                categoryId: category._id,
+                saleStatus: "available",
+                advertised: false,
+              };
 
-          setIsAdding(true);
-          fetch('http://localhost:5000/products', {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json',
-              authorization: `bearer ${localStorage.getItem("thrift-token")}`
-            },
-            body: JSON.stringify(product)
-          })
-            .then(res => res.json())
-            .then(data => {
-              if (data.acknowledged) {
-                toast.success(`Successfully added ${product.productName} to products`);
-                reset();
-                setIsAdding(false);
-                navigate("/dashboard/my-products");
-              }
+              fetch("http://localhost:5000/products", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                  authorization: `bearer ${localStorage.getItem(
+                    "thrift-token"
+                  )}`,
+                },
+                body: JSON.stringify(product),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  if (data.acknowledged) {
+                    toast.success(
+                      `Successfully added ${product.productName} to products`
+                    );
+                    reset();
+                    setIsAdding(false);
+                    navigate("/dashboard/my-products");
+                  }
+                });
             });
         }
       });
   };
 
   return (
-    <div className="container mx-auto p-3 py-16">
+    <div className="container mx-auto p-3 my-16">
       <div className="card max-w-lg mx-auto bg-white">
         <div className="card-body border rounded-md">
           <h2 className="card-title justify-center text-2xl cursor-pointer">
@@ -238,7 +246,11 @@ const AddAProduct = () => {
                 </label>
                 <textarea
                   {...register("description", {
-                    required: "Description is required", maxLength: { value: 200, message: "Please short your message under 200 character" }
+                    required: "Description is required",
+                    maxLength: {
+                      value: 200,
+                      message: "Please short your message under 200 character",
+                    },
                   })}
                   className="textarea textarea-bordered"
                   rows="5"
