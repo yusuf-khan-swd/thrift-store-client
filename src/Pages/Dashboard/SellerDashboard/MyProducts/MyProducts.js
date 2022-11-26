@@ -144,7 +144,7 @@ const MyProducts = () => {
                       className={`btn btn-xs ${product.advertised ? "btn-success" : "btn-primary"
                         }`}
                       disabled={
-                        product.saleStatus === "available" ? false : true
+                        (product.saleStatus === "available" ? false : true) || isDataLoading
                       }
                     >
                       {`${product.advertised ? "Remove Advertise" : "Advertise"
@@ -155,6 +155,7 @@ const MyProducts = () => {
                     <button
                       onClick={() => handleDeleteProduct(product._id)}
                       className="btn btn-error btn-sm text-gray-600 font-bold"
+                      disabled={isDataLoading}
                     >
                       Delete
                     </button>
