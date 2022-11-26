@@ -88,6 +88,7 @@ const AddAProduct = () => {
                     navigate("/dashboard/my-products");
                   }
                 });
+
             });
         }
       });
