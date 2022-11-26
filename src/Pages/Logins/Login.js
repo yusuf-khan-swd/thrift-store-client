@@ -25,12 +25,12 @@ const Login = () => {
 
   const onSubmit = data => {
     const { email, password } = data;
+    setLoginError("");
 
     userLogin(email, password)
       .then(result => {
         const user = result.user;
         toast.success(`Successfully Login.`);
-        setLoginError("");
         setLoginUserEmail(user.email);
       })
       .catch(error => {
@@ -40,6 +40,8 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
+    setLoginError("");
+
     googleLogin()
       .then(result => {
         const user = result.user;
