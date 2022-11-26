@@ -75,7 +75,7 @@ const AddAProduct = () => {
             .then(res => res.json())
             .then(data => {
               if (data.acknowledged) {
-                toast.success(`Successfully added ${product.name} to products`);
+                toast.success(`Successfully added ${product.productName} to products`);
                 reset();
                 setIsAdding(false);
                 navigate("/dashboard/my-products");
