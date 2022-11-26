@@ -16,7 +16,6 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  console.log(location.state?.from)
 
   if (token) {
     navigate(from, { replace: true });

@@ -34,7 +34,7 @@ const AddACategory = () => {
             .then(res => res.json())
             .then(data => {
               if (data.acknowledged) {
-                toast.success(`Successfully added ${category.category} to categories`);
+                toast.success(`Successfully added ${category.categoryName} to categories`);
                 reset();
                 setIsAdding(false)
               }
@@ -45,7 +45,7 @@ const AddACategory = () => {
 
   return (
     <div className='container mx-auto p-3'>
-      <div className='card max-w-lg mx-auto'>
+      <div className='card max-w-lg mx-auto bg-white my-12'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl cursor-pointer'>Category</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
