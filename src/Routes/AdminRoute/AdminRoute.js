@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useAccount from '../../hooks/useAccount';
@@ -17,6 +18,8 @@ const AdminRoute = ({ children }) => {
   if (user && (userType === "admin")) {
     return children;
   }
+
+  toast.error("Please login as admin");
 
   return <Navigate to="/login" state={{ from: location }} replace></Navigate>
 };
