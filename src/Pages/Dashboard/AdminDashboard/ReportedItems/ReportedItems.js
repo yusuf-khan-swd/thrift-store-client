@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import Loading from '../../../Shared/Loading/Loading';
 import Spinner from '../../../Shared/Spinner/Spinner';
 
 const ReportedItems = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
 
-  const { data: reports, isLoading } = useQuery({
+  const { data: reports, isLoading, refetch } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/reports", {
@@ -34,7 +35,25 @@ const ReportedItems = () => {
   }
 
   const handleDeleteProducts = (id) => {
-
+    setIsDataLoading(true);
+    fetch(`http://localhost:5000/reported-products/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.deletedCount) {
+          toast.success("Deleted the reported product")
+          refetch();
+          setIsDataLoading(false);
+        }
+      })
+      .catch(error => {
+        console.log("delete error: ", error);
+        setIsDataLoading(false);
+      })
   };
 
   return (
