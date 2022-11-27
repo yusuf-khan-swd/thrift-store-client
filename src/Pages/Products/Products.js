@@ -1,5 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { Link, useLoaderData, useNavigation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../Shared/Loading/Loading";
 import BookModal from "./BookModal";
 import ProductCard from "./ProductCard";
@@ -7,13 +8,25 @@ import ProductCard from "./ProductCard";
 const Products = () => {
   const [openModal, setOpenModal] = useState(true);
   const [productBooked, setProductBooked] = useState({});
+  const { id } = useParams();
 
-  const products = useLoaderData();
-  const navigation = useNavigation();
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/category/${id}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`
+        }
+      });
+      const data = await res.json();
+      return data;
+    }
+  });
 
-  if (navigation.state === "loading") {
+  if (isLoading) {
     return <Loading></Loading>
   }
+
 
   if (!products.length) {
     return (
