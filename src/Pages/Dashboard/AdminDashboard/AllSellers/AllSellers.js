@@ -38,9 +38,9 @@ const AllSellers = () => {
     );
   }
 
-  const handleVerifySeller = (id, verified) => {
+  const handleVerifySeller = (id, verified, email) => {
     setIsDataLoading(true);
-    fetch(`http://localhost:5000/all-sellers/${id}`, {
+    fetch(`http://localhost:5000/all-sellers/${id}?email=${email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -113,7 +113,7 @@ const AllSellers = () => {
                   </button>
                   <button
                     onClick={() =>
-                      handleVerifySeller(seller._id, seller.userIsVerified)
+                      handleVerifySeller(seller._id, seller.userIsVerified, seller.userEmail)
                     }
                     className="btn btn-primary btn-xs text-gray-600 font-bold"
                     disabled={isDataLoading}
