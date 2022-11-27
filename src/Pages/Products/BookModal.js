@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
-import Spinner from "../Shared/Spinner/Spinner";
 
 const BookModal = ({ setOpenModal, productBooked }) => {
   const [isDataLoading, setIsDataLoading] = useState(false);
@@ -61,7 +60,6 @@ const BookModal = ({ setOpenModal, productBooked }) => {
           <label htmlFor="book-modal" className="btn btn-sm btn-circle">
             X
           </label>
-          <div className="h-5">{isDataLoading && <Spinner></Spinner>}</div>
           <h2 className="card-title justify-center text-2xl cursor-pointer mb-8">
             Please fill up the form.
           </h2>
