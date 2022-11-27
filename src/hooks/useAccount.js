@@ -10,7 +10,7 @@ const useAccount = (email) => {
 
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/userType?email=${email}`, {
+      fetch(`http://localhost:5000/usersType?email=${email}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem('thrift-token')}`
         }

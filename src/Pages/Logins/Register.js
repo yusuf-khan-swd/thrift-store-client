@@ -34,7 +34,7 @@ const Register = () => {
           userType: accountType,
         };
 
-        fetch('http://localhost:5000/user', {
+        fetch('http://localhost:5000/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -86,7 +86,7 @@ const Register = () => {
           userType: 'buyer'
         };
 
-        fetch('http://localhost:5000/user', {
+        fetch('http://localhost:5000/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'

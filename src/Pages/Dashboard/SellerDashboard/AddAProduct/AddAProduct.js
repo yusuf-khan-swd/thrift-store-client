@@ -51,7 +51,7 @@ const AddAProduct = () => {
             (category) => category.categoryName === data.productCategory
           );
 
-          fetch(`http://localhost:5000/user?email=${user.email}`)
+          fetch(`http://localhost:5000/users?email=${user.email}`)
             .then((res) => res.json())
             .then((userData) => {
               const userInfo = userData.result;

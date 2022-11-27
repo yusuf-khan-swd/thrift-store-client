@@ -46,7 +46,7 @@ const Login = () => {
       .then(result => {
         const user = result.user;
 
-        fetch(`http://localhost:5000/user?email=${user.email}`)
+        fetch(`http://localhost:5000/users?email=${user.email}`)
           .then(res => res.json())
           .then(data => {
 
