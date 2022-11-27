@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const BookModal = ({ setOpenModal, productBooked }) => {
@@ -7,10 +8,12 @@ const BookModal = ({ setOpenModal, productBooked }) => {
   const [bookError, setBookError] = useState("");
   const { productName, resalePrice } = productBooked;
 
-  const handleBookProduct = (event) => {
-    event.preventDefault();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-    console.log('btn click');
+  const onSubmit = (value) => {
+    console.log(value);
+
+    setOpenModal(false)
   };
 
   return (
@@ -18,10 +21,11 @@ const BookModal = ({ setOpenModal, productBooked }) => {
       <input type="checkbox" id="book-modal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box">
+          <label htmlFor="book-modal" className="btn btn-sm btn-circle">X</label>
           <h2 className='card-title justify-center text-2xl cursor-pointer mb-8'>Please fill up the form.</h2>
           <div className='card max-w-sm mx-auto bg-white'>
             <div className='card-body border rounded-md'>
-              <form onSubmit={handleBookProduct}>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text font-medium">Your Name</span>
@@ -50,24 +54,25 @@ const BookModal = ({ setOpenModal, productBooked }) => {
                   <label className="label">
                     <span className="label-text font-medium">Your Phone Number</span>
                   </label>
-                  <input type="text" className="input input-bordered w-full" required />
+                  <input {...register('buyerNumber', { required: "Phone Number is required" })} type="text" className="input input-bordered w-full" />
+                  <p className='text-red-500'>{errors.buyerNumber?.message}</p>
                 </div>
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text font-medium">Meting Location</span>
                   </label>
-                  <input type="text" className="input input-bordered w-full" required />
+                  <input {...register('metingLocation', { required: "Meting Location required" })} type="text" className="input input-bordered w-full" />
+                  <p className='text-red-500'>{errors.metingLocation?.message}</p>
                 </div>
                 <p className='text-red-500 mt-2'> {bookError} </p>
                 <div className='form-control w-full mt-5'>
-                  <button className='btn' type={'submit'}>Login</button>
-                  <label htmlFor="book-modal" type={'submit'} className="btn">Submit</label>
+                  <button type={'submit'} className='btn btn-secondary'>Submit</button>
                 </div>
               </form>
             </div>
           </div>
-          <div className="modal-action">
-            <button onClick={() => setOpenModal(false)} className='btn btn-secondary'>Close</button>
+          <div className='modal-action'>
+            <label htmlFor="book-modal" className="btn btn-sm">Leave</label>
           </div>
         </div>
       </div>
