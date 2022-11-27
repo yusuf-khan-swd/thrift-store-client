@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const BookModal = ({ setOpenModal, productBooked }) => {
@@ -23,9 +24,27 @@ const BookModal = ({ setOpenModal, productBooked }) => {
       productName: productName,
       productId: _id,
     };
-    console.log(order);
 
-    // setOpenModal(false);
+
+    fetch("http://localhost:5000/orders", {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      },
+      body: JSON.stringify(order)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.acknowledged) {
+          toast.success("Product book confirm.");
+          setOpenModal(false);
+        }
+      })
+      .catch(error => {
+        setBookError(error.message);
+      })
+
   };
 
   return (
