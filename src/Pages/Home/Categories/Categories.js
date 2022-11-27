@@ -8,6 +8,16 @@ import axios from 'axios';
 const Categories = () => {
   const location = useLocation();
   const isItCategoriesRoute = location.pathname === "/categories"
+  let isItHomeRoute = "";
+  if (location.pathname === "/home") {
+    isItHomeRoute = true;
+  }
+  else if (location.pathname === "/") {
+    isItHomeRoute = true;
+  }
+  else {
+    isItHomeRoute = false;
+  }
 
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ['categories'],
@@ -34,11 +44,22 @@ const Categories = () => {
             }
           </ul>
         }
-        <div className={`${isItCategoriesRoute ? 'col-span-5 md:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'}`}>
-          {
-            categories.map(category => <CategoryCard key={category._id} category={category}></CategoryCard>)
-          }
-        </div>
+        {
+          isItCategoriesRoute &&
+          <div className="`col-span-5 md:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+              categories.map(category => <CategoryCard key={category._id} category={category}></CategoryCard>)
+            }
+          </div>
+        }
+        {
+          isItHomeRoute &&
+          <ul className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 mb-8'>
+            {
+              categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary w-full' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
+            }
+          </ul>
+        }
       </div>
     </div>
   );
