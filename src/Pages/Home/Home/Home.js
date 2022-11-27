@@ -21,8 +21,6 @@ const Home = () => {
     return <Loading></Loading>
   }
 
-  console.log(`advertise = ${advertisedItems.length}`, advertisedItems)
-
   return (
     <div className='container mx-auto'>
       <Banner></Banner>
