@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import Spinner from "../Shared/Spinner/Spinner";
 
 const ProductCard = ({ product, setOpenModal, handleBookProduct }) => {
+  const [isDataLoading, setIsDataLoading] = useState(false);
+
   const {
     productName,
     image,
@@ -14,6 +18,8 @@ const ProductCard = ({ product, setOpenModal, handleBookProduct }) => {
     conditionType,
     sellerNumber,
     description,
+    _id,
+    reported
   } = product;
 
   const handleBooked = (modal, product) => {
@@ -21,8 +27,31 @@ const ProductCard = ({ product, setOpenModal, handleBookProduct }) => {
     handleBookProduct(product);
   };
 
+  const handleReport = (id) => {
+    setIsDataLoading(true);
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount) {
+          toast.success("Reported to admin");
+        }
+        setIsDataLoading(false);
+      })
+      .catch(error => {
+        console.log('report error: ', error)
+        setIsDataLoading(false);
+      })
+  };
+
   return (
     <div className="m-2">
+      <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
       <div className="card card-side bg-white shadow-xl border">
         <div>
           <figure>
@@ -43,7 +72,7 @@ const ProductCard = ({ product, setOpenModal, handleBookProduct }) => {
           <p>Description: {description}</p>
           <div className="card-actions justify-end">
             <label onClick={() => handleBooked(true, product)} htmlFor="book-modal" className="btn btn-primary">Book Now</label>
-            <button className="btn btn-primary">Report to admin</button>
+            <button disabled={isDataLoading} onClick={() => handleReport(_id, reported)} className={`btn ${reported ? 'btn-warning' : 'btn-secondary'}`}>{`${reported ? 'Remove Report' : 'Report to admin'}`}</button>
           </div>
         </div>
       </div>
