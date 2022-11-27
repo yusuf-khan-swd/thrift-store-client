@@ -36,7 +36,7 @@ const ProductCard = ({ product }) => {
           <p>Mobile Number: {sellerNumber}</p>
           <p>Description: {description}</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Book now</button>
+            <label htmlFor="book-modal" className="btn btn-primary">Book Now</label>
             <button className="btn btn-primary">Report to admin</button>
           </div>
         </div>

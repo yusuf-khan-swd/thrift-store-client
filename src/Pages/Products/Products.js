@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import BookModal from "./BookModal";
 import ProductCard from "./ProductCard";
 
 const Products = () => {
@@ -15,6 +16,9 @@ const Products = () => {
         {products.map((product) => (
           <ProductCard key={product._id} product={product}></ProductCard>
         ))}
+      </div>
+      <div>
+        <BookModal></BookModal>
       </div>
     </div>
   );
