@@ -5,10 +5,12 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import googleLogo from '../../assets/google.png';
 import useToken from '../../hooks/useToken';
+import Spinner from '../Shared/Spinner/Spinner';
 
 const Register = () => {
   const { createUser, updateUserInfo, googleLogin, logOut } = useContext(AuthContext);
   const [registerError, setRegisterError] = useState("");
+  const [isDataLoading, setIsDataLoading] = useState(false);
 
   const [registerUserEmail, setRegisterUserEmail] = useState("");
   const [token] = useToken(registerUserEmail);
@@ -17,6 +19,7 @@ const Register = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const onSubmit = data => {
+    setIsDataLoading(true);
     const { email, password, confirm, name, accountType } = data;
     setRegisterError("");
 
@@ -49,6 +52,7 @@ const Register = () => {
               handleUpdateUserInfo(name);
               setRegisterError("");
               reset();
+              setIsDataLoading(false);
             }
           })
       })
@@ -57,6 +61,7 @@ const Register = () => {
         setRegisterError(error.message);
         toast.error(error.message)
         reset();
+        setIsDataLoading(false);
       })
   };
 
@@ -68,14 +73,17 @@ const Register = () => {
     updateUserInfo(profile)
       .then(() => {
         setRegisterError("");
+        setIsDataLoading(false);
       })
       .catch((error) => {
         console.log("Update profile error: ", error);
-        setRegisterError(error.message)
+        setRegisterError(error.message);
+        setIsDataLoading(false);
       })
   };
 
   const handleGoogleLogin = () => {
+    setIsDataLoading(true);
     googleLogin()
       .then(result => {
         const user = result.user;
@@ -100,6 +108,7 @@ const Register = () => {
                 toast.success("Successfully register with Google.");
                 setRegisterUserEmail(user.email);
                 setRegisterError("");
+                setIsDataLoading(false);
               }
             }
             else {
@@ -107,9 +116,11 @@ const Register = () => {
               logOut()
                 .then(() => {
                   navigate("/login");
+                  setIsDataLoading(false);
                 })
                 .catch(error => {
                   console.log('logout error: ', error);
+                  setIsDataLoading(false);
                 })
             }
           })
@@ -117,6 +128,7 @@ const Register = () => {
       .catch(error => {
         console.log("Google Error: ", error);
         setRegisterError(error.message);
+        setIsDataLoading(false);
       })
   };
 
@@ -126,6 +138,7 @@ const Register = () => {
         token &&
         <Navigate to="/"></Navigate>
       }
+      <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
       <div className='card max-w-lg mx-auto bg-white'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl underline underline-offset-2 cursor-pointer'>Create an Account</h2>
@@ -169,12 +182,12 @@ const Register = () => {
             </div>
             <p className='text-red-500 mt-2'> {registerError} </p>
             <div className='form-control w-full mt-5'>
-              <button className='btn' type={'submit'}>Register</button>
+              <button className='btn' type={'submit'} disabled={isDataLoading}>Register</button>
             </div>
           </form>
           <div className="divider">OR</div>
           <div className='form-control w-full'>
-            <button onClick={handleGoogleLogin} className='btn'>
+            <button onClick={handleGoogleLogin} className='btn' disabled={isDataLoading}>
               <img src={googleLogo} className="w-9 mr-3" alt="" />
               Google Register
             </button>
