@@ -10,8 +10,8 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#2dd4bf",
-          secondary: "#34d399",
+          primary: "#51f0d0", // from element tab
+          secondary: "#2dd4bf", // teal 400
           accent: "#37CDBE",
           neutral: "#3D4451",
           "base-100": "#FFFFFF",
