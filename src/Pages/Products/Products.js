@@ -26,7 +26,7 @@ const Products = () => {
   return (
     <div className="container mx-auto mb-24">
       <h2 className="text-3xl font-bold text-center my-8 uppercase">
-        <Link to="/categories" className="text-sm">Category</Link> <br /> <span>{products[0]?.productCategory}</span>
+        <Link to="/categories" className="text-sm text-secondary hover:link">Category</Link> <br /> <span>{products[0]?.productCategory}</span>
       </h2>
       <div className="grid grid-cols-1 gap-6 ">
         {products.map((product) => (
