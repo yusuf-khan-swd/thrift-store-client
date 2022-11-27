@@ -5,10 +5,12 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import googleLogo from '../../assets/google.png';
 import useToken from '../../hooks/useToken';
+import Spinner from '../Shared/Spinner/Spinner';
 
 const Login = () => {
   const { userLogin, googleLogin, logOut } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
+  const [isDataLoading, setIsDataLoading] = useState(false);
 
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const [token] = useToken(loginUserEmail);
@@ -24,6 +26,7 @@ const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = data => {
+    setIsDataLoading(true);
     const { email, password } = data;
     setLoginError("");
 
@@ -32,15 +35,18 @@ const Login = () => {
         const user = result.user;
         toast.success(`Successfully Login.`);
         setLoginUserEmail(user.email);
+        setIsDataLoading(false);
       })
       .catch(error => {
         console.log("Login error: ", error);
         setLoginError(error.message);
+        setIsDataLoading(false);
       })
   };
 
   const handleGoogleLogin = () => {
     setLoginError("");
+    setIsDataLoading(true);
 
     googleLogin()
       .then(result => {
@@ -53,6 +59,7 @@ const Login = () => {
             if (data?.result?.userEmail) {
               setLoginUserEmail(user.email);
               toast.success("Successfully login with google.");
+              setIsDataLoading(false);
             }
             else {
               toast.error("Please Register First");
@@ -72,6 +79,7 @@ const Login = () => {
       .catch(error => {
         console.log("Google Error: ", error);
         setLoginError(error.message);
+        setIsDataLoading(false);
       })
   };
 
@@ -81,6 +89,7 @@ const Login = () => {
         token &&
         <Navigate to={`${from}`}></Navigate>
       }
+      <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
       <div className='card max-w-sm mx-auto bg-white'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl cursor-pointer'>Login</h2>
@@ -101,12 +110,12 @@ const Login = () => {
             </div>
             <p className='text-red-500 mt-2'> {loginError} </p>
             <div className='form-control w-full mt-5'>
-              <button className='btn' type={'submit'}>Login</button>
+              <button className='btn' type={'submit'} disabled={isDataLoading}>Login</button>
             </div>
           </form>
           <div className="divider">OR</div>
           <div className='form-control w-full'>
-            <button onClick={handleGoogleLogin} className='btn'>
+            <button onClick={handleGoogleLogin} className='btn' disabled={isDataLoading}>
               <img src={googleLogo} className="w-9 mr-3" alt="" />
               Login
             </button>
