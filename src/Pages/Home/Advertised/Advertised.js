@@ -6,7 +6,7 @@ const Advertised = ({ advertisedItems }) => {
 
   return (
     <div>
-      <h2>Advertised Items</h2>
+      <h2>Advertised Items {advertisedItems.length} </h2>
     </div>
   );
 };

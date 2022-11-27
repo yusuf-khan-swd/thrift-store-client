@@ -21,12 +21,14 @@ const Home = () => {
     return <Loading></Loading>
   }
 
+  console.log(`advertise = ${advertisedItems.length}`, advertisedItems)
+
   return (
     <div className='container mx-auto'>
       <Banner></Banner>
       <Categories></Categories>
       {
-        advertisedItems.length !== 0 &&
+        (advertisedItems.length !== 0) &&
         <Advertised advertisedItems={advertisedItems}></Advertised>
       }
       <OurStates></OurStates>
