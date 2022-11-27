@@ -83,8 +83,8 @@ const AddAProduct = () => {
                     toast.success(
                       `Successfully added ${product.productName} to products`
                     );
-                    reset();
                     setIsAdding(false);
+                    reset();
                     navigate("/dashboard/my-products");
                   }
                 });
