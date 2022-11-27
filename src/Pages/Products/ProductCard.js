@@ -29,7 +29,7 @@ const ProductCard = ({ product, setOpenModal, handleBookProduct }) => {
 
   const handleReport = (id) => {
     setIsDataLoading(true);
-    fetch(`http://localhost:5000/reports/${id}`, {
+    fetch(`http://localhost:5000/reported-products/${id}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
