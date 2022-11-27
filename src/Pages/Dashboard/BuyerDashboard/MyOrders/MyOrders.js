@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import Loading from '../../../Shared/Loading/Loading';
 import Spinner from '../../../Shared/Spinner/Spinner';
 
 const MyOrders = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
 
-  const { data: orders, isLoading } = useQuery({
+  const { data: orders, isLoading, refetch } = useQuery({
     queryKey: ['orders'],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/orders", {
@@ -25,7 +26,24 @@ const MyOrders = () => {
   }
 
 
-  const handleDeleteOrder = (id) => { };
+  const handleDeleteOrder = (id) => {
+    setIsDataLoading(true);
+    fetch(`http://localhost:5000/orders/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if (data.deletedCount) {
+          toast.success("Your order is deleted.");
+          refetch();
+          setIsDataLoading(false);
+        }
+      })
+  };
 
   return (
     <div>
