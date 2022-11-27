@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
+import Loading from "../Shared/Loading/Loading";
 import BookModal from "./BookModal";
 import ProductCard from "./ProductCard";
 
@@ -8,6 +9,11 @@ const Products = () => {
   const [productBooked, setProductBooked] = useState({});
 
   const products = useLoaderData();
+  const navigation = useNavigation();
+
+  if (navigation.state === "loading") {
+    return <Loading></Loading>
+  }
 
   if (!products.length) {
     return (
