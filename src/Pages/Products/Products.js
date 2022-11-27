@@ -10,6 +10,16 @@ const Products = () => {
   const products = useLoaderData();
   console.log(products);
 
+  if (!products.length) {
+    return (
+      <div className="h-screen flex justify-center items-center lg:items-start lg:mt-8">
+        <h2 className="text-5xl font-bold">
+          This category have <span className="text-teal-500">0</span> products.
+        </h2>
+      </div>
+    );
+  }
+
   const handleBookProduct = product => {
     setProductBooked(product);
   };
