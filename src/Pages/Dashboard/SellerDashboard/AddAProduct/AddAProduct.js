@@ -67,7 +67,7 @@ const AddAProduct = () => {
                 advertised: false,
               };
 
-              fetch("http://localhost:5000/products", {
+              fetch("http://localhost:5000/seller-product", {
                 method: "POST",
                 headers: {
                   "content-type": "application/json",

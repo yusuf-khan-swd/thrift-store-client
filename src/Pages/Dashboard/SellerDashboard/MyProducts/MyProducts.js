@@ -17,7 +17,7 @@ const MyProducts = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/products?email=${user.email}`,
+        `http://localhost:5000/seller-products?email=${user.email}`,
         {
           headers: {
             authorization: `bearer ${localStorage.getItem("thrift-token")}`,
@@ -45,7 +45,7 @@ const MyProducts = () => {
 
   const handleAdvertised = (id, advertise) => {
     setIsDataLoading(true);
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`http://localhost:5000/seller-product/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -78,7 +78,7 @@ const MyProducts = () => {
     }
 
     setIsDataLoading(true);
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`http://localhost:5000/seller-product/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("thrift-token")}`,
