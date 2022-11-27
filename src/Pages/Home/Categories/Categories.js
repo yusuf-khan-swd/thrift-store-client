@@ -8,16 +8,6 @@ import axios from 'axios';
 const Categories = () => {
   const location = useLocation();
   const isItCategoriesRoute = location.pathname === "/categories"
-  let isItHomeRoute = "";
-  if (location.pathname === "/home") {
-    isItHomeRoute = true;
-  }
-  else if (location.pathname === "/") {
-    isItHomeRoute = true;
-  }
-  else {
-    isItHomeRoute = false;
-  }
 
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ['categories'],
@@ -53,7 +43,7 @@ const Categories = () => {
           </div>
         }
         {
-          isItHomeRoute &&
+          !isItCategoriesRoute &&
           <ul className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 mb-8'>
             {
               categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary w-full' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
