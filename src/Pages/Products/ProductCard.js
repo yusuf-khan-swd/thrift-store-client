@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductCard = ({ product, setOpenModal }) => {
+const ProductCard = ({ product, setOpenModal, handleBookProduct }) => {
   const {
     productName,
     image,
@@ -15,6 +15,11 @@ const ProductCard = ({ product, setOpenModal }) => {
     sellerNumber,
     description,
   } = product;
+
+  const handleBooked = (modal, product) => {
+    setOpenModal(modal);
+    handleBookProduct(product);
+  };
 
   return (
     <div className="m-2">
@@ -37,7 +42,7 @@ const ProductCard = ({ product, setOpenModal }) => {
           <p>Mobile Number: {sellerNumber}</p>
           <p>Description: {description}</p>
           <div className="card-actions justify-end">
-            <label onClick={() => setOpenModal(true)} htmlFor="book-modal" className="btn btn-primary">Book Now</label>
+            <label onClick={() => handleBooked(true, product)} htmlFor="book-modal" className="btn btn-primary">Book Now</label>
             <button className="btn btn-primary">Report to admin</button>
           </div>
         </div>

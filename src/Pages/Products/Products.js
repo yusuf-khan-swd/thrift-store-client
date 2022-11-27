@@ -5,9 +5,14 @@ import ProductCard from "./ProductCard";
 
 const Products = () => {
   const [openModal, setOpenModal] = useState(true);
+  const [productBooked, setProductBooked] = useState({});
 
   const products = useLoaderData();
   console.log(products);
+
+  const handleBookProduct = product => {
+    setProductBooked(product);
+  };
 
   return (
     <div className="container mx-auto mb-24">
@@ -16,13 +21,13 @@ const Products = () => {
       </h2>
       <div className="grid grid-cols-1 gap-6 ">
         {products.map((product) => (
-          <ProductCard key={product._id} product={product} setOpenModal={setOpenModal}></ProductCard>
+          <ProductCard key={product._id} product={product} setOpenModal={setOpenModal} handleBookProduct={handleBookProduct}></ProductCard>
         ))}
       </div>
       <div>
         {
           openModal &&
-          <BookModal setOpenModal={setOpenModal}></BookModal>
+          <BookModal setOpenModal={setOpenModal} productBooked={productBooked}></BookModal>
         }
       </div>
     </div>
