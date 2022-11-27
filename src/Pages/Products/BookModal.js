@@ -8,7 +8,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
   const { user } = useContext(AuthContext);
 
   const [bookError, setBookError] = useState("");
-  const { productName, resalePrice, image, _id } = productBooked;
+  const { productName, resalePrice, image, _id, sellerEmail } = productBooked;
 
   const {
     register,
@@ -25,7 +25,8 @@ const BookModal = ({ setOpenModal, productBooked }) => {
       buyerName: user.displayName,
       buyerEmail: user.email,
       productName: productName,
-      productPrice: resalePrice
+      productPrice: resalePrice,
+      sellerEmail: sellerEmail
     };
 
 
