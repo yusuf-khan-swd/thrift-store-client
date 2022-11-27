@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import toast from "react-hot-toast";
+import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import Spinner from "../Shared/Spinner/Spinner";
 
-const ProductCard = ({ product, setOpenModal, handleBookProduct }) => {
-  const [isDataLoading, setIsDataLoading] = useState(false);
-
+const ProductCard = ({ product, setOpenModal, handleBookProduct, handleReport, isDataLoading }) => {
   const {
     productName,
     image,
@@ -28,31 +24,9 @@ const ProductCard = ({ product, setOpenModal, handleBookProduct }) => {
     handleBookProduct(product);
   };
 
-  const handleReport = (id) => {
-    setIsDataLoading(true);
-    fetch(`http://localhost:5000/reported-products/${id}`, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/json',
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.modifiedCount) {
-          toast.success("Reported to admin");
-        }
-        setIsDataLoading(false);
-      })
-      .catch(error => {
-        console.log('report error: ', error)
-        setIsDataLoading(false);
-      })
-  };
 
   return (
     <div className="m-2">
-      <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
       <div className="card card-side bg-white shadow-xl border">
         <div>
           <figure>
