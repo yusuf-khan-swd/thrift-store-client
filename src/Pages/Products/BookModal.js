@@ -5,6 +5,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
   const { user } = useContext(AuthContext);
 
   const [bookError, setBookError] = useState("");
+  const { productName, resalePrice } = productBooked;
 
   const handleBookProduct = (event) => {
     event.preventDefault();
@@ -23,26 +24,44 @@ const BookModal = ({ setOpenModal, productBooked }) => {
               <form onSubmit={handleBookProduct}>
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text font-medium">Name</span>
+                    <span className="label-text font-medium">Your Name</span>
                   </label>
                   <input type="text" defaultValue={user.displayName} disabled className="input input-bordered w-full" required />
                 </div>
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text font-medium">Email</span>
+                    <span className="label-text font-medium">Your Email</span>
                   </label>
                   <input type="email" defaultValue={user.email} disabled className="input input-bordered w-full" required />
                 </div>
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text font-medium">Password</span>
+                    <span className="label-text font-medium">Product name</span>
+                  </label>
+                  <input type="text" defaultValue={productName} disabled className="input input-bordered w-full" required />
+                </div>
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text font-medium">Product Price</span>
+                  </label>
+                  <input type="text" defaultValue={resalePrice} disabled className="input input-bordered w-full" required />
+                </div>
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text font-medium">Your Phone Number</span>
+                  </label>
+                  <input type="text" className="input input-bordered w-full" required />
+                </div>
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="label-text font-medium">Meting Location</span>
                   </label>
                   <input type="text" className="input input-bordered w-full" required />
                 </div>
                 <p className='text-red-500 mt-2'> {bookError} </p>
                 <div className='form-control w-full mt-5'>
                   <button className='btn' type={'submit'}>Login</button>
-                  <label htmlFor="book-modal" className="btn">Submit</label>
+                  <label htmlFor="book-modal" type={'submit'} className="btn">Submit</label>
                 </div>
               </form>
             </div>
