@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const BookModal = ({ setOpenModal, productBooked }) => {
@@ -61,106 +62,114 @@ const BookModal = ({ setOpenModal, productBooked }) => {
           <label htmlFor="book-modal" className="btn btn-sm btn-circle">
             X
           </label>
-          <h2 className="card-title justify-center text-2xl cursor-pointer mb-8">
-            Please fill up the form.
-          </h2>
-          <div className="card max-w-sm mx-auto bg-white">
-            <div className="card-body border rounded-md">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text font-medium">Your Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue={user.displayName}
-                    disabled
-                    className="input input-bordered w-full"
-                    required
-                  />
-                </div>
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text font-medium">Your Email</span>
-                  </label>
-                  <input
+          {
+            !user?.uid ?
+              <h2 className="mt-8 font-bold text-3xl">Please <Link to="/login" className="hover:link text-secondary">login</Link> </h2>
+              :
+              <>
+                <h2 className="card-title justify-center text-2xl cursor-pointer mb-8">
+                  Please fill up the form.
+                </h2>
+                <div className="card max-w-sm mx-auto bg-white">
+                  <div className="card-body border rounded-md">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <div className="form-control w-full">
+                        <label className="label">
+                          <span className="label-text font-medium">Your Name</span>
+                        </label>
+                        <input
+                          type="text"
+                          defaultValue={user.displayName}
+                          disabled
+                          className="input input-bordered w-full"
+                          required
+                        />
+                      </div>
+                      <div className="form-control w-full">
+                        <label className="label">
+                          <span className="label-text font-medium">Your Email</span>
+                        </label>
+                        <input
 
-                    type="email"
-                    defaultValue={user.email}
-                    disabled
-                    className="input input-bordered w-full"
-                    required
-                  />
-                </div>
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text font-medium">Product name</span>
-                  </label>
-                  <input
+                          type="email"
+                          defaultValue={user.email}
+                          disabled
+                          className="input input-bordered w-full"
+                          required
+                        />
+                      </div>
+                      <div className="form-control w-full">
+                        <label className="label">
+                          <span className="label-text font-medium">Product name</span>
+                        </label>
+                        <input
 
-                    type="text"
-                    defaultValue={productName}
-                    disabled
-                    className="input input-bordered w-full"
-                    required
-                  />
-                </div>
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text font-medium">
-                      Product Price
-                    </span>
-                  </label>
-                  <input
+                          type="text"
+                          defaultValue={productName}
+                          disabled
+                          className="input input-bordered w-full"
+                          required
+                        />
+                      </div>
+                      <div className="form-control w-full">
+                        <label className="label">
+                          <span className="label-text font-medium">
+                            Product Price
+                          </span>
+                        </label>
+                        <input
 
-                    type="text"
-                    defaultValue={resalePrice}
-                    disabled
-                    className="input input-bordered w-full"
-                    required
-                  />
+                          type="text"
+                          defaultValue={resalePrice}
+                          disabled
+                          className="input input-bordered w-full"
+                          required
+                        />
+                      </div>
+                      <div className="form-control w-full">
+                        <label className="label">
+                          <span className="label-text font-medium">
+                            Your Phone Number
+                          </span>
+                        </label>
+                        <input
+                          {...register("buyerNumber", {
+                            required: "Phone Number is required",
+                          })}
+                          type="text"
+                          className="input input-bordered w-full"
+                        />
+                        <p className="text-red-500">{errors.buyerNumber?.message}</p>
+                      </div>
+                      <div className="form-control w-full">
+                        <label className="label">
+                          <span className="label-text font-medium">
+                            Meting Location
+                          </span>
+                        </label>
+                        <input
+                          {...register("metingLocation", {
+                            required: "Meting Location required",
+                          })}
+                          type="text"
+                          className="input input-bordered w-full"
+                        />
+                        <p className="text-red-500">
+                          {errors.metingLocation?.message}
+                        </p>
+                      </div>
+                      <p className="text-red-500 mt-2"> {bookError} </p>
+                      <div className="form-control w-full mt-5">
+                        <button type={"submit"} className="btn btn-secondary" disabled={isDataLoading}>
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text font-medium">
-                      Your Phone Number
-                    </span>
-                  </label>
-                  <input
-                    {...register("buyerNumber", {
-                      required: "Phone Number is required",
-                    })}
-                    type="text"
-                    className="input input-bordered w-full"
-                  />
-                  <p className="text-red-500">{errors.buyerNumber?.message}</p>
-                </div>
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text font-medium">
-                      Meting Location
-                    </span>
-                  </label>
-                  <input
-                    {...register("metingLocation", {
-                      required: "Meting Location required",
-                    })}
-                    type="text"
-                    className="input input-bordered w-full"
-                  />
-                  <p className="text-red-500">
-                    {errors.metingLocation?.message}
-                  </p>
-                </div>
-                <p className="text-red-500 mt-2"> {bookError} </p>
-                <div className="form-control w-full mt-5">
-                  <button type={"submit"} className="btn btn-secondary" disabled={isDataLoading}>
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+              </>
+
+          }
           <div className="modal-action">
             <label htmlFor="book-modal" className="btn btn-sm">
               Leave
