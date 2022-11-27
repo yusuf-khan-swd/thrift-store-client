@@ -51,54 +51,57 @@ const MyOrders = () => {
         My Orders: <span className="text-teal-500">{orders.length}</span>
       </h2>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
-      <div className="overflow-x-auto m-2 lg:m-5">
-        <div className="overflow-x-auto w-full">
-          <table className="table w-full">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order, index) => (
-                <tr key={order._id}>
-                  <th>{index + 1 < 10 && "0" + (index + 1)}</th>
-                  <td>
-                    <div className="flex items-center space-x-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src={order.productImage}
-                            alt="Avatar Tailwind CSS Component"
-                          />
+      {
+        orders.length !== 0 &&
+        <div className="overflow-x-auto m-2 lg:m-5">
+          <div className="overflow-x-auto w-full">
+            <table className="table w-full">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Product Name</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order, index) => (
+                  <tr key={order._id}>
+                    <th>{index + 1 < 10 && "0" + (index + 1)}</th>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src={order.productImage}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">{order.productName}</div>
                         </div>
                       </div>
-                      <div>
-                        <div className="font-bold">{order.productName}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>${order.resalePrice}</td>
+                    </td>
+                    <td>${order.resalePrice}</td>
 
-                  <td>
-                    <Link to={`/dashboard/my-payment/${order._id}`} className='btn btn-sm btn-secondary mr-3'>Pay</Link>
-                    <button
-                      onClick={() => handleDeleteOrder(order._id)}
-                      className="btn btn-error btn-sm text-gray-600 font-bold"
-                      disabled={isDataLoading}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    <td>
+                      <Link to={`/dashboard/my-payment/${order._id}`} className='btn btn-sm btn-secondary mr-3' disabled={isDataLoading}>Pay</Link>
+                      <button
+                        onClick={() => handleDeleteOrder(order._id)}
+                        className="btn btn-error btn-sm text-gray-600 font-bold"
+                        disabled={isDataLoading}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      }
     </div>
   );
 };

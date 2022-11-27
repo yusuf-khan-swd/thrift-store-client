@@ -2,12 +2,17 @@ import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider/AuthProvider';
 import useAccount from '../hooks/useAccount';
+import Loading from '../Pages/Shared/Loading/Loading';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
 
-  const [userType] = useAccount(user.email);
+  const [userType, isAccountLoading] = useAccount(user.email);
+
+  if (isAccountLoading) {
+    return <Loading></Loading>
+  }
 
   const dashboardItems = <>
     {
