@@ -12,77 +12,92 @@ const Products = () => {
   const [productBooked, setProductBooked] = useState({});
   const { id } = useParams();
 
-  const { data: products, isLoading, refetch } = useQuery({
+  const {
+    data: products,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/category/${id}`, {
         headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`
-        }
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
       });
       const data = await res.json();
       return data;
-    }
+    },
   });
 
   if (isLoading) {
-    return <Loading></Loading>
+    return <Loading></Loading>;
   }
-
 
   if (!products.length) {
     return (
       <div className="h-screen flex justify-center items-center lg:items-start lg:mt-8">
         <h2 className="text-5xl font-bold">
-          This category have <span className="text-teal-500">0</span> products <br />
+          This category have <span className="text-teal-500">0</span> products
+          <br />
         </h2>
       </div>
     );
   }
 
-  const handleBookProduct = product => {
+  const handleBookProduct = (product) => {
     setProductBooked(product);
   };
 
   const handleReport = (id, reported) => {
     setIsDataLoading(true);
     fetch(`http://localhost:5000/reported-products/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'content-type': 'application/json',
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
       },
-      body: JSON.stringify({ reported })
+      body: JSON.stringify({ reported }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.modifiedCount) {
-          toast.success(`${reported ? 'Reported to admin' : 'Remove report'}`);
+          toast.success(`${reported ? "Reported to admin" : "Remove report"}`);
           refetch();
           setIsDataLoading(false);
         }
-
       })
-      .catch(error => {
-        console.log('report error: ', error)
-      })
+      .catch((error) => {
+        console.log("report error: ", error);
+      });
   };
 
   return (
     <div className="container mx-auto mb-24">
       <h2 className="text-3xl font-bold text-center my-8 uppercase">
-        <Link to="/categories" className="text-sm text-secondary hover:link">Category</Link> <br /> <span>{products[0]?.productCategory}</span>
+        <Link to="/categories" className="text-sm text-secondary hover:link">
+          Category
+        </Link>
+        <br /> <span>{products[0]?.productCategory}</span>
       </h2>
       <div className="grid grid-cols-1 gap-6 ">
         {products.map((product) => (
-          <ProductCard key={product._id} product={product} setOpenModal={setOpenModal} handleBookProduct={handleBookProduct} handleReport={handleReport} isDataLoading={isDataLoading}></ProductCard>
+          <ProductCard
+            key={product._id}
+            product={product}
+            setOpenModal={setOpenModal}
+            handleBookProduct={handleBookProduct}
+            handleReport={handleReport}
+            isDataLoading={isDataLoading}
+          ></ProductCard>
         ))}
       </div>
       <div>
-        {
-          openModal &&
-          <BookModal setOpenModal={setOpenModal} productBooked={productBooked}></BookModal>
-        }
+        {openModal && (
+          <BookModal
+            setOpenModal={setOpenModal}
+            productBooked={productBooked}
+          ></BookModal>
+        )}
       </div>
     </div>
   );
