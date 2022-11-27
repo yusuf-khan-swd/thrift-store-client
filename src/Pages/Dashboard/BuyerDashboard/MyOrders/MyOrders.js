@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import Loading from '../../../Shared/Loading/Loading';
 import Spinner from '../../../Shared/Spinner/Spinner';
 
@@ -36,7 +37,6 @@ const MyOrders = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.deletedCount) {
           toast.success("Your order is deleted.");
           refetch();
@@ -59,8 +59,6 @@ const MyOrders = () => {
                 <th></th>
                 <th>Product Name</th>
                 <th>Price</th>
-                <th>Sales Status</th>
-                <th>Advertise Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -84,13 +82,9 @@ const MyOrders = () => {
                     </div>
                   </td>
                   <td>${order.resalePrice}</td>
-                  <td className="uppercase font-medium">
-                    {order.saleStatus}
-                  </td>
-                  <th>
-                    <button> Pay </button>
-                  </th>
+
                   <td>
+                    <Link to={`/dashboard/my-payment/${order._id}`} className='btn btn-sm btn-secondary mr-3'>Pay</Link>
                     <button
                       onClick={() => handleDeleteOrder(order._id)}
                       className="btn btn-error btn-sm text-gray-600 font-bold"
