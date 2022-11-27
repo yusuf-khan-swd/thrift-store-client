@@ -83,7 +83,7 @@ const MyOrders = () => {
                         </div>
                       </div>
                     </td>
-                    <td>${order.resalePrice}</td>
+                    <td>${order.productPrice}</td>
 
                     <td>
                       <Link to={`/dashboard/my-payment/${order._id}`} className='btn btn-sm btn-secondary mr-3' disabled={isDataLoading}>Pay</Link>

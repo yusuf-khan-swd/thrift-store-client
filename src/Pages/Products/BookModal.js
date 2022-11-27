@@ -2,8 +2,10 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import Spinner from "../Shared/Spinner/Spinner";
 
 const BookModal = ({ setOpenModal, productBooked }) => {
+  const [isDataLoading, setIsDataLoading] = useState(false);
   const { user } = useContext(AuthContext);
 
   const [bookError, setBookError] = useState("");
@@ -16,13 +18,15 @@ const BookModal = ({ setOpenModal, productBooked }) => {
   } = useForm();
 
   const onSubmit = (value) => {
+    setIsDataLoading(true);
     const order = {
       ...value,
+      productImage: image,
+      productId: _id,
       buyerName: user.displayName,
       buyerEmail: user.email,
-      productImage: image,
       productName: productName,
-      productId: _id,
+      productPrice: resalePrice
     };
 
 
@@ -39,10 +43,12 @@ const BookModal = ({ setOpenModal, productBooked }) => {
         if (data.acknowledged) {
           toast.success("Product book confirm.");
           setOpenModal(false);
+          setIsDataLoading(false);
         }
       })
       .catch(error => {
         setBookError(error.message);
+        setIsDataLoading(false);
       })
 
   };
@@ -55,6 +61,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
           <label htmlFor="book-modal" className="btn btn-sm btn-circle">
             X
           </label>
+          <div className="h-5">{isDataLoading && <Spinner></Spinner>}</div>
           <h2 className="card-title justify-center text-2xl cursor-pointer mb-8">
             Please fill up the form.
           </h2>
@@ -78,6 +85,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
                     <span className="label-text font-medium">Your Email</span>
                   </label>
                   <input
+
                     type="email"
                     defaultValue={user.email}
                     disabled
@@ -90,6 +98,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
                     <span className="label-text font-medium">Product name</span>
                   </label>
                   <input
+
                     type="text"
                     defaultValue={productName}
                     disabled
@@ -104,6 +113,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
                     </span>
                   </label>
                   <input
+
                     type="text"
                     defaultValue={resalePrice}
                     disabled
@@ -145,7 +155,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
                 </div>
                 <p className="text-red-500 mt-2"> {bookError} </p>
                 <div className="form-control w-full mt-5">
-                  <button type={"submit"} className="btn btn-secondary">
+                  <button type={"submit"} className="btn btn-secondary" disabled={isDataLoading}>
                     Submit
                   </button>
                 </div>
