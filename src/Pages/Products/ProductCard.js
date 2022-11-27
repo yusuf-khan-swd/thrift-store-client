@@ -1,12 +1,27 @@
-import React from 'react';
+import React from "react";
 
 const ProductCard = ({ product }) => {
-  const { productName, image, location, resalePrice, originalPrice, monthsUsed, time, sellerName, sellerIsVerified, conditionType, sellerNumber, description } = product;
+  const {
+    productName,
+    image,
+    location,
+    resalePrice,
+    originalPrice,
+    monthsUsed,
+    time,
+    sellerName,
+    sellerIsVerified,
+    conditionType,
+    sellerNumber,
+    description,
+  } = product;
   return (
-    <div className='m-2'>
+    <div className="m-2">
       <div className="card card-side bg-white shadow-xl border">
         <div>
-          <figure><img src={image} className="w-1/2" alt={productName} /></figure>
+          <figure>
+            <img src={image} className="w-1/2" alt={productName} />
+          </figure>
         </div>
         <div className="card-body">
           <h2 className="card-title uppercase justify-center">{productName}</h2>
@@ -22,6 +37,7 @@ const ProductCard = ({ product }) => {
           <p>Description: {description}</p>
           <div className="card-actions justify-end">
             <button className="btn btn-primary">Book now</button>
+            <button className="btn btn-primary">Report to admin</button>
           </div>
         </div>
       </div>
