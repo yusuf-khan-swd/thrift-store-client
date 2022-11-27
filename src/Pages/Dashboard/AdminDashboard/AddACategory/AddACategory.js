@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import Spinner from '../../../Shared/Spinner/Spinner';
 
 const AddACategory = () => {
   const [isAdding, setIsAdding] = useState(false);
@@ -8,7 +9,7 @@ const AddACategory = () => {
   const imageHostKey = process.env.REACT_APP_imgbbKey;
 
   const onSubmit = data => {
-    const image = data.image[0];
+    const image = data.categoryImage[0];
     const formData = new FormData();
     formData.append('image', image);
 
@@ -45,7 +46,8 @@ const AddACategory = () => {
 
   return (
     <div className='container mx-auto p-3'>
-      <div className='card max-w-lg mx-auto bg-white my-12'>
+      <div className="h-8 mt-12">{isAdding && <Spinner></Spinner>}</div>
+      <div className='card max-w-lg mx-auto bg-white mb-12'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl cursor-pointer'>Category</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -60,8 +62,8 @@ const AddACategory = () => {
               <label className="label">
                 <span className="label-text font-medium">Image</span>
               </label>
-              <input {...register('image', { required: "Image is required" })} type="file" className="file-input file-input-bordered file-input-sm w-full" required />
-              <p className='text-red-500'>{errors.image?.message}</p>
+              <input {...register('categoryImage', { required: "Image is required" })} type="file" className="file-input file-input-bordered file-input-sm w-full" required />
+              <p className='text-red-500'>{errors.categoryImage?.message}</p>
             </div>
             <div className='form-control w-full mt-5'>
               <button className='btn' type={'submit'} disabled={isAdding}>Add to Categories</button>
