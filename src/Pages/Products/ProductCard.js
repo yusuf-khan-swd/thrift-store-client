@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { FaCheckCircle } from "react-icons/fa";
 import Spinner from "../Shared/Spinner/Spinner";
 
 const ProductCard = ({ product, setOpenModal, handleBookProduct }) => {
@@ -65,7 +66,7 @@ const ProductCard = ({ product, setOpenModal, handleBookProduct }) => {
           <p>Original Price: ${originalPrice}</p>
           <p>Months of Use: ${monthsUsed} </p>
           <p>Posted Time: {time}</p>
-          <p>Seller Name: {sellerName}</p>
+          <p className="flex items-center"> Seller Name: {sellerName} {sellerIsVerified && <FaCheckCircle className="ml-3" title="Seller is verified"></FaCheckCircle>}</p>
           <p>Seller is verified: {`${sellerIsVerified}`} </p>
           <p>Condition Type: {conditionType}</p>
           <p>Mobile Number: {sellerNumber}</p>
