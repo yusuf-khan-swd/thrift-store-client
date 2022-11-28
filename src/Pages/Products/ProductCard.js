@@ -61,7 +61,6 @@ const ProductCard = ({
               ></FaCheckCircle>
             )}
           </p>
-          <p>Seller is verified: {`${sellerIsVerified}`} </p>
           <p>Condition Type: {conditionType}</p>
           <p>Mobile Number: {sellerNumber}</p>
           <p>Description: {description}</p>
