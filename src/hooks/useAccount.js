@@ -10,7 +10,7 @@ const useAccount = (email) => {
 
   useEffect(() => {
     if (email) {
-      fetch(`https://thrift-store-server.vercel.app/usersType?email=${email}`, {
+      fetch(`http://localhost:5000/usersType?email=${email}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem('thrift-token')}`
         }

@@ -31,7 +31,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
     };
 
 
-    fetch("https://thrift-store-server.vercel.app/orders", {
+    fetch("http://localhost:5000/orders", {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

@@ -12,7 +12,7 @@ const Categories = () => {
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
-      const res = await axios.get('https://thrift-store-server.vercel.app/categories');
+      const res = await axios.get('http://localhost:5000/categories');
       const data = await res.data;
       return data;
     }

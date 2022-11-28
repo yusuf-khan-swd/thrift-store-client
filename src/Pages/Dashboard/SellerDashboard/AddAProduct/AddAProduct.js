@@ -22,7 +22,7 @@ const AddAProduct = () => {
   const { data: categories, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch("https://thrift-store-server.vercel.app/categories");
+      const res = await fetch("http://localhost:5000/categories");
       const data = await res.json();
       return data;
     },
@@ -51,7 +51,7 @@ const AddAProduct = () => {
             (category) => category.categoryName === data.productCategory
           );
 
-          fetch(`https://thrift-store-server.vercel.app/users?email=${user.email}`)
+          fetch(`http://localhost:5000/users?email=${user.email}`)
             .then((res) => res.json())
             .then((userData) => {
               const userInfo = userData.result;
@@ -67,7 +67,7 @@ const AddAProduct = () => {
                 advertised: false,
               };
 
-              fetch("https://thrift-store-server.vercel.app/seller-product", {
+              fetch("http://localhost:5000/seller-product", {
                 method: "POST",
                 headers: {
                   "content-type": "application/json",

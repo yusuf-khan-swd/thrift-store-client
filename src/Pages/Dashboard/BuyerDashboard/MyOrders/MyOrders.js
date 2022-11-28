@@ -11,7 +11,7 @@ const MyOrders = () => {
   const { data: orders, isLoading, refetch } = useQuery({
     queryKey: ['orders'],
     queryFn: async () => {
-      const res = await fetch("https://thrift-store-server.vercel.app/orders", {
+      const res = await fetch("http://localhost:5000/orders", {
         headers: {
           authorization: `bearer ${localStorage.getItem("thrift-token")}`
         }
@@ -29,7 +29,7 @@ const MyOrders = () => {
 
   const handleDeleteOrder = (id) => {
     setIsDataLoading(true);
-    fetch(`https://thrift-store-server.vercel.app/orders/${id}`, {
+    fetch(`http://localhost:5000/orders/${id}`, {
       method: 'DELETE',
       headers: {
         authorization: `bearer ${localStorage.getItem("thrift-token")}`

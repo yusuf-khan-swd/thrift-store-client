@@ -11,7 +11,7 @@ const Home = () => {
   const { data: advertisedItems, isLoading } = useQuery({
     queryKey: ["advertised"],
     queryFn: async () => {
-      const res = await axios.get("https://thrift-store-server.vercel.app/advertised");
+      const res = await axios.get("http://localhost:5000/advertised");
       const data = await res.data;
       return data;
     },

@@ -24,7 +24,7 @@ const AddACategory = () => {
 
           const category = { ...data, categoryImage: imageData.data.url }
 
-          fetch('https://thrift-store-server.vercel.app/categories', {
+          fetch('http://localhost:5000/categories', {
             method: 'POST',
             headers: {
               'content-type': 'application/json',
