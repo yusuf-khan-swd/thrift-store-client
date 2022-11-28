@@ -117,7 +117,7 @@ const MyProducts = () => {
             <tbody>
               {products.map((product, index) => (
                 <tr key={product._id}>
-                  <th>{index + 1 < 10 && "0" + (index + 1)}</th>
+                  <th>{(index + 1) < 10 ? ("0" + (index + 1)) : (index + 1)}</th>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
