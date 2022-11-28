@@ -49,15 +49,16 @@ const ProductCard = ({
           <h2 className="card-title uppercase justify-center font-bold">{productName}</h2>
           <p className="font-semibold text-xl text-center mb-5">Resale Price: ${resalePrice} </p>
           <div className="mb-3">
-            <p>Months of Use: {monthsUsed} Month</p>
-            <p>Original Price: ${originalPrice}</p>
-            <p>Location: {location} </p>
-            <p>Posted Time: {postedDate} {hour}{AmOrPm}</p>
-            <p>Condition Type: {conditionType}</p>
+            <p className="font-medium mb-1">Months of Use: <span className="font-bold ">{monthsUsed} Month</span></p>
+            <p className="font-medium mb-1">Original Price: <span className="font-bold ">${originalPrice}</span> </p>
+            <p className="font-medium mb-1">Location: <span className="font-bold ">{location}</span> </p>
+            <p className="font-medium mb-1">Posted Time: <span className="font-bold ">{postedDate} {hour}{AmOrPm}</span></p>
+            <p className="font-medium mb-1">Condition Type: <span className="font-bold ">{conditionType}</span></p>
+            <p className="font-medium mb-1">Sale Status: <span className="uppercase text-green-400">{saleStatus}</span></p>
           </div>
           <div>
-            <p className="flex items-center">
-              Seller Name: {sellerName}
+            <p className="flex items-center font-medium mb-1">
+              Seller Name: <span className="font-bold ml-1"> {sellerName}</span>
               {sellerIsVerified && (
                 <FaCheckCircle
                   className="ml-3 text-blue-600"
@@ -65,7 +66,7 @@ const ProductCard = ({
                 ></FaCheckCircle>
               )}
             </p>
-            <p>Seller Mobile Number: {sellerNumber}</p>
+            <p className="font-medium mb-1">Seller Mobile Number: <span className="font-bold">{sellerNumber}</span></p>
             <p className="mb-3"><span className="font-medium">Description:</span> {description}</p>
           </div>
           <div className="card-actions justify-start lg:justify-end mt-5">
