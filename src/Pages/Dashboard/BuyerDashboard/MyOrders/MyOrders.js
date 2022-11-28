@@ -86,7 +86,9 @@ const MyOrders = () => {
                     <td>${order.productPrice}</td>
 
                     <td>
-                      <Link to={`/dashboard/my-payment/${order._id}`} className='btn btn-sm btn-secondary mr-3' disabled={isDataLoading}>Pay</Link>
+                      <Link to={`/dashboard/my-payment/${order._id}`} className='btn btn-sm btn-secondary mr-3' disabled={isDataLoading || order.saleStatus}>
+                        {order.saleStatus ? 'Paid' : 'Pay'}
+                      </Link>
                       <button
                         onClick={() => handleDeleteOrder(order._id)}
                         className="btn btn-error btn-sm text-gray-600 font-bold"

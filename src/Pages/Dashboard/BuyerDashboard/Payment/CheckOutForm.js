@@ -1,5 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const CheckOutForm = ({ product }) => {
   const [clientSecret, setClientSecret] = useState("");
@@ -9,8 +11,9 @@ const CheckOutForm = ({ product }) => {
   const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
-  const { productName, productPrice, buyerName, buyerEmail } = product;
+  const { productName, productPrice, buyerName, buyerEmail, _id, productId } = product;
 
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -47,7 +50,7 @@ const CheckOutForm = ({ product }) => {
       console.log('[payment error]', error);
       setCardError(error?.message)
     } else {
-      console.log('[Payment method]', paymentMethod)
+      // console.log('[Payment method]', paymentMethod)
     }
 
     setIsDataLoading(true);
@@ -73,9 +76,40 @@ const CheckOutForm = ({ product }) => {
     }
 
     if (paymentIntent.status === "succeeded") {
-      setSuccess("Congrats!! Your payment completed.");
-      setTransactionId(paymentIntent.id);
-      setIsDataLoading(false);
+      const payment = {
+        price: productPrice,
+        transactionId: paymentIntent.id,
+        email: buyerEmail,
+        orderId: _id,
+        productId
+      };
+
+      fetch("http://localhost:5000/payments", {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`
+        },
+        body: JSON.stringify(payment)
+      })
+        .then(res => res.json())
+        .then(data => {
+
+          if (data.acknowledged) {
+            toast.success("Payment Done");
+            setSuccess("Congrats!! Your payment completed.");
+            setTransactionId(paymentIntent.id);
+            setIsDataLoading(false);
+            setCardError(false);
+            navigate("/dashboard/my-orders")
+          }
+        })
+        .catch(error => {
+          console.log("payment error: ", error);
+          setCardError(error.message);
+          setIsDataLoading(false);
+        })
+
     }
 
 
