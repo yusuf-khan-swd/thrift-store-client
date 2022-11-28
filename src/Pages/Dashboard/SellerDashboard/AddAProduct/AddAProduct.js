@@ -166,7 +166,7 @@ const AddAProduct = () => {
                 className="input input-bordered w-full"
                 required
               />
-              <p className="text-red-500">{errors.originalPrice?.message}</p>
+              <p className="text-red-500 mt-2">{errors.originalPrice?.message}</p>
             </div>
             <div className="form-control w-full mt-5">
               <div className="form-control w-full">
@@ -181,7 +181,7 @@ const AddAProduct = () => {
                   className="input input-bordered w-full"
                   required
                 />
-                <p className="text-red-500">{errors.monthsUsed?.message}</p>
+                <p className="text-red-500 mt-2">{errors.monthsUsed?.message}</p>
               </div>
             </div>
             <div className="form-control w-full mt-5">
@@ -199,7 +199,7 @@ const AddAProduct = () => {
                   <option>Good</option>
                   <option>Fair</option>
                 </select>
-                <p className="text-red-500">{errors.monthsUsed?.message}</p>
+                <p className="text-red-500 mt-2">{errors.monthsUsed?.message}</p>
               </div>
             </div>
             <div className="form-control w-full mt-5">
@@ -215,7 +215,7 @@ const AddAProduct = () => {
                   className="input input-bordered w-full"
                   required
                 />
-                <p className="text-red-500">{errors.sellerNumber?.message}</p>
+                <p className="text-red-500 mt-2">{errors.sellerNumber?.message}</p>
               </div>
             </div>
             <div className="form-control w-full mt-5">
@@ -235,7 +235,7 @@ const AddAProduct = () => {
                     <option key={category._id}>{category.categoryName}</option>
                   ))}
                 </select>
-                <p className="text-red-500">
+                <p className="text-red-500 mt-2">
                   {errors.productCategory?.message}
                 </p>
               </div>
@@ -260,7 +260,7 @@ const AddAProduct = () => {
                   className="textarea textarea-bordered"
                   rows="5"
                 ></textarea>
-                <p className="text-red-500">{errors.description?.message}</p>
+                <p className="text-red-500 mt-2">{errors.description?.message}</p>
               </div>
             </div>
             <div className="form-control w-full mt-5">
