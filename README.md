@@ -1,9 +1,11 @@
-# Getting Started with Create React App
+# A thrift store - _Charity Truly_
 
-adminEmail: admin@admin.com
-adminPassword: 123456
+- adminEmail: admin@admin.com
+- adminPassword: 123456
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Project live site [Charity Truly](https://thrift-store-88291.web.app/).
+
+## Project Functionality :
 
 - User can register as seller or buyer.
 - User can login as admin, seller and buyer
@@ -23,6 +25,23 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - In all seller admin can verify a seller or remove verification.
 - If seller is verified then a tick icon will show side of seller name.
 - In reported items route admin can see all reported items. And delete the reported item.
+
+## Project Feature:
+
+- This project use <code>react</code> as a front-end library.
+- And to add style and to make responsive used <code>tailwindCSS</code>
+  and <code>daisyUI</code> as tailwindCSS component library.
+- Create a admin route feature for only admin can access.
+- Create a seller route feature only seller can access.
+- Payment system feature for buyer to pay. Using <code>stripe</code>.
+- <code>react-query</code> - used for fetching data from server and loading state and refetch
+- <code>axios</code> - Explore the use of axios and used to get server data.
+- <code>date-fns</code> - used to format the data.
+- <code>firebase</code> - as authentication service. And to host this website.
+- <code>react-router-dom</code> - Using react-router-dom make all the route for this project.
+- <code>react-hook-form</code> - Using get form values, show error message and some basic validation.
+- <code>react-hot-toast</code> - To show beautiful message for user.
+- <code>react-icons</code> - Used for site icon.
 
 ## Available Scripts
 
