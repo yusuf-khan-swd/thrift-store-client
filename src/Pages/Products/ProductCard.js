@@ -30,7 +30,7 @@ const ProductCard = ({
 
   const postedDate = format(convertToISO, "PP");
   const hour = format(convertToISO, 'h');
-  const AmOrPm = format(convertToISO, 'a');
+  const AmOrPm = format(convertToISO, 'aaa');
 
 
   const handleBooked = (modal, product) => {
@@ -50,7 +50,7 @@ const ProductCard = ({
           <p>Resale Price: ${resalePrice} </p>
           <p>Original Price: ${originalPrice}</p>
           <p>Months of Use: ${monthsUsed} </p>
-          <p>Posted Time: {postedDate} {hour} {AmOrPm}</p>
+          <p>Posted Time: {postedDate} {hour}{AmOrPm}</p>
           <p className="flex items-center">
 
             Seller Name: {sellerName}
