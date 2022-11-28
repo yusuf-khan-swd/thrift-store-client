@@ -102,6 +102,13 @@ const CheckOutForm = ({ product }) => {
             </button>
           </form>
           <p className='text-red-500 mt-2'> {cardError} </p>
+          {
+            success &&
+            <div>
+              <p className='text-green-500'>{success}</p>
+              <p className='font-semibold'>Your Transaction Id: {transactionId}</p>
+            </div>
+          }
         </div>
       </div>
     </div>
