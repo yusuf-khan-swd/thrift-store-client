@@ -23,7 +23,7 @@ const Categories = () => {
   }
 
   return (
-    <div className='container mx-auto mb-24 md:border md:border-primary rounded-lg mt-8 p-3'>
+    <div className='container mx-auto mb-24 sm:border sm:border-primary rounded-lg mt-8 p-3'>
       <Link to="/categories"><h2 className='text-3xl font-bold text-center my-8 uppercase hover:link underline'>Our Categories</h2></Link>
       <div className={`${isItCategoriesRoute && 'grid grid-cols-5'}`}>
         {
@@ -36,21 +36,21 @@ const Categories = () => {
         }
         {
           isItCategoriesRoute &&
-          <div className="`col-span-5 md:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="col-span-5 md:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {
               categories.map(category => <CategoryCard key={category._id} category={category}></CategoryCard>)
             }
           </div>
         }
-        {
-          !isItCategoriesRoute &&
-          <ul className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 mb-8'>
-            {
-              categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary w-full' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
-            }
-          </ul>
-        }
       </div>
+      {
+        !isItCategoriesRoute &&
+        <ul className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 mb-8'>
+          {
+            categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary w-full' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
+          }
+        </ul>
+      }
     </div>
   );
 };

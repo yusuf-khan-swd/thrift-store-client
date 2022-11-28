@@ -4,10 +4,10 @@ import banner from '../../../assets/banner-1.jpg';
 
 const Banner = () => {
   return (
-    <div className="relative flex flex-col py-16 lg:pt-0 lg:flex-col lg:pb-0 my-16 bg-white rounded-lg">
+    <div className="relative flex flex-col py-16 lg:pt-0 lg:flex-col lg:pb-0 my-16 bg-white rounded-lg sm:border sm:border-primary">
       <div className="flex flex-col items-start w-full max-w-xl px-4 mx-auto lg:px-8 lg:max-w-screen-xl">
         <div className="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
-          <div className="max-w-xl mb-6">
+          <div className="max-w-xl mb-6 text-center sm:text-left">
             <div>
               <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
                 Hope are here
@@ -22,7 +22,7 @@ const Banner = () => {
           </div>
           <div className="flex flex-col items-center md:flex-row">
             <Link className='btn btn-primary mr-3 ' to="/categories">Categories</Link>
-            <Link className='font-bold' to="/blog">Read Blog</Link>
+            <Link className='font-bold hidden lg:block' to="/blog">Read Blog</Link>
           </div>
         </div>
       </div>

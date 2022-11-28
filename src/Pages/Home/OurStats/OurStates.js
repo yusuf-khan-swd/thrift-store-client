@@ -2,7 +2,7 @@ import React from 'react';
 
 const OurStates = () => {
   return (
-    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 bg-white my-16 rounded-lg">
+    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 bg-white my-16 rounded-lg sm:border sm:border-primary">
       <div className="max-w-xl mb-10 md:mx-auto text-center lg:max-w-2xl md:mb-12">
         <div>
           <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
@@ -10,11 +10,10 @@ const OurStates = () => {
           </p>
         </div>
         <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-          The quick, brown fox jumps over a lazy dog
+          A place where you can find all your needs
         </h2>
         <p className="text-base text-gray-700 md:text-lg">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque rem aperiam, eaque ipsa quae.
+          Successful people always see things working out. Alone, we don’t make much of a difference, but together, we are strong to face any problem.
         </p>
       </div>
       <div className="relative w-full p-px mx-auto mb-4 overflow-hidden transition-shadow duration-300 border rounded lg:mb-8 lg:max-w-4xl group hover:shadow-xl">
@@ -27,7 +26,7 @@ const OurStates = () => {
             <h6 className="text-4xl font-bold text-deep-purple-accent-400 sm:text-5xl">
               82%
             </h6>
-            <p className="text-center md:text-base">
+            <p className="text-center md:text-base mt-3">
               Goes to our charity fund along with our employee salary
             </p>
           </div>
@@ -36,16 +35,13 @@ const OurStates = () => {
             <h6 className="text-4xl font-bold text-deep-purple-accent-400 sm:text-5xl">
               106.5K
             </h6>
-            <p className="text-center md:text-base">
+            <p className="text-center md:text-base mt-3">
               Done Donation to charity organization
             </p>
           </div>
         </div>
       </div>
-      <p className="mx-auto mb-4 text-gray-600 sm:text-center lg:max-w-2xl lg:mb-6 md:px-16">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </p>
+
     </div>
   );
 };
