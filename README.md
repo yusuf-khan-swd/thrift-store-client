@@ -5,6 +5,21 @@ adminPassword: 123456
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+- User can register as seller or buyer.
+- User can login as admin, seller and buyer
+- If user is log in then only can book a product with user additional information in modal.
+- Create role and route for admin, seller and buyer.
+- Like AdminRoute where only admin can access. For securing server side access create a admin middle-ware.
+- And a SellerRoute Where only seller can access. For securing server side access create a seller middle-ware.
+- Make a private route for only buyer access.
+- Seller can advertised product or remove advertised.
+- Seller can also add a product with product information and upload a image that hosted on imageBB hosting service.
+- Seller can also delete, seller own product in my products.
+- Admin can see all sellers and all buyers. And delete a seller or buyer.
+- In all seller admin can verify a seller or remove verification.
+- If seller is verified then a tick icon will show side of seller name.
+- In reported items route admin can see all reported items. And delete the reported item.
+
 ## Available Scripts
 
 In the project directory, you can run:
