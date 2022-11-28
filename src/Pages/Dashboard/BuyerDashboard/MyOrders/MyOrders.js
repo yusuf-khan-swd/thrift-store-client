@@ -28,6 +28,14 @@ const MyOrders = () => {
 
 
   const handleDeleteOrder = (id) => {
+    const isConfirm = window.confirm(
+      "Are you sure you want to delete this product"
+    );
+
+    if (!isConfirm) {
+      return;
+    }
+
     setIsDataLoading(true);
     fetch(`http://localhost:5000/orders/${id}`, {
       method: 'DELETE',
