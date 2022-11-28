@@ -24,6 +24,7 @@ const Register = () => {
     setRegisterError("");
 
     if (password !== confirm) {
+      setIsDataLoading(false);
       return toast.error("Password didn't matched.");
     }
 
