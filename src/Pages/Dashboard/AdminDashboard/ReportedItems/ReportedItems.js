@@ -10,7 +10,7 @@ const ReportedItems = () => {
   const { data: reports, isLoading, refetch } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/reported-products", {
+      const res = await fetch("https://thrift-store-server.vercel.app/reported-products", {
         headers: {
           authorization: `bearer ${localStorage.getItem("thrift-token")}`
         }
@@ -36,7 +36,7 @@ const ReportedItems = () => {
 
   const handleDeleteProducts = (id) => {
     setIsDataLoading(true);
-    fetch(`http://localhost:5000/reported-products/${id}`, {
+    fetch(`https://thrift-store-server.vercel.app/reported-products/${id}`, {
       method: 'DELETE',
       headers: {
         authorization: `bearer ${localStorage.getItem("thrift-token")}`

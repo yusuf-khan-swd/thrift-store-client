@@ -14,7 +14,7 @@ const AllBuyers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/all-buyers", {
+      const res = await fetch("https://thrift-store-server.vercel.app/all-buyers", {
         headers: {
           authorization: `bearer ${localStorage.getItem("thrift-token")}`,
         },
@@ -40,7 +40,7 @@ const AllBuyers = () => {
 
   const handleDeleteBuyers = (id) => {
     setIsDataLoading(true);
-    fetch(`http://localhost:5000/all-buyers/${id}`, {
+    fetch(`https://thrift-store-server.vercel.app/all-buyers/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("thrift-token")}`,

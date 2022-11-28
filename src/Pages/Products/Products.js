@@ -19,7 +19,7 @@ const Products = () => {
   } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/category/${id}`, {
+      const res = await fetch(`https://thrift-store-server.vercel.app/category/${id}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("thrift-token")}`,
         },
@@ -50,7 +50,7 @@ const Products = () => {
 
   const handleReport = (id, reported) => {
     setIsDataLoading(true);
-    fetch(`http://localhost:5000/reported-products/${id}`, {
+    fetch(`https://thrift-store-server.vercel.app/reported-products/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
