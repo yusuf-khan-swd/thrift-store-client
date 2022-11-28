@@ -1,9 +1,27 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const CheckOutForm = () => {
+const CheckOutForm = ({ product }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [clientSecret, setClientSecret] = useState("");
+
+  const { resalePrice } = product;
+
+  useEffect(() => {
+    fetch("http://localhost:5000/create-payment-intent", {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      },
+      body: JSON.stringify({ resalePrice }) // price will go here
+    })
+      .then(res => res.json())
+      .then(data => () => {
+        setClientSecret(data.clientSecret)
+      })
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
