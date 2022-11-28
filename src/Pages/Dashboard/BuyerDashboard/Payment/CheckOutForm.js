@@ -19,9 +19,7 @@ const CheckOutForm = ({ product }) => {
       body: JSON.stringify({ resalePrice })
     })
       .then(res => res.json())
-      .then(data => () => {
-        setClientSecret(data.clientSecret)
-      })
+      .then(data => setClientSecret(data.clientSecret))
   }, [resalePrice]);
 
   const handleSubmit = async (event) => {
@@ -72,7 +70,7 @@ const CheckOutForm = ({ product }) => {
               },
             }}
           />
-          <button className='btn btn-sm btn-primary mt-3' type="submit" disabled={!stripe}>
+          <button className='btn btn-sm btn-primary mt-3' type="submit" disabled={!stripe || !clientSecret}>
             Pay
           </button>
         </form>
