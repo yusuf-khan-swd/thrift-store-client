@@ -41,14 +41,13 @@ const ProductCard = ({
 
   return (
     <div className="m-2">
-      <div className="card lg:card-side grid grid-cols-1 md:grid-cols-2 bg-white shadow-xl rounded-lg">
+      <div className="card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-white shadow-xl rounded-lg">
         <figure>
-          <img src={image} alt={productName} />
+          <img src={image} className="p-3 rounded-3xl" alt={productName} />
         </figure>
-        <div className="card-body">
+        <div className="card-body lg:col-span-2">
           <h2 className="card-title uppercase justify-center">{productName}</h2>
-          <p>location: {location} </p>
-          <p className="font-bold">{saleStatus}</p>
+          <p>Location: {location} </p>
           <p>Resale Price: ${resalePrice} </p>
           <p>Original Price: ${originalPrice}</p>
           <p>Months of Use: ${monthsUsed} </p>
