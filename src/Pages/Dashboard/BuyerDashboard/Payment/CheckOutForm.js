@@ -16,13 +16,13 @@ const CheckOutForm = ({ product }) => {
         'content-type': 'application/json',
         authorization: `bearer ${localStorage.getItem("thrift-token")}`
       },
-      body: JSON.stringify({ resalePrice }) // price will go here
+      body: JSON.stringify({ resalePrice })
     })
       .then(res => res.json())
       .then(data => () => {
         setClientSecret(data.clientSecret)
       })
-  });
+  }, [resalePrice]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
