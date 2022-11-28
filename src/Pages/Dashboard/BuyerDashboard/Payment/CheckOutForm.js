@@ -16,7 +16,7 @@ const CheckOutForm = ({ product }) => {
   const { productName, productPrice, buyerName, buyerEmail, _id, productId } = product;
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://thrift-store-server.vercel.app/create-payment-intent", {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -84,7 +84,7 @@ const CheckOutForm = ({ product }) => {
         productId
       };
 
-      fetch("http://localhost:5000/payments", {
+      fetch("https://thrift-store-server.vercel.app/payments", {
         method: 'POST',
         headers: {
           'content-type': 'application/json',

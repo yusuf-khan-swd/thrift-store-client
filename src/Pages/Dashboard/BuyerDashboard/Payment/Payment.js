@@ -14,7 +14,7 @@ const Payment = () => {
   const { data: product, isLoading } = useQuery({
     queryKey: ['product'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/orders/${id}`, {
+      const res = await fetch(`https://thrift-store-server.vercel.app/orders/${id}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("thrift-token")}`
         }
