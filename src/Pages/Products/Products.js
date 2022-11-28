@@ -73,12 +73,13 @@ const Products = () => {
 
   return (
     <div className="container mx-auto mb-24">
-      <h2 className="text-3xl font-bold text-center my-8 uppercase">
+      <h2 className="text-3xl font-bold text-center mt-8 mb-2 uppercase">
         <Link to="/categories" className="text-sm text-secondary hover:link">
           Category
         </Link>
         <br /> <span>{products[0]?.productCategory}</span>
       </h2>
+      <p className="text-center font-bold text-zinc-400 text-xl mb-5">Total {products.length} Products Available</p>
       <div className="grid grid-cols-1 gap-6 ">
         {products.map((product) => (
           <ProductCard
