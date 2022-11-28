@@ -32,10 +32,10 @@ const ProductCard = ({
 
   return (
     <div className="m-2">
-      <div className="card card-side bg-white shadow-xl border">
+      <div className="card lg:card-side bg-white shadow-xl border">
         <div>
           <figure>
-            <img src={image} className="w-1/2" alt={productName} />
+            <img src={image} alt={productName} />
           </figure>
         </div>
         <div className="card-body">
