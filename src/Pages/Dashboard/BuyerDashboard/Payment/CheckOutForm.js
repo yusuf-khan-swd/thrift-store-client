@@ -116,7 +116,7 @@ const CheckOutForm = ({ product }) => {
   };
 
   return (
-    <div>
+    <div className='my-16'>
       <h2 className="text-center my-8 text-3xl font-bold">Payment for <span className='text-secondary'>{productName}</span> which price <span className='text-secondary'>${productPrice}</span> </h2>
       <div className='card max-w-md bg-white m-3 mx-auto'>
         <div className='card-body'>

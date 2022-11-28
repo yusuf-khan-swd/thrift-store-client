@@ -24,6 +24,7 @@ const ProductCard = ({
     description,
     _id,
     reported,
+    saleStatus,
   } = product;
 
   const convertToISO = parseISO(time);
@@ -47,6 +48,7 @@ const ProductCard = ({
         <div className="card-body">
           <h2 className="card-title uppercase justify-center">{productName}</h2>
           <p>location: {location} </p>
+          <p className="font-bold">{saleStatus}</p>
           <p>Resale Price: ${resalePrice} </p>
           <p>Original Price: ${originalPrice}</p>
           <p>Months of Use: ${monthsUsed} </p>
