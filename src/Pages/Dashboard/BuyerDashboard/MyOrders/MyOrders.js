@@ -61,6 +61,7 @@ const MyOrders = () => {
                   <th></th>
                   <th>Product Name</th>
                   <th>Price</th>
+                  <th>Seller</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -84,6 +85,7 @@ const MyOrders = () => {
                       </div>
                     </td>
                     <td>${order.productPrice}</td>
+                    <td>${order.sellerEmail}</td>
 
                     <td>
                       <Link to={`/dashboard/my-payment/${order._id}`} className='btn btn-sm btn-secondary mr-3' disabled={isDataLoading || order.saleStatus}>
