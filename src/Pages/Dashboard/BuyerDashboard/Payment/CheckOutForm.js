@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 const CheckOutForm = ({ product }) => {
   const [clientSecret, setClientSecret] = useState("");
+  const [isDataLoading, setIsDataLoading] = useState(false);
   const [cardError, setCardError] = useState("");
   const [success, setSuccess] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -49,6 +50,8 @@ const CheckOutForm = ({ product }) => {
       console.log('[Payment method]', paymentMethod)
     }
 
+    setIsDataLoading(true);
+
     const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
       clientSecret,
       {
@@ -65,13 +68,16 @@ const CheckOutForm = ({ product }) => {
     setSuccess('');
     if (confirmError) {
       setCardError(confirmError.message);
+      setIsDataLoading(false);
       return;
     }
 
     if (paymentIntent.status === "succeeded") {
       setSuccess("Congrats!! Your payment completed.");
       setTransactionId(paymentIntent.id);
+      setIsDataLoading(false);
     }
+
 
   };
 
@@ -97,7 +103,7 @@ const CheckOutForm = ({ product }) => {
                 },
               }}
             />
-            <button className='btn btn-sm btn-primary mt-3' type="submit" disabled={!stripe || !clientSecret}>
+            <button className='btn btn-sm btn-primary mt-3' type="submit" disabled={!stripe || !clientSecret || isDataLoading}>
               Pay
             </button>
           </form>
