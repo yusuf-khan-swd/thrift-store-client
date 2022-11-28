@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { FaUser } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
@@ -29,6 +30,7 @@ const Navbar = () => {
         <>
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li><button onClick={handleLogOut}>Logout</button></li>
+          <li><button title={user?.displayName}><FaUser className='text-xl'></FaUser></button></li>
         </>
         :
         <li><Link to="/login">Login</Link></li>
