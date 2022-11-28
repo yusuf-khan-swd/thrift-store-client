@@ -7,7 +7,7 @@ const CheckOutForm = ({ product }) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const { productPrice } = product;
+  const { productName, productPrice, buyerName, buyerEmail } = product;
 
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -53,7 +53,8 @@ const CheckOutForm = ({ product }) => {
         payment_method: {
           card: card,
           billing_details: {
-            name: 'Jenny Rosen',
+            name: buyerName,
+            email: buyerEmail
           },
         },
       },
@@ -63,30 +64,33 @@ const CheckOutForm = ({ product }) => {
   };
 
   return (
-    <div className='card max-w-md bg-white m-3 mx-auto'>
-      <div className='card-body'>
-        <form onSubmit={handleSubmit} className="">
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: '16px',
-                  color: '#424770',
-                  '::placeholder': {
-                    color: '#aab7c4',
+    <div>
+      <h2 className="text-center my-8 text-3xl font-bold">Payment for <span className='text-secondary'>{productName}</span> which price <span className='text-secondary'>${productPrice}</span> </h2>
+      <div className='card max-w-md bg-white m-3 mx-auto'>
+        <div className='card-body'>
+          <form onSubmit={handleSubmit} className="">
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: '16px',
+                    color: '#424770',
+                    '::placeholder': {
+                      color: '#aab7c4',
+                    },
+                  },
+                  invalid: {
+                    color: '#9e2146',
                   },
                 },
-                invalid: {
-                  color: '#9e2146',
-                },
-              },
-            }}
-          />
-          <button className='btn btn-sm btn-primary mt-3' type="submit" disabled={!stripe || !clientSecret}>
-            Pay
-          </button>
-        </form>
-        <p className='text-red-500 mt-2'> {cardError} </p>
+              }}
+            />
+            <button className='btn btn-sm btn-primary mt-3' type="submit" disabled={!stripe || !clientSecret}>
+              Pay
+            </button>
+          </form>
+          <p className='text-red-500 mt-2'> {cardError} </p>
+        </div>
       </div>
     </div>
   );
