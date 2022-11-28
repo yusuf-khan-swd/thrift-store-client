@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import banner from '../../../assets/banner-1.jpg';
 
 const Banner = () => {
   return (
@@ -16,9 +17,7 @@ const Banner = () => {
               A Charity Shop
             </h2>
             <p className="text-base text-gray-700 md:text-lg">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae. explicabo.
+              A charity shop, thrift shop or thrift store or opportunity shop or op-shop is a retail establishment run by a charitable organization to raise money. Charity shops are a type of social enterprise
             </p>
           </div>
           <div className="flex flex-col items-center md:flex-row">
@@ -30,7 +29,7 @@ const Banner = () => {
       <div className="inset-y-0 right-0 w-full max-w-xl px-4 mx-auto lg:pl-8 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-1/2 lg:max-w-full lg:absolute xl:px-0">
         <img
           className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none sm:h-96 lg:h-full"
-          src="https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+          src={banner}
           alt=""
         />
       </div>
