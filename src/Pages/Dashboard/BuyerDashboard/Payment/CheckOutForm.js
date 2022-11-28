@@ -7,7 +7,7 @@ const CheckOutForm = ({ product }) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const { resalePrice } = product;
+  const { productPrice } = product;
 
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -16,11 +16,11 @@ const CheckOutForm = ({ product }) => {
         'content-type': 'application/json',
         authorization: `bearer ${localStorage.getItem("thrift-token")}`
       },
-      body: JSON.stringify({ resalePrice })
+      body: JSON.stringify({ productPrice })
     })
       .then(res => res.json())
       .then(data => setClientSecret(data.clientSecret))
-  }, [resalePrice]);
+  }, [productPrice]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,6 +46,18 @@ const CheckOutForm = ({ product }) => {
     } else {
       console.log('[Payment method]', paymentMethod)
     }
+
+    const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+      clientSecret,
+      {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: 'Jenny Rosen',
+          },
+        },
+      },
+    );
 
 
   };
