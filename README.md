@@ -8,6 +8,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - User can register as seller or buyer.
 - User can login as admin, seller and buyer
 - If user is log in then only can book a product with user additional information in modal.
+- A log in user can book a products and it will show in dashboard my products
+- User can delete book products or pay for a product.
+- User can pay to purchase the product which implement using stripe.
+- After payment done paid product will not show in advertisement component or in category of products.
 - Create role and route for admin, seller and buyer.
 - Like AdminRoute where only admin can access. For securing server side access create a admin middle-ware.
 - And a SellerRoute Where only seller can access. For securing server side access create a seller middle-ware.
