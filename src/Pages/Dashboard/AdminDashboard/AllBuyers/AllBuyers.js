@@ -39,6 +39,14 @@ const AllBuyers = () => {
   }
 
   const handleDeleteBuyers = (id) => {
+    const isConfirm = window.confirm(
+      "Are you sure you want to delete this product"
+    );
+
+    if (!isConfirm) {
+      return;
+    }
+
     setIsDataLoading(true);
     fetch(`https://thrift-store-server.vercel.app/all-buyers/${id}`, {
       method: "DELETE",
