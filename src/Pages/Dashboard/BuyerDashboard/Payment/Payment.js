@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
 import CheckOutForm from './CheckOutForm';
 
-const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PK}`)
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK)
 
 const Payment = () => {
   return (
