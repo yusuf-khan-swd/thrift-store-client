@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 const CheckOutForm = ({ product }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [cardError, setCardError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
 
@@ -60,6 +62,16 @@ const CheckOutForm = ({ product }) => {
       },
     );
 
+    setSuccess('');
+    if (confirmError) {
+      setCardError(confirmError.message);
+      return;
+    }
+
+    if (paymentIntent.status === "succeeded") {
+      setSuccess("Congrats!! Your payment completed.");
+      setTransactionId(paymentIntent.id);
+    }
 
   };
 
