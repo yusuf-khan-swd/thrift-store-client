@@ -2,9 +2,10 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 
 const CheckOutForm = ({ product }) => {
+  const [clientSecret, setClientSecret] = useState("");
+  const [cardError, setCardError] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-  const [clientSecret, setClientSecret] = useState("");
 
   const { resalePrice } = product;
 
@@ -42,7 +43,8 @@ const CheckOutForm = ({ product }) => {
     });
 
     if (error) {
-      console.log('[payment error]', error)
+      console.log('[payment error]', error);
+      setCardError(error?.message)
     } else {
       console.log('[Payment method]', paymentMethod)
     }
@@ -74,6 +76,7 @@ const CheckOutForm = ({ product }) => {
             Pay
           </button>
         </form>
+        <p className='text-red-500 mt-2'> {cardError} </p>
       </div>
     </div>
   );
