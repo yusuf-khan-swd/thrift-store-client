@@ -107,6 +107,7 @@ const MyProducts = () => {
               <tr>
                 <th></th>
                 <th>Product</th>
+                <th>Category</th>
                 <th>Price</th>
                 <th>Sales Status</th>
                 <th>Advertise Status</th>
@@ -132,6 +133,7 @@ const MyProducts = () => {
                       </div>
                     </div>
                   </td>
+                  <td>{product.productCategory}</td>
                   <td>${product.resalePrice}</td>
                   <td className="uppercase font-medium">
                     {product.saleStatus}
