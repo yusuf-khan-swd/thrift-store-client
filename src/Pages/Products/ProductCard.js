@@ -1,3 +1,4 @@
+import { format, parseISO } from "date-fns";
 import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
@@ -25,6 +26,13 @@ const ProductCard = ({
     reported,
   } = product;
 
+  const convertToISO = parseISO(time);
+
+  const postedDate = format(convertToISO, "PP");
+  const hour = format(convertToISO, 'h');
+  const AmOrPm = format(convertToISO, 'a');
+
+
   const handleBooked = (modal, product) => {
     setOpenModal(modal);
     handleBookProduct(product);
@@ -32,19 +40,17 @@ const ProductCard = ({
 
   return (
     <div className="m-2">
-      <div className="card lg:card-side bg-white shadow-xl border">
-        <div>
-          <figure>
-            <img src={image} alt={productName} />
-          </figure>
-        </div>
+      <div className="card lg:card-side grid grid-cols-1 md:grid-cols-2 bg-white shadow-xl rounded-lg">
+        <figure>
+          <img src={image} alt={productName} />
+        </figure>
         <div className="card-body">
           <h2 className="card-title uppercase justify-center">{productName}</h2>
           <p>location: {location} </p>
           <p>Resale Price: ${resalePrice} </p>
           <p>Original Price: ${originalPrice}</p>
           <p>Months of Use: ${monthsUsed} </p>
-          <p>Posted Time: {time}</p>
+          <p>Posted Time: {postedDate} {hour} {AmOrPm}</p>
           <p className="flex items-center">
 
             Seller Name: {sellerName}
