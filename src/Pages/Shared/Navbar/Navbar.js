@@ -47,7 +47,7 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost normal-case text-xl">Charity Truly</Link>
+          <Link to="/" className="btn btn-ghost normal-case text-xl">Thrift Store</Link>
         </div>
         {
           currentLocation.includes('/dashboard') &&
