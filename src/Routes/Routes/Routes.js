@@ -7,6 +7,7 @@ import AllSellers from "../../Pages/Dashboard/AdminDashboard/AllSellers/AllSelle
 import ReportedItems from "../../Pages/Dashboard/AdminDashboard/ReportedItems/ReportedItems";
 import MyOrders from "../../Pages/Dashboard/BuyerDashboard/MyOrders/MyOrders";
 import Payment from "../../Pages/Dashboard/BuyerDashboard/Payment/Payment";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import AddAProduct from "../../Pages/Dashboard/SellerDashboard/AddAProduct/AddAProduct";
 import MyBuyers from "../../Pages/Dashboard/SellerDashboard/MyBuyers/MyBuyers";
 import MyProducts from "../../Pages/Dashboard/SellerDashboard/MyProducts/MyProducts";
@@ -63,6 +64,10 @@ const routes = createBrowserRouter([
     element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
     errorElement: <DisplayError></DisplayError>,
     children: [
+      {
+        path: '/dashboard',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+      },
       {
         path: '/dashboard/my-orders',
         element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
