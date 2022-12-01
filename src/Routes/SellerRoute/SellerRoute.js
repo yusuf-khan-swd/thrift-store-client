@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import toast from 'react-hot-toast';
 import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useAccount from '../../hooks/useAccount';
@@ -19,9 +18,8 @@ const SellerRoute = ({ children }) => {
     return children;
   }
 
-  toast.error("Please login as seller");
 
-  return <Navigate to="/login" state={{ from: location }} replace></Navigate>
+  return <Navigate to={user ? '/dashboard' : '/login'} state={{ from: location }} replace></Navigate>
 };
 
 export default SellerRoute;
