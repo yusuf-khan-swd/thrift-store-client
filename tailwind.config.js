@@ -10,8 +10,17 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#2bf29c",
-          secondary: "#002333",
+          primary: "#06b6d4",
+          secondary: "#2563eb",
+          // secondary: "#3b82f6",
+
+          // my try
+          // primary: "#2ed08a",
+          // secondary: "#2bf29c",
+
+          // color from anas
+          // primary: "#2bf29c",
+          // secondary: "#002333",
           accent: "#37CDBE",
           neutral: "#3D4451",
           "base-100": "#FFFFFF",
