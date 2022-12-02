@@ -3,6 +3,7 @@ import DashboardLayout from "../../Layouts/DashboardLayout";
 import Main from "../../Layouts/Main";
 import AddACategory from "../../Pages/Dashboard/AdminDashboard/AddACategory/AddACategory";
 import AllBuyers from "../../Pages/Dashboard/AdminDashboard/AllBuyers/AllBuyers";
+import AllCategories from "../../Pages/Dashboard/AdminDashboard/AllCategories/AllCategories";
 import AllSellers from "../../Pages/Dashboard/AdminDashboard/AllSellers/AllSellers";
 import ReportedItems from "../../Pages/Dashboard/AdminDashboard/ReportedItems/ReportedItems";
 import MyOrders from "../../Pages/Dashboard/BuyerDashboard/MyOrders/MyOrders";
@@ -103,6 +104,10 @@ const routes = createBrowserRouter([
       {
         path: '/dashboard/add-category',
         element: <AdminRoute><AddACategory></AddACategory></AdminRoute>
+      },
+      {
+        path: '/dashboard/all-categories',
+        element: <AdminRoute><AllCategories></AllCategories></AdminRoute>
       },
     ],
   }

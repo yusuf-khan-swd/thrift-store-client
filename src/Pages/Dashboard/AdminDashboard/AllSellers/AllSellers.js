@@ -50,7 +50,6 @@ const AllSellers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount) {
           toast.success(
             `${verified ? "Seller verification remove" : "Seller is verified"}`

@@ -57,7 +57,7 @@ const ReportedItems = () => {
   };
 
   return (
-    <div>
+    <div className='container mx-auto mb-24'>
       <div className="text-center py-8">
         <h2 className="text-3xl font-bold uppercase cursor-pointer text-teal-400 underline">
           Total reported product - {reports.length}
@@ -68,7 +68,7 @@ const ReportedItems = () => {
         <table className="table table-zebra w-full">
           <thead>
             <tr>
-              <th></th>
+              <th>s/n</th>
               <th>Reported Product</th>
               <th>Product Category</th>
               <th>Seller Email</th>
