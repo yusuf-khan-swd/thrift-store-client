@@ -96,12 +96,12 @@ const MyOrders = () => {
                     <td>${order.sellerEmail}</td>
 
                     <td>
-                      <Link to={`/dashboard/my-payment/${order._id}`} className='btn btn-sm btn-secondary mr-3' disabled={isDataLoading || order.saleStatus}>
+                      <Link to={`/dashboard/my-payment/${order._id}`} className='btn btn-sm btn-primary mr-3' disabled={isDataLoading || order.saleStatus}>
                         {order.saleStatus ? 'Paid' : 'Pay'}
                       </Link>
                       <button
                         onClick={() => handleDeleteOrder(order._id)}
-                        className="btn btn-error btn-sm text-gray-600 font-bold"
+                        className="btn btn-error btn-outline btn-sm font-bold"
                         disabled={isDataLoading}
                       >
                         Delete

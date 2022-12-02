@@ -78,7 +78,7 @@ const AllBuyers = () => {
             <tr>
               <th></th>
               <th>Buyer Name</th>
-              <th>Email</th>
+              <th>Buyer Email</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -91,7 +91,7 @@ const AllBuyers = () => {
                 <td>
                   <button
                     onClick={() => handleDeleteBuyers(buyer._id)}
-                    className="btn btn-error btn-xs text-gray-600 font-bold mr-4"
+                    className="btn btn-error btn-outline btn-xs text-gray-600 font-bold mr-4"
                   >
                     Delete
                   </button>

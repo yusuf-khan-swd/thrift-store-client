@@ -101,7 +101,7 @@ const AllSellers = () => {
             <tr>
               <th></th>
               <th>Seller Name</th>
-              <th>Email</th>
+              <th>Seller Email</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -114,7 +114,7 @@ const AllSellers = () => {
                 <td>
                   <button
                     onClick={() => handleDeleteSeller(seller._id)}
-                    className="btn btn-error btn-xs text-gray-600 font-bold mr-4"
+                    className="btn btn-error btn-outline btn-xs font-bold mr-4"
                     disabled={isDataLoading}
                   >
                     Delete
