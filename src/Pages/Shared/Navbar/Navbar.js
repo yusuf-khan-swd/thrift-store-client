@@ -28,8 +28,8 @@ const Navbar = () => {
       user?.uid ?
         <>
           <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to="/dashboard">Dashboard</NavLink></li>
-          <li className='mb-1 lg:m-0 lg:mr-1 '><button onClick={handleLogOut}>Logout</button></li>
-          <li className='mb-1 lg:m-0 lg:mr-1 '><button title={user?.displayName}><FaUser className='text-xl'></FaUser></button></li>
+          <li className='mb-1 lg:m-0 lg:mr-1 '><button className='rounded-lg' onClick={handleLogOut}>Logout</button></li>
+          <li className='mb-1 lg:m-0 lg:mr-1 '><button className='rounded-lg' title={user?.displayName}><FaUser className='text-xl'></FaUser></button></li>
         </>
         :
         <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to="/login">Login</NavLink></li>
@@ -48,7 +48,7 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost normal-case text-xl">Thrift Store</Link>
+          <Link to="/" className="btn btn-ghost normal-case text-xl rounded-lg">Thrift Store</Link>
         </div>
         {
           currentLocation.includes('/dashboard') &&
