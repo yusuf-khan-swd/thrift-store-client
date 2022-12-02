@@ -9,7 +9,7 @@ const Banner = () => {
         <div className="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
           <div className="max-w-xl mb-6 text-center md:text-left">
             <div>
-              <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-400">
+              <p className="inline-block px-3 py-px mb-4 text-xs font-bold tracking-wider uppercase rounded-full btn-primary">
                 Hope are here
               </p>
             </div>
@@ -21,7 +21,7 @@ const Banner = () => {
             </p>
           </div>
           <div className="flex flex-col items-center md:flex-row">
-            <Link className='btn btn-primary mr-3 ' to="/categories">Categories</Link>
+            <Link className='btn btn-primary font-bold mr-3 ' to="/categories">Categories</Link>
             <Link className='font-bold hidden lg:block' to="/blog">Read Blog</Link>
           </div>
         </div>

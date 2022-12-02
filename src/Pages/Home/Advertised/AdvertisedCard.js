@@ -12,7 +12,7 @@ const AdvertisedCard = ({ item, setOpenModal,
     <div className="m-2">
       <div className="card card-compact w-full bg-base-100 shadow-xl border">
         <figure>
-          <img src={image} className="w-full h-80" alt={productName} />
+          <img src={image} className="w-full h-72" alt={productName} />
         </figure>
         <div className="card-body">
           <h2 className="card-title uppercase justify-center">{productName}</h2>

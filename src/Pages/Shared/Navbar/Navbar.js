@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { FaUser } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import './Navbar.css'
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -20,23 +21,23 @@ const Navbar = () => {
   };
 
   const menuItems = <>
-    <li><Link to='/home'>Home</Link></li>
-    <li><Link to='/blog'>Blog</Link></li>
-    <li><Link to="/categories">Categories</Link></li>
+    <li><NavLink className={({ isActive }) => isActive ? 'active' : undefined} to='/home'>Home</NavLink></li>
+    <li><NavLink className={({ isActive }) => isActive ? 'active' : undefined} to='/blog'>Blog</NavLink></li>
+    <li><NavLink className={({ isActive }) => isActive ? 'active' : undefined} to="/categories">Categories</NavLink></li>
     {
       user?.uid ?
         <>
-          <li><Link to="/dashboard">Dashboard</Link></li>
+          <li><NavLink className={({ isActive }) => isActive ? 'active' : undefined} to="/dashboard">Dashboard</NavLink></li>
           <li><button onClick={handleLogOut}>Logout</button></li>
           <li><button title={user?.displayName}><FaUser className='text-xl'></FaUser></button></li>
         </>
         :
-        <li><Link to="/login">Login</Link></li>
+        <li><NavLink className={({ isActive }) => isActive ? 'active' : undefined} to="/login">Login</NavLink></li>
     }
   </>
 
   return (
-    <div className='bg-teal-200 sticky top-0 z-50'>
+    <div className='bg-primary sticky top-0 z-10 font-bold text-slate-600'>
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
