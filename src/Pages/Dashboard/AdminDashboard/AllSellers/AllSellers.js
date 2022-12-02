@@ -90,7 +90,7 @@ const AllSellers = () => {
     <div>
       <div className="text-center py-8">
         <h2 className="text-3xl font-bold uppercase cursor-pointer text-teal-400 underline">
-          All Sellers Total - {sellers.length}
+          Total Seller - {sellers.length}
         </h2>
       </div>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>

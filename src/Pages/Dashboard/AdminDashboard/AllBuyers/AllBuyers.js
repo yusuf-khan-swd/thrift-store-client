@@ -68,7 +68,7 @@ const AllBuyers = () => {
     <div>
       <div className="text-center py-8">
         <h2 className="text-3xl font-bold uppercase cursor-pointer text-teal-400 underline">
-          All Buyers Total- {buyers.length}
+          Total Buyers - {buyers.length}
         </h2>
       </div>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
@@ -92,6 +92,7 @@ const AllBuyers = () => {
                   <button
                     onClick={() => handleDeleteBuyers(buyer._id)}
                     className="btn btn-error btn-outline btn-xs text-gray-600 font-bold mr-4"
+                    disabled={isDataLoading}
                   >
                     Delete
                   </button>
