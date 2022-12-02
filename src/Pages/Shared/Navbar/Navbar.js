@@ -21,23 +21,23 @@ const Navbar = () => {
   };
 
   const menuItems = <>
-    <li><NavLink className={({ isActive }) => isActive ? 'active' : undefined} to='/home'>Home</NavLink></li>
-    <li><NavLink className={({ isActive }) => isActive ? 'active' : undefined} to='/blog'>Blog</NavLink></li>
-    <li><NavLink className={({ isActive }) => isActive ? 'active' : undefined} to="/categories">Categories</NavLink></li>
+    <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to='/home'>Home</NavLink></li>
+    <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to='/blog'>Blog</NavLink></li>
+    <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to="/categories">Categories</NavLink></li>
     {
       user?.uid ?
         <>
-          <li><NavLink className={({ isActive }) => isActive ? 'active' : undefined} to="/dashboard">Dashboard</NavLink></li>
-          <li><button onClick={handleLogOut}>Logout</button></li>
-          <li><button title={user?.displayName}><FaUser className='text-xl'></FaUser></button></li>
+          <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to="/dashboard">Dashboard</NavLink></li>
+          <li className='mb-1 lg:m-0 lg:mr-1 '><button onClick={handleLogOut}>Logout</button></li>
+          <li className='mb-1 lg:m-0 lg:mr-1 '><button title={user?.displayName}><FaUser className='text-xl'></FaUser></button></li>
         </>
         :
-        <li><NavLink className={({ isActive }) => isActive ? 'active' : undefined} to="/login">Login</NavLink></li>
+        <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to="/login">Login</NavLink></li>
     }
   </>
 
   return (
-    <div className='bg-primary sticky top-0 z-10 font-bold text-slate-600'>
+    <div className='bg-secondary sticky top-0 z-10 font-bold text-slate-200'>
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -58,7 +58,7 @@ const Navbar = () => {
             </label>
           </div>
         }
-        <div className="navbar-end hidden lg:flex">
+        <div className="navbar navbar-end hidden lg:flex w-full">
           <ul className="menu menu-horizontal p-0">
             {menuItems}
           </ul>
