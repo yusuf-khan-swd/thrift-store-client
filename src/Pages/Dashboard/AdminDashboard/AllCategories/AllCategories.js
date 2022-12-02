@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import Loading from '../../../Shared/Loading/Loading';
 import Spinner from '../../../Shared/Spinner/Spinner';
 
 const AllCategories = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
 
-  const { data: categories, isLoading } = useQuery({
+  const { data: categories, isLoading, refetch } = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
       const res = await axios.get('https://thrift-store-server.vercel.app/categories');
@@ -21,7 +22,33 @@ const AllCategories = () => {
   }
 
   const handleDeleteCategory = id => {
-    console.log(id);
+    const isConfirm = window.confirm(
+      "Are you sure you want to delete this category"
+    );
+
+    if (!isConfirm) {
+      return;
+    }
+
+    setIsDataLoading(true);
+    fetch(`https://thrift-store-server.vercel.app/categories/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.deletedCount) {
+          toast.success("Category Deleted Successfully.");
+          refetch();
+          setIsDataLoading(false);
+        }
+      })
+      .catch(error => {
+        setIsDataLoading(false);
+        console.log('error: ', error);
+      })
   };
 
   return (

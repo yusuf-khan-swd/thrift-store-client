@@ -6,7 +6,7 @@ const Dashboard = () => {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center md:block'>
-      <div className='card w-96 max-w-sm shadow-lg bg-white md:mt-16 md:ml-16'>
+      <div className='card w-96 max-w-sm shadow-lg bg-white md:mt-16 md:ml-16 border'>
         <div className='card-body'>
           <h2 className='card-title justify-center text-2xl cursor-pointer'>Profile</h2>
           <form>

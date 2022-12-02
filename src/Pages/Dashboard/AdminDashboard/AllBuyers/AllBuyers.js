@@ -76,7 +76,7 @@ const AllBuyers = () => {
         <table className="table table-zebra w-full">
           <thead>
             <tr>
-              <th></th>
+              <th>S/N</th>
               <th>Buyer Name</th>
               <th>Buyer Email</th>
               <th>Action</th>

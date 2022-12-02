@@ -98,7 +98,7 @@ const AllSellers = () => {
         <table className="table table-zebra w-full">
           <thead>
             <tr>
-              <th></th>
+              <th>S/N</th>
               <th>Seller Name</th>
               <th>Seller Email</th>
               <th>Verify</th>
