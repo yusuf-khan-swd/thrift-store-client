@@ -73,8 +73,8 @@ const Products = () => {
 
   return (
     <div className="container mx-auto mb-24 mt-10">
-      <div className="m-2 mt-10">
-        <dir className="border border-primary rounded-lg pb-8">
+      <div className="m-2">
+        <dir className="pb-8">
           <h2 className="text-3xl font-bold text-center mt-8 mb-2 uppercase">
             <Link to="/categories" className="text-sm text-secondary hover:link">
               Category

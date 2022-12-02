@@ -42,9 +42,11 @@ const ProductCard = ({
   return (
     <div className="m-2">
       <div className="card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-white shadow-xl rounded-lg max-w-6xl mx-auto border">
-        <figure>
-          <img src={image} className="p-2 rounded-2xl" alt={productName} />
-        </figure>
+        <div>
+          <figure>
+            <img src={image} className="p-2 rounded-2xl" alt={productName} />
+          </figure>
+        </div>
         <div className="card-body lg:col-span-2 text-zinc-500">
           <h2 className="card-title uppercase justify-center font-bold">{productName}</h2>
           <p className="font-semibold text-xl text-center mb-5">Resale Price: ${resalePrice} </p>
