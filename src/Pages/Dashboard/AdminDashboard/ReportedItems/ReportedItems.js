@@ -69,25 +69,45 @@ const ReportedItems = () => {
           <thead>
             <tr>
               <th></th>
-              <th>Reported Product Name</th>
-              <th>Email</th>
+              <th>Reported Product</th>
+              <th>Product Category</th>
               <th>Seller Email</th>
+              <th>Reporter</th>
+              <th>Action</th>
+              <th>Total Report</th>
             </tr>
           </thead>
           <tbody>
             {reports.map((report, index) => (
               <tr key={report._id}>
                 <th>{index + 1 < 10 ? "0" + (index + 1) : index + 1}</th>
-                <td>{report.productName}</td>
+                <td>
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src={report.image}
+                          alt={report.productName}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">{report.productName}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>{report.productCategory}</td>
                 <td>{report.sellerEmail}</td>
+                <td>User</td>
                 <td>
                   <button
                     onClick={() => handleDeleteProducts(report._id)}
-                    className="btn btn-error btn-xs text-gray-600 font-bold mr-4"
+                    className="btn btn-error btn-xs btn-outline font-bold mr-4"
                   >
                     Delete
                   </button>
                 </td>
+                <td>00</td>
               </tr>
             ))}
           </tbody>
