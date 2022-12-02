@@ -102,6 +102,7 @@ const AllSellers = () => {
               <th></th>
               <th>Seller Name</th>
               <th>Seller Email</th>
+              <th>Verify</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -113,20 +114,22 @@ const AllSellers = () => {
                 <td>{seller.userEmail}</td>
                 <td>
                   <button
+                    onClick={() =>
+                      handleVerifySeller(seller._id, seller.userIsVerified, seller.userEmail)
+                    }
+                    className={`btn btn-xs text-gray-600 font-bold ${seller.userIsVerified ? 'btn-success' : 'btn-primary'}`}
+                    disabled={isDataLoading}
+                  >
+                    {seller.userIsVerified ? "Remove Verification" : "Verify"}
+                  </button>
+                </td>
+                <td>
+                  <button
                     onClick={() => handleDeleteSeller(seller._id)}
                     className="btn btn-error btn-outline btn-xs font-bold mr-4"
                     disabled={isDataLoading}
                   >
                     Delete
-                  </button>
-                  <button
-                    onClick={() =>
-                      handleVerifySeller(seller._id, seller.userIsVerified, seller.userEmail)
-                    }
-                    className="btn btn-primary btn-xs text-gray-600 font-bold"
-                    disabled={isDataLoading}
-                  >
-                    {seller.userIsVerified ? "Remove Verification" : "Verify"}
                   </button>
                 </td>
               </tr>
