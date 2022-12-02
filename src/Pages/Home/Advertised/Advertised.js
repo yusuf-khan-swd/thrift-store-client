@@ -12,8 +12,8 @@ const Advertised = ({ advertisedItems }) => {
 
   return (
     <div className="container mx-auto mb-24 ">
-      <div className="md:border md:border-primary rounded-lg m-2">
-        <div className="mt-8 p-3">
+      <div className="border border-primary rounded-lg m-2">
+        <div className="mt-8 p-3 pb-8">
           <h2 className="text-3xl font-bold text-center my-8 uppercase underline cursor-pointer">
             Advertised Items
           </h2>

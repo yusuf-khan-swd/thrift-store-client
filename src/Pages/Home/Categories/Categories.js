@@ -24,7 +24,7 @@ const Categories = () => {
 
   return (
     <div className='container mx-auto mb-24'>
-      <div className='sm:border sm:border-primary rounded-lg m-2'>
+      <div className='border border-primary rounded-lg m-2'>
         <div className='mt-8 p-3 m-2'>
           <Link to="/categories"><h2 className='text-3xl font-bold text-center my-8 uppercase hover:link underline'>Our Categories</h2></Link>
           <div className={`${isItCategoriesRoute && 'grid grid-cols-5'}`}>

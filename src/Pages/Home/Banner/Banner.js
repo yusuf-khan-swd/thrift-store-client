@@ -5,7 +5,7 @@ import banner from '../../../assets/banner-1.jpg';
 const Banner = () => {
   return (
     <div className='container mx-auto'>
-      <div className='rounded-lg sm:border sm:border-primary mt-10 mb-24 m-2'>
+      <div className='rounded-lg border border-primary mt-10 mb-24 m-2'>
         <div className="relative flex flex-col py-16 lg:pt-0 lg:flex-col lg:pb-0 lg:h-[450px]">
           <div className="flex flex-col items-start w-full max-w-xl px-4 mx-auto lg:px-8 lg:max-w-screen-xl">
             <div className="mb-16 lg:my-24 lg:max-w-lg lg:pr-5">

@@ -2,9 +2,9 @@ import React from 'react';
 
 const OurStates = () => {
   return (
-    <div className='container mx-auto'>
-      <div className='rounded-lg sm:border sm:border-primary m-2'>
-        <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:w-full md:px-24 lg:px-8 lg:py-20 bg-white my-16">
+    <div className='container mx-auto mb-24'>
+      <div className='rounded-lg border border-primary m-2'>
+        <div className="px-4 pt-16 pb-8 mx-auto sm:max-w-xl md:max-w-full lg:w-full md:px-24 lg:px-8 lg:py-20 bg-white rounded-lg">
           <div className="max-w-xl mb-10 md:mx-auto text-center lg:max-w-2xl md:mb-12">
             <div>
               <p className="inline-block px-3 py-px mb-4 text-xs uppercase rounded-full bg-primary font-bold">
