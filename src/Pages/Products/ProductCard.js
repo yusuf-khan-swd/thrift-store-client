@@ -41,7 +41,7 @@ const ProductCard = ({
 
   return (
     <div className="m-2">
-      <div className="card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-white shadow-xl rounded-lg max-w-6xl mx-auto">
+      <div className="card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-white shadow-xl rounded-lg max-w-6xl mx-auto border">
         <figure>
           <img src={image} className="p-2 rounded-2xl" alt={productName} />
         </figure>
