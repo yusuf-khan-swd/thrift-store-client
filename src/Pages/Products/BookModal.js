@@ -120,7 +120,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
                         <input
 
                           type="text"
-                          defaultValue={resalePrice}
+                          defaultValue={`$${resalePrice}`}
                           disabled
                           className="input input-bordered w-full"
                           required
