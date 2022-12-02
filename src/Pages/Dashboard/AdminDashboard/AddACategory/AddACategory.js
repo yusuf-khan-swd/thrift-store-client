@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../Shared/Spinner/Spinner';
 
 const AddACategory = () => {
   const [isAdding, setIsAdding] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const imageHostKey = process.env.REACT_APP_imgbbKey;
+  const navigate = useNavigate();
 
   const onSubmit = data => {
     const image = data.categoryImage[0];
@@ -37,7 +39,8 @@ const AddACategory = () => {
               if (data.acknowledged) {
                 toast.success(`Successfully added ${category.categoryName} to categories`);
                 reset();
-                setIsAdding(false)
+                setIsAdding(false);
+                navigate("/dashboard/all-categories");
               }
             })
         }

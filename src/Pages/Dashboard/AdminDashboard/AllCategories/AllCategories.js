@@ -21,7 +21,7 @@ const AllCategories = () => {
     return <Loading></Loading>
   }
 
-  const handleDeleteCategory = id => {
+  const handleDeleteCategory = (id, categoryName) => {
     const isConfirm = window.confirm(
       "Are you sure you want to delete this category"
     );
@@ -31,7 +31,7 @@ const AllCategories = () => {
     }
 
     setIsDataLoading(true);
-    fetch(`https://thrift-store-server.vercel.app/categories/${id}`, {
+    fetch(`https://thrift-store-server.vercel.app/categories/${id}?categoryName=${categoryName}`, {
       method: 'DELETE',
       headers: {
         authorization: `bearer ${localStorage.getItem("thrift-token")}`
@@ -55,7 +55,7 @@ const AllCategories = () => {
     <div className='container mx-auto mb-24'>
       <div className="text-center py-8">
         <h2 className="text-3xl font-bold uppercase cursor-pointer text-teal-400 underline">
-          Total reported product - {categories.length}
+          Total Categories - {categories.length}
         </h2>
       </div>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
@@ -93,8 +93,9 @@ const AllCategories = () => {
                 <td>admin email</td>
                 <td>
                   <button
-                    onClick={() => handleDeleteCategory(category._id)}
+                    onClick={() => handleDeleteCategory(category._id, category.categoryName)}
                     className="btn btn-error btn-xs btn-outline font-bold mr-4"
+                    disabled={isDataLoading}
                   >
                     Delete
                   </button>
