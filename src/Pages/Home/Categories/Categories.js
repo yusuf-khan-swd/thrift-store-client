@@ -36,7 +36,7 @@ const Categories = () => {
         }
         {
           isItCategoriesRoute &&
-          <div className="col-span-5 md:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="col-span-5 md:col-span-4 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
             {
               categories.map(category => <CategoryCard key={category._id} category={category}></CategoryCard>)
             }
