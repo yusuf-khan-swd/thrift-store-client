@@ -84,7 +84,7 @@ const Login = () => {
   };
 
   return (
-    <div className='container mx-auto p-3 my-16'>
+    <div className='container mx-auto p-3 mb-24'>
       {
         token &&
         <Navigate to={`${from}`}></Navigate>
