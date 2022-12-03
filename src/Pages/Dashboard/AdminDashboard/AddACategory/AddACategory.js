@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
 import Spinner from '../../../Shared/Spinner/Spinner';
 
 const AddACategory = () => {
+  const { user } = useContext(AuthContext);
+
   const [isAdding, setIsAdding] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const imageHostKey = process.env.REACT_APP_imgbbKey;
@@ -24,7 +27,7 @@ const AddACategory = () => {
       .then(imageData => {
         if (imageData.success) {
 
-          const category = { ...data, categoryImage: imageData.data.url }
+          const category = { ...data, categoryImage: imageData.data.url, adminName: user.displayName, adminEmail: user.email }
 
           fetch('https://thrift-store-server.vercel.app/categories', {
             method: 'POST',
@@ -48,8 +51,8 @@ const AddACategory = () => {
   };
 
   return (
-    <div className='container mx-auto p-3'>
-      <div className="h-8 mt-12">{isAdding && <Spinner></Spinner>}</div>
+    <div className='container mx-auto px-3'>
+      <div className="h-8 mt-4">{isAdding && <Spinner></Spinner>}</div>
       <div className='card max-w-lg mx-auto bg-white mb-12'>
         <div className='card-body border rounded-md'>
           <h2 className='card-title justify-center text-2xl cursor-pointer'>Category</h2>
@@ -58,15 +61,38 @@ const AddACategory = () => {
               <label className="label">
                 <span className="label-text font-medium">Category Name</span>
               </label>
-              <input {...register('categoryName', { required: "Category is required" })} type="text" className="input input-bordered w-full" required />
+              <input {...register('categoryName', { required: "Category is required" })} type="text" className="input input-bordered w-full" />
               <p className='text-red-500'>{errors.categoryName?.message}</p>
             </div>
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text font-medium">Image</span>
               </label>
-              <input {...register('categoryImage', { required: "Image is required" })} type="file" className="file-input file-input-bordered file-input-sm w-full" required />
+              <input {...register('categoryImage', { required: "Image is required" })} type="file" className="file-input file-input-bordered file-input-sm w-full" />
               <p className='text-red-500'>{errors.categoryImage?.message}</p>
+            </div>
+            <div className="form-control w-full mt-5">
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text font-medium">Description</span>
+                </label>
+                <textarea
+                  {...register("description", {
+                    required: "Description is required",
+                    maxLength: {
+                      value: 55,
+                      message: "Please short your message under 50 character",
+                    },
+                    minLength: {
+                      value: 10,
+                      message: "Please write something about category at least 10 character"
+                    }
+                  })}
+                  className="textarea textarea-bordered"
+                  rows="3"
+                ></textarea>
+                <p className="text-red-500 mt-2">{errors.description?.message}</p>
+              </div>
             </div>
             <div className='form-control w-full mt-5'>
               <button className='btn' type={'submit'} disabled={isAdding}>Add to Categories</button>

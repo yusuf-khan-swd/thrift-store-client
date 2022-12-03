@@ -89,8 +89,8 @@ const AllCategories = () => {
                     </div>
                   </div>
                 </td>
-                <td>admin name</td>
-                <td>admin email</td>
+                <td>{category.adminName}</td>
+                <td>{category.adminEmail}</td>
                 <td>
                   <button
                     onClick={() => handleDeleteCategory(category._id, category.categoryName)}
