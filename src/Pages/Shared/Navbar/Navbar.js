@@ -21,24 +21,25 @@ const Navbar = () => {
   };
 
   const menuItems = <>
-    <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to='/home'>Home</NavLink></li>
-    <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to='/blog'>Blog</NavLink></li>
-    <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to="/categories">Categories</NavLink></li>
+    <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to='/home'>Home</NavLink></li>
+    <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to='/blog'>Blog</NavLink></li>
+    <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to="/categories">Categories</NavLink></li>
     {
       user?.uid ?
         <>
-          <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to="/dashboard">Dashboard</NavLink></li>
-          <li className='mb-1 lg:m-0 lg:mr-1 '><button className='rounded-lg' onClick={handleLogOut}>Logout</button></li>
-          <li className='mb-1 lg:m-0 lg:mr-1 '><button className='rounded-lg' title={user?.displayName}><FaUser className='text-xl'></FaUser></button></li>
+          <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to="/dashboard">Dashboard</NavLink></li>
+          <li className='mb-1 lg:m-0 lg:mr-1'><button className='rounded-lg' onClick={handleLogOut}>Logout</button></li>
+          <li className='mb-1 lg:m-0 lg:mr-1'><button className='rounded-lg' title={user?.displayName}><FaUser className='text-xl'></FaUser></button></li>
         </>
         :
-        <li className='mb-1 lg:m-0 lg:mr-1 '><NavLink className={`rounded-lg `} to="/login">Login</NavLink></li>
+        <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to="/login">Login</NavLink></li>
     }
   </>
 
   return (
-    <div className='bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold'>
-      <div className="navbar container mx-auto">
+    // <div className='bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold'>
+    <div className='bg-lime-400 sticky top-0 z-40'>
+      <div className="navbar container mx-auto p-0">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">

@@ -10,8 +10,11 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#06b6d4",
-          secondary: "#2563eb",
+          primary: "#84cc16",
+          secondary: "#a78bfa",
+          // Gradient color from tailwind blue cyan
+          // primary: "#06b6d4",
+          // secondary: "#2563eb",
           // secondary: "#3b82f6",
 
           // my try
