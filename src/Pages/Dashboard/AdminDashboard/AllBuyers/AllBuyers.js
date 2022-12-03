@@ -38,6 +38,38 @@ const AllBuyers = () => {
     );
   }
 
+  const handleMakeAdmin = (id, userName) => {
+    const isConfirm = window.confirm(
+      `Are you sure you want to make ${userName} admin?`
+    );
+
+    if (!isConfirm) {
+      return;
+    }
+
+    setIsDataLoading(true);
+    fetch(`https://thrift-store-server.vercel.app/users/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount) {
+          toast.success("Successfully added user as admin.")
+        }
+        refetch();
+        setIsDataLoading(false);
+      })
+      .catch(error => {
+        setIsDataLoading(false);
+        console.log("make admin error: ", error);
+      })
+
+  };
+
   const handleDeleteBuyers = (id) => {
     const isConfirm = window.confirm(
       "Are you sure you want to delete this product"
@@ -89,6 +121,7 @@ const AllBuyers = () => {
                 <td>{buyer.userName}</td>
                 <td>{buyer.userEmail}</td>
                 <td>
+                  <button onClick={() => handleMakeAdmin(buyer._id, buyer.userName)} className="btn btn-xs btn-info mr-2" disabled={isDataLoading}>Make Admin</button>
                   <button
                     onClick={() => handleDeleteBuyers(buyer._id)}
                     className="btn btn-error btn-outline btn-xs text-gray-600 font-bold mr-4"
