@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../Layouts/DashboardLayout";
 import Main from "../../Layouts/Main";
 import AddACategory from "../../Pages/Dashboard/AdminDashboard/AddACategory/AddACategory";
+import AllAdmin from "../../Pages/Dashboard/AdminDashboard/AllAdmin/AllAdmin";
 import AllBuyers from "../../Pages/Dashboard/AdminDashboard/AllBuyers/AllBuyers";
 import AllCategories from "../../Pages/Dashboard/AdminDashboard/AllCategories/AllCategories";
 import AllSellers from "../../Pages/Dashboard/AdminDashboard/AllSellers/AllSellers";
@@ -96,6 +97,10 @@ const routes = createBrowserRouter([
       {
         path: '/dashboard/all-buyers',
         element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+      },
+      {
+        path: '/dashboard/all-admins',
+        element: <AdminRoute><AllAdmin></AllAdmin></AdminRoute>
       },
       {
         path: '/dashboard/reported-items',

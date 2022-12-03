@@ -32,6 +32,7 @@ const DashboardLayout = () => {
       <>
         <li className='border rounded-lg m-1'><Link to='/dashboard/all-sellers'>All Sellers</Link></li>
         <li className='border rounded-lg m-1'><Link to='/dashboard/all-buyers'>All Buyers</Link></li>
+        <li className='border rounded-lg m-1'><Link to='/dashboard/all-admins'>All Admins</Link></li>
         <li className='border rounded-lg m-1'><Link to='/dashboard/reported-items'>Reported Items</Link></li>
         <li className='border rounded-lg m-1'><Link to='/dashboard/add-category'>Add a Category</Link></li>
         <li className='border rounded-lg m-1'><Link to='/dashboard/all-categories'>All Categories</Link></li>

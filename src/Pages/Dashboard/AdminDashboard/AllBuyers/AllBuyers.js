@@ -70,9 +70,9 @@ const AllBuyers = () => {
 
   };
 
-  const handleDeleteBuyers = (id) => {
+  const handleDeleteBuyers = (id, userName) => {
     const isConfirm = window.confirm(
-      "Are you sure you want to delete this product"
+      `Are you sure you want to delete buyer: ${userName}`
     );
 
     if (!isConfirm) {
@@ -91,9 +91,13 @@ const AllBuyers = () => {
         if (data.deletedCount) {
           toast.success("User deleted successfully.");
           refetch();
-          setIsDataLoading(false);
         }
-      });
+        setIsDataLoading(false);
+      })
+      .catch(error => {
+        console.log("delete buyer error: ", error);
+        setIsDataLoading(false);
+      })
   };
 
   return (
