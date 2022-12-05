@@ -13,7 +13,7 @@ const MyBuyers = () => {
   const { data: products, isLoading, refetch } = useQuery({
     queryKey: ['ordered-products'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/ordered-products?email=${user.email}`, {
+      const res = await fetch(`https://thrift-store-server.vercel.app/ordered-products?email=${user.email}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("thrift-token")}`
         }
