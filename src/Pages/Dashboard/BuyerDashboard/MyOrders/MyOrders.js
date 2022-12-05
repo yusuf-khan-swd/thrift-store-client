@@ -8,7 +8,7 @@ import Spinner from '../../../Shared/Spinner/Spinner';
 const MyOrders = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
 
-  const { data: orders, isLoading, refetch } = useQuery({
+  const { data: products, isLoading, refetch } = useQuery({
     queryKey: ['orders'],
     queryFn: async () => {
       const res = await fetch("https://thrift-store-server.vercel.app/orders", {
@@ -29,7 +29,7 @@ const MyOrders = () => {
 
   const handleDeleteOrder = (id) => {
     const isConfirm = window.confirm(
-      "Are you sure you want to delete this product"
+      "Are you sure you want cancel this product"
     );
 
     if (!isConfirm) {
@@ -56,11 +56,11 @@ const MyOrders = () => {
   return (
     <div>
       <h2 className="text-3xl font-bold text-center cursor-pointer underline underline-offset-4 py-8 uppercase">
-        My Orders: <span className="text-teal-500">{orders.length}</span>
+        My Orders: <span className="text-teal-500">{products.length}</span>
       </h2>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
       {
-        orders.length !== 0 &&
+        products.length !== 0 &&
         <div className="overflow-x-auto m-2 lg:m-5">
           <div className="overflow-x-auto w-full">
             <table className="table w-full">
@@ -74,33 +74,33 @@ const MyOrders = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order, index) => (
-                  <tr key={order._id}>
+                {products.map((product, index) => (
+                  <tr key={product._id}>
                     <th>{index + 1 < 10 && "0" + (index + 1)}</th>
                     <td>
                       <div className="flex items-center space-x-3">
                         <div className="avatar">
                           <div className="mask mask-squircle w-12 h-12">
                             <img
-                              src={order.productImage}
+                              src={product.productImage}
                               alt="Avatar Tailwind CSS Component"
                             />
                           </div>
                         </div>
                         <div>
-                          <div className="font-bold">{order.productName}</div>
+                          <div className="font-bold">{product.productName}</div>
                         </div>
                       </div>
                     </td>
-                    <td>${order.productPrice}</td>
-                    <td>${order.sellerEmail}</td>
+                    <td>${product.productPrice}</td>
+                    <td>{product.sellerEmail}</td>
 
                     <td>
-                      <Link to={`/dashboard/my-payment/${order._id}`} className='btn btn-sm btn-primary mr-3' disabled={isDataLoading || order.saleStatus}>
-                        {order.saleStatus ? 'Paid' : 'Pay'}
+                      <Link to={`/dashboard/my-payment/${product._id}`} className='btn btn-sm btn-primary mr-3' disabled={isDataLoading || product.saleStatus}>
+                        {product.saleStatus ? 'Paid' : 'Pay'}
                       </Link>
                       <button
-                        onClick={() => handleDeleteOrder(order._id)}
+                        onClick={() => handleDeleteOrder(product._id)}
                         className="btn btn-error btn-outline btn-sm font-bold"
                         disabled={isDataLoading}
                       >
