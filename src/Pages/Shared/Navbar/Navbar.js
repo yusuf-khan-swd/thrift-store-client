@@ -37,8 +37,7 @@ const Navbar = () => {
   </>
 
   return (
-    // <div className='bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold'>
-    <div className='bg-lime-400 sticky top-0 z-40'>
+    <div className='bg-navbar-bg-color sticky top-0 z-40'>
       <div className="navbar container mx-auto p-0">
         <div className="navbar-start">
           <div className="dropdown">
