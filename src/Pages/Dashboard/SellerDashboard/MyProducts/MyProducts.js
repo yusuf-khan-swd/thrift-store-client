@@ -156,7 +156,7 @@ const MyProducts = () => {
                   <td>
                     <button
                       onClick={() => handleDeleteProduct(product._id)}
-                      className="btn btn-error btn-sm text-gray-600 font-bold"
+                      className="btn btn-error btn-outline btn-sm text-gray-600 font-bold"
                       disabled={isDataLoading}
                     >
                       Delete
