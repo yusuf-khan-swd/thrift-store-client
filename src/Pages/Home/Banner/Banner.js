@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import banner from '../../../assets/banner-1.jpg';
+import banner from '../../../assets/banner-2.webp';
 
 const Banner = () => {
   return (
