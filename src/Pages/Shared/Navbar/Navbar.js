@@ -54,8 +54,8 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost capitalize text-xl rounded-lg">
-            <img src={logo} className="w-9 mr-2" alt="" />
+          <Link to="/" className="btn btn-ghost capitalize text-xl lg:text-2xl rounded-lg">
+            <img src={logo} className="w-9 rounded-full mr-2" alt="" />
             Thrift Store
           </Link>
         </div>
