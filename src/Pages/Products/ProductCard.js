@@ -53,10 +53,10 @@ const ProductCard = ({
         <div className="card h-full lg:col-span-2 text-zinc-500">
           <div className="card-body p-8 pt-2 md:pt-8">
             <div className="border-b mb-2">
-              <h2 className="card-title uppercase justify-center font-bold">
+              <h2 className="card-title uppercase justify-start sm:justify-center font-bold">
                 {productName}
               </h2>
-              <p className="font-semibold text-xl text-center mb-2">
+              <p className="font-semibold text-xl sm:text-center mb-2">
                 Resale Price: <span className="ml-1 text-black">${resalePrice}</span>
               </p>
             </div>
@@ -122,14 +122,14 @@ const ProductCard = ({
               <label
                 onClick={() => handleBooked(true, product)}
                 htmlFor="book-modal"
-                className="btn btn-primary text-white"
+                className="btn btn-primary text-white w-full sm:w-44"
               >
                 Book Now
               </label>
               <button
                 disabled={isDataLoading}
                 onClick={() => handleReport(_id, reported)}
-                className={`btn ${reported ? "btn-warning" : "btn-accent text-white"
+                className={`btn w-full sm:w-44 ${reported ? "btn-warning" : "btn-accent text-white"
                   }`}
               >{`${reported ? "Remove Report" : "Report to admin"}`}</button>
             </div>
