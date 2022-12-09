@@ -30,7 +30,7 @@ const Banner = () => {
 
               </Link>
               <Link
-                to="/blogs"
+                to="/blog"
                 aria-label=""
                 className="inline-flex items-center font-semibold text-gray-800 transition-colors duration-200 hover:text-green-700"
               >
