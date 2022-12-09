@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 import CategoryCard from './CategoryCard';
 import axios from 'axios';
+import CategoryName from '../../Shared/CategoryName/CategoryName';
 
 const Categories = () => {
   const location = useLocation();
@@ -47,9 +48,7 @@ const Categories = () => {
         {
           !isItCategoriesRoute &&
           <ul className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 mb-8'>
-            {
-              categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary w-full text-white' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
-            }
+            <CategoryName></CategoryName>
           </ul>
         }
       </div>

@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { FaUser } from 'react-icons/fa';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import CategoryName from '../CategoryName/CategoryName';
 import './Navbar.css'
 
 const Navbar = () => {
@@ -22,7 +23,11 @@ const Navbar = () => {
 
   const menuItems = <>
     <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to='/home'>Home</NavLink></li>
-    <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to="/categories">Categories</NavLink></li>
+    <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to="/categories">Categories</NavLink>
+      <ul className="p-5 bg-[#222] w-56">
+        <CategoryName></CategoryName>
+      </ul>
+    </li>
     <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to='/blog'>Blog</NavLink></li>
     {
       user?.uid ?
