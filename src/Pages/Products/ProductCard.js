@@ -40,8 +40,8 @@ const ProductCard = ({
 
   return (
     <div className="m-2">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-white shadow-xl rounded-lg max-w-6xl mx-auto border">
-        <div className="m-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 bg-white shadow-xl rounded-lg max-w-6xl mx-auto border">
+        <div className="m-2 lg:h-[430px]">
           <figure className="h-full w-full">
             <img
               src={image}
@@ -51,58 +51,65 @@ const ProductCard = ({
           </figure>
         </div>
         <div className="card lg:col-span-2 text-zinc-500">
-          <div className="card-body">
-            <h2 className="card-title uppercase lg:justify-center font-bold">
-              {productName}
-            </h2>
-            <p className="font-semibold text-xl lg:text-center mb-5">
-              Resale Price: <span className="text-black">${resalePrice}</span>
-            </p>
-            <div className="mb-3">
-              <p className="font-medium mb-1">
-                Months of Use:
-                <span className="font-bold ">{monthsUsed} Month</span>
-              </p>
-              <p className="font-medium mb-1">
-                Original Price:
-                <span className="font-bold ">${originalPrice}</span>
-              </p>
-              <p className="font-medium mb-1">
-                Location: <span className="font-bold ">{location}</span>
-              </p>
-              <p className="font-medium mb-1">
-                Posted Time:
-                <span className="font-bold ">
-                  {postedDate} {hour}
-                  {AmOrPm}
-                </span>
-              </p>
-              <p className="font-medium mb-1">
-                Condition Type:
-                <span className="font-bold ">{conditionType}</span>
-              </p>
-              <p className="font-medium mb-1">
-                Sale Status:
-                <span className="uppercase text-green-500">{saleStatus}</span>
+          <div className="card-body p-8 pt-2 md:pt-8">
+            <div className="border-b mb-2">
+              <h2 className="card-title uppercase justify-center font-bold">
+                {productName}
+              </h2>
+              <p className="font-semibold text-xl text-center mb-2">
+                Resale Price: <span className="ml-1 text-black">${resalePrice}</span>
               </p>
             </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2">
+              <div className="mb-3">
+                <p className="font-medium mb-1">
+                  Months of Use:
+                  <span className=" font-bold ml-1">{monthsUsed} Month</span>
+                </p>
+                <p className="font-medium mb-1">
+                  Location: <span className=" font-bold ml-1">{location}</span>
+                </p>
+                <p className="font-medium mb-1">
+                  Condition Type:
+                  <span className="ml-1 font-bold ">{conditionType}</span>
+                </p>
+                <p className="font-medium mb-1">
+                  Sale Status:
+                  <span className="ml-1 uppercase text-green-500">{saleStatus}</span>
+                </p>
+              </div>
+              <div>
+                <p className="font-medium mb-1">
+                  Original Price:
+                  <span className="ml-1 font-bold ">${originalPrice}</span>
+                </p>
+                <p className="flex items-center font-medium mb-1">
+                  Seller Name:
+                  <span className="ml-1 font-bold"> {sellerName}</span>
+                  {sellerIsVerified && (
+                    <FaCheckCircle
+                      className="ml-3 text-blue-600"
+                      title="Seller is verified"
+                    ></FaCheckCircle>
+                  )}
+                </p>
+                <p className="font-medium mb-1">
+                  Seller Mobile Number:
+                  <span className="ml-1 font-bold">{sellerNumber}</span>
+                </p>
+                <p className="font-medium mb-1">
+                  Posted Time:
+                  <span className="ml-1 font-bold">
+                    {postedDate} {hour}
+                    {AmOrPm}
+                  </span>
+                </p>
+              </div>
+            </div>
             <div>
-              <p className="flex items-center font-medium mb-1">
-                Seller Name:
-                <span className="font-bold ml-1"> {sellerName}</span>
-                {sellerIsVerified && (
-                  <FaCheckCircle
-                    className="ml-3 text-blue-600"
-                    title="Seller is verified"
-                  ></FaCheckCircle>
-                )}
-              </p>
-              <p className="font-medium mb-1">
-                Seller Mobile Number:
-                <span className="font-bold">{sellerNumber}</span>
-              </p>
               <p className="mb-3">
-                <span className="font-medium">Description:</span>
+                <span className="ml-1 font-medium">Quick Overview</span> <br />
                 {description?.length > 200
                   ? description.slice(0, 198) + "..."
                   : description}
