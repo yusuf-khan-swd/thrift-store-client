@@ -50,7 +50,7 @@ const ProductCard = ({
             />
           </figure>
         </div>
-        <div className="card lg:col-span-2 text-zinc-500">
+        <div className="card h-full lg:col-span-2 text-zinc-500">
           <div className="card-body p-8 pt-2 md:pt-8">
             <div className="border-b mb-2">
               <h2 className="card-title uppercase justify-center font-bold">
@@ -61,7 +61,7 @@ const ProductCard = ({
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 text-sm">
               <div className="mb-3">
                 <p className="font-medium mb-1">
                   Months of Use:
@@ -108,14 +108,17 @@ const ProductCard = ({
               </div>
             </div>
             <div>
-              <p className="mb-3">
-                <span className="ml-1 font-medium">Quick Overview</span> <br />
-                {description?.length > 200
-                  ? description.slice(0, 198) + "..."
-                  : description}
+              <p className="overflow-hidden text-ellipsis h-32">
+                <span className="font-medium">Quick Overview</span> <br />
+                <span className="text-sm">
+                  {description?.length > 200
+                    ? description.slice(0, 198) + "..."
+                    : description
+                  }
+                </span>
               </p>
             </div>
-            <div className="card-actions justify-start lg:justify-end mt-5">
+            <div className="card-actions justify-start lg:justify-end">
               <label
                 onClick={() => handleBooked(true, product)}
                 htmlFor="book-modal"
