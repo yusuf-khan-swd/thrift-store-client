@@ -4,7 +4,8 @@ import { FaUser } from 'react-icons/fa';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import CategoryName from '../CategoryName/CategoryName';
-import './Navbar.css'
+import './Navbar.css';
+import logo from '../../../assets/android-chrome-192x192.png';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -53,7 +54,10 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost capitalize text-xl rounded-lg">Thrift Store</Link>
+          <Link to="/" className="btn btn-ghost capitalize text-xl rounded-lg">
+            <img src={logo} className="w-9 mr-2" alt="" />
+            Thrift Store
+          </Link>
         </div>
         {
           currentLocation.includes('/dashboard') &&
