@@ -22,8 +22,8 @@ const Navbar = () => {
 
   const menuItems = <>
     <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to='/home'>Home</NavLink></li>
-    <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to='/blog'>Blog</NavLink></li>
     <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to="/categories">Categories</NavLink></li>
+    <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to='/blog'>Blog</NavLink></li>
     {
       user?.uid ?
         <>
@@ -37,7 +37,7 @@ const Navbar = () => {
   </>
 
   return (
-    <div className='sticky top-0 z-40'>
+    <div className='sticky top-0 z-40 bg-[#222] text-white'>
       <div className="navbar container mx-auto p-0">
         <div className="navbar-start">
           <div className="dropdown">
@@ -48,23 +48,23 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost normal-case text-xl rounded-lg">Thrift Store</Link>
+          <Link to="/" className="btn btn-ghost capitalize text-xl rounded-lg">Thrift Store</Link>
         </div>
         {
           currentLocation.includes('/dashboard') &&
-          <div className='navbar-end'>
+          <div div className='navbar-end' >
             <label htmlFor="dashboard-drawer" tabIndex={0} className="btn btn-ghost lg:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </label>
-          </div>
+          </div >
         }
         <div className="navbar navbar-end hidden lg:flex w-full">
           <ul className="menu menu-horizontal p-0">
             {menuItems}
           </ul>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 

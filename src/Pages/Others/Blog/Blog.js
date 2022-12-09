@@ -2,45 +2,37 @@ import React from "react";
 
 const Blog = () => {
   return (
-    <div className="container mx-auto mb-12">
-      <h2 className="text-2xl font-semibold text-center mt-5 underline underline-offset-8 cursor-pointer">
+    <div className="container mx-auto mb-12 prose">
+      <h2 className="text-center">
         Blog Page
       </h2>
-      <div className="max-w-5xl m-5 lg:mx-auto">
-        <div className="mb-5 border border-primary rounded-lg p-5">
-          <h2 className="font-bold mb-1">
+      <div>
+        <div className="mb-5 border rounded-lg p-5 m-2 hover:bg-gray-100">
+          <h4>
             What are the different ways to manage a state in a React
             application?
-          </h2>
+          </h4>
           <div>
-            <p>
-              Answer: The Four Kinds of React State to Manage 1.Local state
-              2.Global state 3.Server state 4.URL state.
-            </p>
-            <p>
-              Local (UI) state – Local state is data we manage in one or another
-              component.
-            </p>
-            <p>
-              Global (UI) state – Global state is data we manage across multiple
-              components.
-            </p>
-            <p>
-              Server state – Data that comes from an external server that must
-              be integrated with our UI state.
-            </p>
-            <p>
-              URL state – Data that exists on our URLs, including the pathname
-              and query parameters.
-            </p>
+            <div className="mb-2">
+              The Four Kinds of React State to Manage 1. Local state
+              2. Global state 3. Server state 4. URL state.
+            </div>
+            Local (UI) state – Local state is data we manage in one or another
+            component. <br />
+            Global (UI) state – Global state is data we manage across multiple
+            components. <br />
+            Server state – Data that comes from an external server that must
+            be integrated with our UI state. <br />
+            URL state – Data that exists on our URLs, including the pathname
+            and query parameters.
           </div>
         </div>
-        <div className="mb-5 border border-primary rounded-lg p-5">
-          <h2 className="font-bold mb-1">
+        <div className="mb-5 border rounded-lg p-5 m-2 hover:bg-gray-100">
+          <h4>
             How does prototypical inheritance work?
-          </h2>
+          </h4>
           <div>
-            <p className="mb-3">
+            <p>
               When it comes to inheritance, JavaScript only has one construct:
               objects. Each object has a private property which holds a link to
               another object called its prototype. That prototype object has a
@@ -56,19 +48,19 @@ const Blog = () => {
             </p>
           </div>
         </div>
-        <div className="mb-5 border border-primary rounded-lg p-5">
-          <h2 className="font-bold mb-1">
+        <div className="mb-5 border transition-colors duration-500 rounded-lg p-5 m-2 hover:bg-gray-100">
+          <h4>
             What is a unit test? Why should we write unit tests?
-          </h2>
+          </h4>
           <div>
-            <p className="mb-3">
+            <p>
               The main objective of unit testing is to isolate written code to
               test and determine if it works as intended. Unit testing is an
               important step in the development process, because if done
               correctly, it can help detect early flaws in code which may be
               more difficult to find in later testing stages.
             </p>
-            <p className="mb-3">
+            <p>
               A unit test is a way of testing a unit - the smallest piece of
               code that can be logically isolated in a system. In most
               programming languages, that is a function, a subroutine, a method
@@ -83,16 +75,16 @@ const Blog = () => {
             </p>
           </div>
         </div>
-        <div className="mb-5 border border-primary rounded-lg p-5">
-          <h2 className="font-bold mb-1">React vs. Angular vs. Vue?</h2>
-          <p className="mb-3">
+        <div className="mb-5 border transition-colors duration-500 rounded-lg p-5 m-2 hover:bg-gray-100">
+          <h4>React vs. Angular vs. Vue?</h4>
+          <p>
             Angular has a steep learning curve, considering it is a complete
             solution, and mastering Angular requires you to learn associated
             concepts like TypeScript and MVC. Even though it takes time to learn
             Angular, the investment pays dividends in terms of understanding how
             the front end works.
           </p>
-          <p className="mb-3">
+          <p>
             React offers a Getting Started guide that should help one set up
             React in about an hour. The documentation is thorough and complete,
             with solutions to common issues already present on Stack Overflow.

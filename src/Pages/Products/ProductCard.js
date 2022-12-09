@@ -49,14 +49,14 @@ const ProductCard = ({
         </div>
         <div className="card-body lg:col-span-2 text-zinc-500">
           <h2 className="card-title uppercase justify-center font-bold">{productName}</h2>
-          <p className="font-semibold text-xl text-center mb-5">Resale Price: ${resalePrice} </p>
+          <p className="font-semibold text-xl text-center mb-5">Resale Price: <span className="text-black">${resalePrice}</span> </p>
           <div className="mb-3">
             <p className="font-medium mb-1">Months of Use: <span className="font-bold ">{monthsUsed} Month</span></p>
             <p className="font-medium mb-1">Original Price: <span className="font-bold ">${originalPrice}</span> </p>
             <p className="font-medium mb-1">Location: <span className="font-bold ">{location}</span> </p>
             <p className="font-medium mb-1">Posted Time: <span className="font-bold ">{postedDate} {hour}{AmOrPm}</span></p>
             <p className="font-medium mb-1">Condition Type: <span className="font-bold ">{conditionType}</span></p>
-            <p className="font-medium mb-1">Sale Status: <span className="uppercase text-green-400">{saleStatus}</span></p>
+            <p className="font-medium mb-1">Sale Status: <span className="uppercase text-green-500">{saleStatus}</span></p>
           </div>
           <div>
             <p className="flex items-center font-medium mb-1">
@@ -75,14 +75,14 @@ const ProductCard = ({
             <label
               onClick={() => handleBooked(true, product)}
               htmlFor="book-modal"
-              className="btn btn-primary"
+              className="btn btn-primary text-white"
             >
               Book Now
             </label>
             <button
               disabled={isDataLoading}
               onClick={() => handleReport(_id, reported)}
-              className={`btn ${reported ? "btn-warning" : "btn-secondary"}`}
+              className={`btn ${reported ? "btn-warning" : "btn-accent text-white"}`}
             >{`${reported ? "Remove Report" : "Report to admin"}`}</button>
           </div>
         </div>
