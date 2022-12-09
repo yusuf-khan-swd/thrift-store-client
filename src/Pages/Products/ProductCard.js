@@ -49,8 +49,8 @@ const ProductCard = ({
         </div>
         <div className="card lg:col-span-2 text-zinc-500">
           <div className="card-body">
-            <h2 className="card-title uppercase justify-center font-bold">{productName}</h2>
-            <p className="font-semibold text-xl text-center mb-5">Resale Price: <span className="text-black">${resalePrice}</span> </p>
+            <h2 className="card-title uppercase lg:justify-center font-bold">{productName}</h2>
+            <p className="font-semibold text-xl lg:text-center mb-5">Resale Price: <span className="text-black">${resalePrice}</span> </p>
             <div className="mb-3">
               <p className="font-medium mb-1">Months of Use: <span className="font-bold ">{monthsUsed} Month</span></p>
               <p className="font-medium mb-1">Original Price: <span className="font-bold ">${originalPrice}</span> </p>

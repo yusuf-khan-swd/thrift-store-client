@@ -64,7 +64,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
           </label>
           {
             !user?.uid ?
-              <h2 className="mt-8 font-bold text-3xl">Please <Link to="/login" className="hover:link text-secondary">login</Link> </h2>
+              <h2 className="mt-8 font-bold text-3xl">Please <Link to="/login" className="hover:link text-info">login</Link> </h2>
               :
               <>
                 <h2 className="card-title justify-center text-2xl cursor-pointer mb-8">
