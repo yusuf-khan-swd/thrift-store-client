@@ -21,7 +21,7 @@ const CategoryName = () => {
   return (
     <>
       {
-        categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary w-full text-white rounded-lg' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
+        categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary w-full text-white rounded-lg overflow-hidden text-ellipsis' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
       }
     </>
   );
