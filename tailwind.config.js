@@ -5,25 +5,22 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        'navbar-bg-color': '#e5e7eb',
-        'btn-bg-color': '#64e546',
-      }
+
     },
   },
   daisyui: {
     themes: [
       {
         mytheme: {
-          primary: "#b6becd",
-          secondary: "#a78bfa",
-          accent: "#37CDBE",
-          neutral: "#3D4451",
-          "base-100": "#FFFFFF",
+          "primary": "#6419E6",
+          "secondary": "#D926A9",
+          "accent": "#1FB2A6",
+          "neutral": "#191D24",
+          "base-100": "#2A303C",
           "info": "#3ABFF8",
           "success": "#36D399",
           "warning": "#FBBD23",
-          "error": "#f54747",
+          "error": "#F87272",
         },
       },
     ],
