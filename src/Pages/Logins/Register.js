@@ -54,6 +54,7 @@ const Register = () => {
               setRegisterError("");
               reset();
               setIsDataLoading(false);
+              navigate("/home");
             }
           })
       })
@@ -110,6 +111,7 @@ const Register = () => {
                 setRegisterUserEmail(user.email);
                 setRegisterError("");
                 setIsDataLoading(false);
+                navigate("/home");
               }
             }
             else {
