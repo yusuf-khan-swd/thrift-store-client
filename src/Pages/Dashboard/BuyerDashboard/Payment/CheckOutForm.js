@@ -137,7 +137,7 @@ const CheckOutForm = ({ product }) => {
                 },
               }}
             />
-            <button className='btn btn-sm btn-primary mt-3' type="submit" disabled={!stripe || !clientSecret || isDataLoading}>
+            <button className='btn btn-sm btn-primary text-white mt-3' type="submit" disabled={!stripe || !clientSecret || isDataLoading}>
               Pay
             </button>
           </form>

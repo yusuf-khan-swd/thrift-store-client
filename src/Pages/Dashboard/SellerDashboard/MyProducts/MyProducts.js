@@ -143,7 +143,7 @@ const MyProducts = () => {
                       onClick={() =>
                         handleAdvertised(product._id, product.advertised)
                       }
-                      className={`btn btn-xs ${product.advertised ? "btn-success" : "btn-primary"
+                      className={`btn btn-xs ${product.advertised ? "btn-success" : "btn-primary text-white"
                         }`}
                       disabled={
                         (product.saleStatus === "available" ? false : true) || isDataLoading

@@ -108,7 +108,7 @@ const MyBuyers = () => {
                     <td>{product.buyerEmail}</td>
 
                     <td>
-                      {/* <Link to={`/dashboard/my-payment/${product._id}`} className='btn btn-sm btn-primary mr-3' disabled={isDataLoading || product.saleStatus}>
+                      {/* <Link to={`/dashboard/my-payment/${product._id}`} className='btn btn-sm btn-primary text-white mr-3' disabled={isDataLoading || product.saleStatus}>
                       {product.saleStatus ? 'Paid' : 'Pay'}
                     </Link> */}
                       <button
