@@ -29,7 +29,7 @@ const MyOrders = () => {
 
   const handleDeleteOrder = (id) => {
     const isConfirm = window.confirm(
-      "Are you sure you want cancel this product"
+      "Are you sure you want remove this product from your orders"
     );
 
     if (!isConfirm) {
