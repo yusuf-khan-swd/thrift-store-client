@@ -28,9 +28,9 @@
 
 ## Project Feature:
 
-- This project use <code>react</code> as a front-end library.
-- And to add style and to make responsive used <code>tailwindCSS</code>
-  and <code>daisyUI</code> as tailwindCSS component library.
+- This project use <code>react.js</code> as a front-end library.
+- And to add style and to make responsive used <code>Tailwind CSS</code>
+  and <code>daisyUI</code> as TailwindCSS component library.
 - Create a admin route feature for only admin can access.
 - Create a seller route feature only seller can access.
 - Payment system feature for buyer to pay. Using <code>stripe</code>.
