@@ -9,21 +9,21 @@
 
 - User can register as seller or buyer.
 - User can login as admin, seller and buyer
-- If user is log in then only can book a product with user additional information in modal.
-- A log in user can book a products and it will show in dashboard my products
-- User can delete book products or pay for a product.
-- User can pay to purchase the product which implement using stripe.
-- After payment done paid product will not show in advertisement component or in category of products.
-- Create role and route for admin, seller and buyer.
-- Like AdminRoute where only admin can access. For securing server side access create a admin middle-ware.
-- And a SellerRoute Where only seller can access. For securing server side access create a seller middle-ware.
-- Make a private route for only buyer access.
-- Seller can advertised product or remove advertised.
+- Login user can report a product to admin, or book a product.
+- For booking a product user must fill the form in modal with additional information.
+- Make a private route where only buyer can access.
+- Booked products will show in buyer dashboard. In dashboard buyer can delete booked products.
+- User can pay for a product and the payment method implement using stripe.
+- After the payment done the paid product will not show in advertisement section or in categories of products.
+- Create role and routes for only admin, seller and buyer.
+- Like AdminRoute where only admin can access. For securing server side API access create a admin middle-ware role.
+- And a SellerRoute Where only seller can access. And to secure server side API access create a seller middle-ware role.
+- Seller can advertised seller product or remove advertisement from the product.
 - Seller can also add a product with product information and upload a image that hosted on imageBB hosting service.
-- Seller can also delete, seller own product in my products.
-- Admin can see all sellers and all buyers. And delete a seller or buyer.
-- In all seller admin can verify a seller or remove verification.
-- If seller is verified then a tick icon will show side of seller name.
+- Seller can also delete seller own product in seller dashboard.
+- Admin can view all sellers and buyers information. And delete a seller/buyer or make a admin.
+- In all-seller route admin can verify a seller or remove verification.
+- If seller is verified then a blue tick icon will show side of seller name as verified seller.
 - In reported items route admin can see all reported items. And delete the reported item.
 
 ## Project Feature:
