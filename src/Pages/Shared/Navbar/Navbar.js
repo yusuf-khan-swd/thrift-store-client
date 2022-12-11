@@ -25,9 +25,9 @@ const Navbar = () => {
   const menuItems = <>
     <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to='/home'>Home</NavLink></li>
     <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to="/categories">Categories</NavLink>
-      <ul className="hidden lg:flex p-5 bg-[#222] w-56">
+      {/* <ul className="p-5 bg-[#333] w-56">
         <CategoryName></CategoryName>
-      </ul>
+      </ul> */}
     </li>
     <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to='/blog'>Blog</NavLink></li>
     {
