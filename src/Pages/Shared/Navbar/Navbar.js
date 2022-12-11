@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 import { FaUser } from 'react-icons/fa';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
-import CategoryName from '../CategoryName/CategoryName';
 import './Navbar.css';
 import logo from '../../../assets/android-chrome-192x192.png';
 
