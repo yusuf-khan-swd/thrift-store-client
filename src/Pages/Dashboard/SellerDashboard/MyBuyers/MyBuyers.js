@@ -58,7 +58,7 @@ const MyBuyers = () => {
     return (
       <div className="h-screen flex justify-center items-center lg:items-start lg:mt-8">
         <div className="text-5xl font-bold">
-          Your Have <span className="text-teal-500">0</span> Items on Sale
+          Your Have <span className="text-teal-500">0</span> Buyer
         </div>
       </div>
     );

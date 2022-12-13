@@ -118,18 +118,6 @@ const AllSellers = () => {
 
   };
 
-  const handleDeleteSeller = (id) => {
-    const isConfirm = window.confirm(
-      "Are you sure you want to delete this product"
-    );
-
-    if (!isConfirm) {
-      return;
-    }
-
-
-  };
-
   const handleConfirmation = (product) => {
     setCloseModal(false);
     setSelectedProduct(product);
@@ -174,13 +162,14 @@ const AllSellers = () => {
                 </td>
                 <td>
                   <button onClick={() => handleMakeAdmin(seller._id, seller.userName)} className="btn btn-xs btn-info mr-2" disabled={isDataLoading}>Make Admin</button>
-                  <button
+                  <label
+                    htmlFor="confirmation-modal"
                     onClick={() => handleConfirmation(seller)}
                     className="btn btn-error btn-outline btn-xs font-bold mr-4"
                     disabled={isDataLoading}
                   >
                     Delete
-                  </button>
+                  </label>
                 </td>
               </tr>
             ))}
