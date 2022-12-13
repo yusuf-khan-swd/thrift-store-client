@@ -1,11 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
 import Loading from "../../../Shared/Loading/Loading";
 import Spinner from "../../../Shared/Spinner/Spinner";
 
 const AllSellers = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
+  const [selectedItem, setSelectedProduct] = useState("");
+  const [deleteItem, setDeleteItem] = useState(false);
+  const [closeModal, setCloseModal] = useState(true);
+
 
   const {
     data: sellers,
@@ -23,6 +28,27 @@ const AllSellers = () => {
       return data;
     },
   });
+
+  useEffect(() => {
+    if (deleteItem) {
+      setIsDataLoading(true);
+      fetch(`https://thrift-store-server.vercel.app/all-sellers/${deleteItem._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            toast.success("User deleted successfully.");
+            refetch();
+            setIsDataLoading(false);
+          }
+        });
+    }
+  }, [deleteItem, refetch]);
+
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -101,22 +127,14 @@ const AllSellers = () => {
       return;
     }
 
-    setIsDataLoading(true);
-    fetch(`https://thrift-store-server.vercel.app/all-sellers/${id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount) {
-          toast.success("User deleted successfully.");
-          refetch();
-          setIsDataLoading(false);
-        }
-      });
+
   };
+
+  const handleConfirmation = (product) => {
+    setCloseModal(false);
+    setSelectedProduct(product);
+  };
+
 
   return (
     <div>
@@ -157,7 +175,7 @@ const AllSellers = () => {
                 <td>
                   <button onClick={() => handleMakeAdmin(seller._id, seller.userName)} className="btn btn-xs btn-info mr-2" disabled={isDataLoading}>Make Admin</button>
                   <button
-                    onClick={() => handleDeleteSeller(seller._id)}
+                    onClick={() => handleConfirmation(seller)}
                     className="btn btn-error btn-outline btn-xs font-bold mr-4"
                     disabled={isDataLoading}
                   >
@@ -169,6 +187,17 @@ const AllSellers = () => {
           </tbody>
         </table>
       </div>
+      {
+        !closeModal &&
+        <ConfirmationModal
+          title={`Are you sure you want to delete`}
+          message={`If delete product ${selectedItem?.productName} it can't be undone.`}
+          setDeleteItem={setDeleteItem}
+          selectedItem={selectedItem}
+          setCloseModal={setCloseModal}
+        ></ConfirmationModal>
+
+      }
     </div>
   );
 };

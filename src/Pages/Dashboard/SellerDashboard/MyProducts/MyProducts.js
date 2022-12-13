@@ -9,8 +9,8 @@ import Spinner from "../../../Shared/Spinner/Spinner";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
   const [isDataLoading, setIsDataLoading] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState("");
-  const [deleteProduct, setDeleteProduct] = useState(false);
+  const [selectedItem, setSelectedProduct] = useState("");
+  const [deleteItem, setDeleteItem] = useState(false);
   const [closeModal, setCloseModal] = useState(true);
 
   const {
@@ -34,9 +34,9 @@ const MyProducts = () => {
   });
 
   useEffect(() => {
-    if (deleteProduct) {
+    if (deleteItem) {
       setIsDataLoading(true);
-      fetch(`https://thrift-store-server.vercel.app/seller-product/${deleteProduct._id}`, {
+      fetch(`https://thrift-store-server.vercel.app/seller-product/${deleteItem._id}`, {
         method: "DELETE",
         headers: {
           authorization: `bearer ${localStorage.getItem("thrift-token")}`,
@@ -51,7 +51,7 @@ const MyProducts = () => {
           }
         });
     }
-  }, [deleteProduct, refetch]);
+  }, [deleteItem, refetch]);
 
 
   if (isLoading) {
@@ -177,10 +177,10 @@ const MyProducts = () => {
         !closeModal &&
         <ConfirmationModal
           title={`Are you sure you want to delete`}
-          message={`If delete product ${selectedProduct?.productName} it can't be undone.`}
-          setDeleteProduct={setDeleteProduct}
+          message={`If delete product ${selectedItem?.productName} it can't be undone.`}
+          setDeleteItem={setDeleteItem}
+          selectedItem={selectedItem}
           setCloseModal={setCloseModal}
-          selectedProduct={selectedProduct}
         ></ConfirmationModal>
 
       }

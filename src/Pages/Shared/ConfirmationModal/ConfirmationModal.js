@@ -1,13 +1,13 @@
 import React from "react";
 
-const ConfirmationModal = ({ title, message, setDeleteProduct, setCloseModal, selectedProduct }) => {
+const ConfirmationModal = ({ title, message, setDeleteItem, selectedItem, setCloseModal }) => {
   const handleSuccessAction = () => {
     setCloseModal(true);
-    setDeleteProduct(selectedProduct);
+    setDeleteItem(selectedItem);
   }
 
   const handleCancelAction = () => {
-    setDeleteProduct(false);
+    setDeleteItem(false);
     setCloseModal(true);
   }
 
