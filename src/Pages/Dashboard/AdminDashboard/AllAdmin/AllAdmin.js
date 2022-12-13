@@ -1,11 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../../Shared/Loading/Loading';
 import Spinner from '../../../Shared/Spinner/Spinner';
 
 const AllAdmin = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
+  const [selectedItem, setSelectedItem] = useState("");
+  const [deleteItem, setDeleteItem] = useState(false);
+  const [closeModal, setCloseModal] = useState(true);
 
   const { data: admins, isLoading, refetch } = useQuery({
     queryKey: ['users'],
@@ -21,6 +25,31 @@ const AllAdmin = () => {
     }
   });
 
+  useEffect(() => {
+    if (deleteItem) {
+      setIsDataLoading(true);
+      fetch(`https://thrift-store-server.vercel.app/all-admins/${deleteItem._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            toast.success("Admin deleted successfully.");
+            refetch();
+          }
+          setIsDataLoading(false);
+        })
+        .catch(error => {
+          console.log("Delete admin error: ", error);
+          setIsDataLoading(true);
+        })
+    }
+  }, [deleteItem, refetch]);
+
+
   if (isLoading) {
     return <Loading></Loading>
   }
@@ -35,34 +64,9 @@ const AllAdmin = () => {
     );
   }
 
-  const handleDeleteAdmin = (id, userName) => {
-    const isConfirm = window.confirm(
-      `Are you sure you want to delete admin: ${userName}?`
-    );
-
-    if (!isConfirm) {
-      return;
-    }
-
-    setIsDataLoading(true);
-    fetch(`https://thrift-store-server.vercel.app/all-admins/${id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount) {
-          toast.success("Admin deleted successfully.");
-          refetch();
-        }
-        setIsDataLoading(false);
-      })
-      .catch(error => {
-        console.log("Delete admin error: ", error);
-        setIsDataLoading(true);
-      })
+  const handleConfirmation = (item) => {
+    setCloseModal(false);
+    setSelectedItem(item);
   };
 
 
@@ -91,19 +95,30 @@ const AllAdmin = () => {
                 <td>{admins.userName}</td>
                 <td>{admins.userEmail}</td>
                 <td>
-                  <button
-                    onClick={() => handleDeleteAdmin(admins._id, admins.userName)}
+                  <label
+                    htmlFor="confirmation-modal"
+                    onClick={() => handleConfirmation(admins)}
                     className="btn btn-error btn-outline btn-xs text-gray-600 font-bold mr-4"
                     disabled={isDataLoading}
                   >
                     Delete
-                  </button>
+                  </label>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {
+        !closeModal &&
+        <ConfirmationModal
+          title={`Are you sure you want to delete`}
+          message={`If delete admin ${selectedItem?.userName} it can't be undone.`}
+          setDeleteItem={setDeleteItem}
+          selectedItem={selectedItem}
+          setCloseModal={setCloseModal}
+        ></ConfirmationModal>
+      }
     </div>
 
   );
