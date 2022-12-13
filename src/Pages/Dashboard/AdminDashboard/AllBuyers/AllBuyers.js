@@ -7,7 +7,7 @@ import Spinner from "../../../Shared/Spinner/Spinner";
 
 const AllBuyers = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
-  const [selectedItem, setSelectedProduct] = useState("");
+  const [selectedItem, setSelectedItem] = useState("");
   const [deleteItem, setDeleteItem] = useState(false);
   const [closeModal, setCloseModal] = useState(true);
 
@@ -83,6 +83,7 @@ const AllBuyers = () => {
       return;
     }
 
+
     setIsDataLoading(true);
     fetch(`https://thrift-store-server.vercel.app/all-buyers/${id}`, {
       method: "DELETE",
@@ -104,9 +105,9 @@ const AllBuyers = () => {
       })
   };
 
-  const handleConfirmation = (product) => {
+  const handleConfirmation = (item) => {
     setCloseModal(false);
-    setSelectedProduct(product);
+    setSelectedItem(item);
   };
 
   return (

@@ -56,9 +56,9 @@ const MyOrders = () => {
     return <Loading></Loading>;
   }
 
-  const handleConfirmation = (product) => {
+  const handleConfirmation = (item) => {
     setCloseModal(false);
-    setSelectedItem(product);
+    setSelectedItem(item);
   };
 
 
