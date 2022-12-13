@@ -99,19 +99,6 @@ const AllBuyers = () => {
 
   };
 
-  const handleDeleteBuyers = (id, userName) => {
-    const isConfirm = window.confirm(
-      `Are you sure you want to delete buyer: ${userName}`
-    );
-
-    if (!isConfirm) {
-      return;
-    }
-
-
-
-  };
-
   const handleConfirmation = (item) => {
     setCloseModal(false);
     setSelectedItem(item);
