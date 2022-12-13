@@ -180,12 +180,11 @@ const AllSellers = () => {
         !closeModal &&
         <ConfirmationModal
           title={`Are you sure you want to delete`}
-          message={`If delete product ${selectedItem?.productName} it can't be undone.`}
+          message={`If delete Seller ${selectedItem?.userName} it can't be undone.`}
           setDeleteItem={setDeleteItem}
           selectedItem={selectedItem}
           setCloseModal={setCloseModal}
         ></ConfirmationModal>
-
       }
     </div>
   );
