@@ -1,34 +1,37 @@
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
-import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
-import Loading from '../../../Shared/Loading/Loading';
-import Spinner from '../../../Shared/Spinner/Spinner';
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
+import Loading from "../../../Shared/Loading/Loading";
+import Spinner from "../../../Shared/Spinner/Spinner";
 
 const MyOrders = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [productName, setProductName] = useState("");
   const [deleteProduct, setDeleteProduct] = useState(false);
 
-  const { data: products, isLoading, refetch } = useQuery({
-    queryKey: ['orders'],
+  const {
+    data: products,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["orders"],
     queryFn: async () => {
       const res = await fetch("https://thrift-store-server.vercel.app/orders", {
         headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`
-        }
-      })
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
+      });
 
       const data = await res.json();
       return data;
-    }
+    },
   });
 
   if (isLoading) {
-    return <Loading></Loading>
+    return <Loading></Loading>;
   }
-
 
   const handleDeleteOrder = (id) => {
     const isConfirm = window.confirm(
@@ -41,21 +44,20 @@ const MyOrders = () => {
 
     setIsDataLoading(true);
     fetch(`https://thrift-store-server.vercel.app/orders/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`
-      }
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+      },
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.deletedCount) {
           toast.success("Your order is deleted.");
           refetch();
           setIsDataLoading(false);
         }
-      })
+      });
   };
-
 
   return (
     <div>
@@ -63,8 +65,7 @@ const MyOrders = () => {
         My Orders: <span className="text-teal-500">{products.length}</span>
       </h2>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
-      {
-        products.length !== 0 &&
+      {products.length !== 0 && (
         <div className="overflow-x-auto m-2 lg:m-5">
           <div className="overflow-x-auto w-full">
             <table className="table w-full">
@@ -100,8 +101,12 @@ const MyOrders = () => {
                     <td>{product.sellerEmail}</td>
 
                     <td>
-                      <Link to={`/dashboard/my-payment/${product._id}`} className='btn btn-sm btn-primary mr-3 text-white' disabled={isDataLoading || product.saleStatus}>
-                        {product.saleStatus ? 'Paid' : 'Pay'}
+                      <Link
+                        to={`/dashboard/my-payment/${product._id}`}
+                        className="btn btn-sm btn-primary mr-3 text-white"
+                        disabled={isDataLoading || product.saleStatus}
+                      >
+                        {product.saleStatus ? "Paid" : "Pay"}
                       </Link>
                       <label
                         htmlFor="confirmation-modal"
@@ -119,8 +124,10 @@ const MyOrders = () => {
             </table>
           </div>
         </div>
-      }
-      <ConfirmationModal title={`Are you sure you want to delete ${productName}`}></ConfirmationModal>
+      )}
+      <ConfirmationModal
+        title={`Are you sure you want to delete ${productName}`}
+      ></ConfirmationModal>
     </div>
   );
 };
