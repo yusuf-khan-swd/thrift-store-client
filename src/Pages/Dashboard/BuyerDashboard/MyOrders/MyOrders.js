@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -8,8 +9,9 @@ import Spinner from "../../../Shared/Spinner/Spinner";
 
 const MyOrders = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
-  const [productName, setProductName] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState("");
   const [deleteProduct, setDeleteProduct] = useState(false);
+  const [closeModal, setCloseModal] = useState(true);
 
   const {
     data: products,
@@ -29,39 +31,41 @@ const MyOrders = () => {
     },
   });
 
+  useEffect(() => {
+    if (deleteProduct) {
+      setIsDataLoading(true);
+      fetch(`https://thrift-store-server.vercel.app/orders/${deleteProduct._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            toast.success("Your order is deleted.");
+            refetch();
+            setIsDataLoading(false);
+          }
+        });
+
+    }
+  }, [deleteProduct, refetch]);
+
   if (isLoading) {
     return <Loading></Loading>;
   }
 
-  const handleDeleteOrder = (id) => {
-    const isConfirm = window.confirm(
-      "Are you sure you want remove this product from your orders"
-    );
-
-    if (!isConfirm) {
-      return;
-    }
-
-    setIsDataLoading(true);
-    fetch(`https://thrift-store-server.vercel.app/orders/${id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount) {
-          toast.success("Your order is deleted.");
-          refetch();
-          setIsDataLoading(false);
-        }
-      });
+  const handleConfirmation = (product) => {
+    setCloseModal(false);
+    setSelectedProduct(product);
   };
+
+
 
   return (
     <div>
-      <h2 className="text-3xl font-bold text-center cursor-pointer underline underline-offset-4 py-8 uppercase">
+      <h2 className="text-3xl font-bold text-center cursor-pointer underline underline-offset-4 py-4 uppercase">
         My Orders: <span className="text-teal-500">{products.length}</span>
       </h2>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
@@ -110,8 +114,7 @@ const MyOrders = () => {
                       </Link>
                       <label
                         htmlFor="confirmation-modal"
-                        // onClick={() => handleDeleteOrder(product._id)}
-                        onClick={() => setProductName(product.productName)}
+                        onClick={() => handleConfirmation(product)}
                         className="btn btn-error btn-outline btn-sm font-bold"
                         disabled={isDataLoading}
                       >
@@ -125,9 +128,17 @@ const MyOrders = () => {
           </div>
         </div>
       )}
-      <ConfirmationModal
-        title={`Are you sure you want to delete ${productName}`}
-      ></ConfirmationModal>
+      {
+        !closeModal &&
+        <ConfirmationModal
+          title={`Are you sure you want to delete`}
+          message={`If delete product ${selectedProduct?.productName} it can't be undone.`}
+          setDeleteProduct={setDeleteProduct}
+          setCloseModal={setCloseModal}
+          selectedProduct={selectedProduct}
+        ></ConfirmationModal>
+
+      }
     </div>
   );
 };
