@@ -2,11 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../../Shared/Loading/Loading';
 import Spinner from '../../../Shared/Spinner/Spinner';
 
 const MyOrders = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
+  const [productName, setProductName] = useState("");
+  const [deleteProduct, setDeleteProduct] = useState(false);
 
   const { data: products, isLoading, refetch } = useQuery({
     queryKey: ['orders'],
@@ -52,6 +55,7 @@ const MyOrders = () => {
         }
       })
   };
+
 
   return (
     <div>
@@ -99,13 +103,15 @@ const MyOrders = () => {
                       <Link to={`/dashboard/my-payment/${product._id}`} className='btn btn-sm btn-primary mr-3 text-white' disabled={isDataLoading || product.saleStatus}>
                         {product.saleStatus ? 'Paid' : 'Pay'}
                       </Link>
-                      <button
-                        onClick={() => handleDeleteOrder(product._id)}
+                      <label
+                        htmlFor="confirmation-modal"
+                        // onClick={() => handleDeleteOrder(product._id)}
+                        onClick={() => setProductName(product.productName)}
                         className="btn btn-error btn-outline btn-sm font-bold"
                         disabled={isDataLoading}
                       >
                         Delete
-                      </button>
+                      </label>
                     </td>
                   </tr>
                 ))}
@@ -114,6 +120,7 @@ const MyOrders = () => {
           </div>
         </div>
       }
+      <ConfirmationModal title={`Are you sure you want to delete ${productName}`}></ConfirmationModal>
     </div>
   );
 };
