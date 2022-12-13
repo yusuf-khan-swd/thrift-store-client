@@ -1,14 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
+import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../../Shared/Loading/Loading';
 import Spinner from '../../../Shared/Spinner/Spinner';
 
 const MyBuyers = () => {
-  const [isDataLoading, setIsDataLoading] = useState(false);
   const { user } = useContext(AuthContext);
+  const [isDataLoading, setIsDataLoading] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState("");
+  const [deleteProduct, setDeleteProduct] = useState(false);
+  const [closeModal, setCloseModal] = useState(true);
+
 
   const { data: products, isLoading, refetch } = useQuery({
     queryKey: ['ordered-products'],
@@ -22,7 +27,28 @@ const MyBuyers = () => {
       const data = await res.json();
       return data;
     }
-  })
+  });
+
+
+  useEffect(() => {
+    if (deleteProduct) {
+      setIsDataLoading(true);
+      fetch(`https://thrift-store-server.vercel.app/orders/${deleteProduct._id}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.deletedCount) {
+            toast.success("Product is deleted.");
+            refetch();
+          }
+          setIsDataLoading(false);
+        })
+    }
+  }, [deleteProduct, refetch]);
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -38,36 +64,14 @@ const MyBuyers = () => {
     );
   }
 
-  const handleDeleteOrder = (id) => {
-    const isConfirm = window.confirm(
-      "Are you sure you want to delete this product"
-    );
-
-    if (!isConfirm) {
-      return;
-    }
-
-    setIsDataLoading(true);
-    fetch(`https://thrift-store-server.vercel.app/orders/${id}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.deletedCount) {
-          toast.success("Product is deleted.");
-          refetch();
-        }
-        setIsDataLoading(false);
-      })
+  const handleConfirmation = (product) => {
+    setCloseModal(false);
+    setSelectedProduct(product);
   };
-
 
   return (
     <div>
-      <h2 className="text-3xl font-bold text-center cursor-pointer underline pt-4 underline-offset-4 uppercase">
+      <h2 className="text-3xl font-bold text-center cursor-pointer underline pt-4 pb-4 underline-offset-4 uppercase">
         My Orders: <span className="text-teal-500">{products.length}</span>
       </h2>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
@@ -108,16 +112,14 @@ const MyBuyers = () => {
                     <td>{product.buyerEmail}</td>
 
                     <td>
-                      {/* <Link to={`/dashboard/my-payment/${product._id}`} className='btn btn-sm btn-primary text-white mr-3' disabled={isDataLoading || product.saleStatus}>
-                      {product.saleStatus ? 'Paid' : 'Pay'}
-                    </Link> */}
-                      <button
-                        onClick={() => handleDeleteOrder(product._id)}
+                      <label
+                        htmlFor="confirmation-modal"
+                        onClick={() => handleConfirmation(product)}
                         className="btn btn-error btn-outline btn-sm font-bold"
                         disabled={isDataLoading}
                       >
                         Delete
-                      </button>
+                      </label>
                     </td>
                   </tr>
                 ))}
@@ -126,6 +128,18 @@ const MyBuyers = () => {
           </div>
         </div>
       }
+      {
+        !closeModal &&
+        <ConfirmationModal
+          title={`Are you sure you want to delete`}
+          message={`If delete product ${selectedProduct?.productName} it can't be undone.`}
+          setDeleteProduct={setDeleteProduct}
+          setCloseModal={setCloseModal}
+          selectedProduct={selectedProduct}
+        ></ConfirmationModal>
+
+      }
+
     </div>
   );
 };
