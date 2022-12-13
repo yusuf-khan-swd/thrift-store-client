@@ -1,11 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
 import Loading from "../../../Shared/Loading/Loading";
 import Spinner from "../../../Shared/Spinner/Spinner";
 
 const AllBuyers = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
+  const [selectedItem, setSelectedProduct] = useState("");
+  const [deleteItem, setDeleteItem] = useState(false);
+  const [closeModal, setCloseModal] = useState(true);
 
   const {
     data: buyers,
@@ -100,6 +104,11 @@ const AllBuyers = () => {
       })
   };
 
+  const handleConfirmation = (product) => {
+    setCloseModal(false);
+    setSelectedProduct(product);
+  };
+
   return (
     <div>
       <div className="text-center py-8">
@@ -139,6 +148,17 @@ const AllBuyers = () => {
           </tbody>
         </table>
       </div>
+      {
+        !closeModal &&
+        <ConfirmationModal
+          title={`Are you sure you want to delete`}
+          message={`If delete Seller ${selectedItem?.userName} it can't be undone.`}
+          setDeleteItem={setDeleteItem}
+          selectedItem={selectedItem}
+          setCloseModal={setCloseModal}
+        ></ConfirmationModal>
+      }
+
     </div>
   );
 };
