@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
 import Loading from "../../../Shared/Loading/Loading";
@@ -27,6 +27,31 @@ const AllBuyers = () => {
       return data;
     },
   });
+
+  useEffect(() => {
+    if (deleteItem) {
+      setIsDataLoading(true);
+      fetch(`https://thrift-store-server.vercel.app/all-buyers/${deleteItem._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            toast.success("User deleted successfully.");
+            refetch();
+          }
+          setIsDataLoading(false);
+        })
+        .catch(error => {
+          console.log("delete buyer error: ", error);
+          setIsDataLoading(false);
+        })
+    }
+  }, [deleteItem, refetch]);
+
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -84,25 +109,7 @@ const AllBuyers = () => {
     }
 
 
-    setIsDataLoading(true);
-    fetch(`https://thrift-store-server.vercel.app/all-buyers/${id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount) {
-          toast.success("User deleted successfully.");
-          refetch();
-        }
-        setIsDataLoading(false);
-      })
-      .catch(error => {
-        console.log("delete buyer error: ", error);
-        setIsDataLoading(false);
-      })
+
   };
 
   const handleConfirmation = (item) => {
@@ -136,13 +143,14 @@ const AllBuyers = () => {
                 <td>{buyer.userEmail}</td>
                 <td>
                   <button onClick={() => handleMakeAdmin(buyer._id, buyer.userName)} className="btn btn-xs btn-info mr-2" disabled={isDataLoading}>Make Admin</button>
-                  <button
-                    onClick={() => handleDeleteBuyers(buyer._id)}
+                  <label
+                    htmlFor="confirmation-modal"
+                    onClick={() => handleConfirmation(buyer)}
                     className="btn btn-error btn-outline btn-xs text-gray-600 font-bold mr-4"
                     disabled={isDataLoading}
                   >
                     Delete
-                  </button>
+                  </label>
                 </td>
               </tr>
             ))}
@@ -153,7 +161,7 @@ const AllBuyers = () => {
         !closeModal &&
         <ConfirmationModal
           title={`Are you sure you want to delete`}
-          message={`If delete Seller ${selectedItem?.userName} it can't be undone.`}
+          message={`If delete buyer ${selectedItem?.userName} it can't be undone.`}
           setDeleteItem={setDeleteItem}
           selectedItem={selectedItem}
           setCloseModal={setCloseModal}
