@@ -9,7 +9,7 @@ import Spinner from "../../../Shared/Spinner/Spinner";
 
 const MyOrders = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
-  const [selectedItem, setSelectedProduct] = useState("");
+  const [selectedItem, setSelectedItem] = useState("");
   const [deleteItem, setDeleteItem] = useState(false);
   const [closeModal, setCloseModal] = useState(true);
 
@@ -58,7 +58,7 @@ const MyOrders = () => {
 
   const handleConfirmation = (product) => {
     setCloseModal(false);
-    setSelectedProduct(product);
+    setSelectedItem(product);
   };
 
 
