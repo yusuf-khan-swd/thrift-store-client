@@ -129,7 +129,7 @@ const BookModal = ({ setOpenModal, productBooked }) => {
                         </p>
                       </div>
                       <p className="text-red-500 mt-2"> {bookError} </p>
-                      <div className="form-control w-full mt-2">
+                      <div className="form-control w-full mt-5">
                         <button type={"submit"} className="btn btn-info" disabled={isDataLoading}>
                           Submit
                         </button>
