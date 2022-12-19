@@ -49,6 +49,16 @@ const AllCategories = () => {
     return <Loading></Loading>
   }
 
+  if (!categories.length) {
+    return (
+      <div className="h-screen flex justify-center items-center lg:items-start lg:mt-8">
+        <h2 className="text-3xl font-bold">
+          Please add a Category. Total <span className='text-teal-500'>0</span> category.
+        </h2>
+      </div>
+    );
+  }
+
   const handleConfirmation = (item) => {
     setCloseModal(false);
     setSelectedItem(item);
