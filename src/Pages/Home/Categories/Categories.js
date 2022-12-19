@@ -27,24 +27,22 @@ const Categories = () => {
     <div className='container mx-auto mb-24'>
       <div className='m-2'>
         <Link to="/categories" title='Categories'><h2 className='text-3xl font-bold text-center capitalize mb-5'>Our Categories</h2></Link>
-        <div className={`${isItCategoriesRoute && 'grid grid-cols-5'}`}>
-          {
-            isItCategoriesRoute &&
+        {
+          isItCategoriesRoute &&
+          <div className={`grid grid-cols-5`}>
             <ul className='hidden md:block md:col-span-1 md:mr-2 lg:mr-8'>
               {
                 categories.map(category => <li className='m-1' key={category._id}> <Link className='btn btn-primary w-full text-white' to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
               }
             </ul>
-          }
-          {
-            isItCategoriesRoute &&
             <div className="col-span-5 md:col-span-4 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
               {
                 categories.map(category => <CategoryCard key={category._id} category={category}></CategoryCard>)
               }
             </div>
-          }
-        </div>
+          </div>
+        }
+
         {
           !isItCategoriesRoute &&
           <ul className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 mb-8'>
