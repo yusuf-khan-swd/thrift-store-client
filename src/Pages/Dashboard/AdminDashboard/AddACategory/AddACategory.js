@@ -80,8 +80,8 @@ const AddACategory = () => {
                   {...register("description", {
                     required: "Description is required",
                     maxLength: {
-                      value: 150,
-                      message: "Please short your message under 150 character",
+                      value: 220,
+                      message: "Please short your message under 220 character",
                     },
                     minLength: {
                       value: 10,
