@@ -68,7 +68,7 @@ const AddACategory = () => {
               <label className="label">
                 <span className="label-text font-medium">Image</span>
               </label>
-              <input {...register('categoryImage', { required: "Image is required" })} type="file" className="file-input file-input-bordered file-input-sm w-full" />
+              <input disabled={isAdding} {...register('categoryImage', { required: "Image is required" })} type="file" className="file-input file-input-bordered file-input-sm w-full" />
               <p className='text-red-500'>{errors.categoryImage?.message}</p>
             </div>
             <div className="form-control w-full mt-5">
