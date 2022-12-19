@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider/AuthProvider';
 import useAccount from '../hooks/useAccount';
 import Loading from '../Pages/Shared/Loading/Loading';
@@ -17,25 +17,25 @@ const DashboardLayout = () => {
   const dashboardItems = <>
     {
       userType === "buyer" &&
-      <li className='border rounded-lg m-1'><Link to='/dashboard/my-orders'>My Orders</Link></li>
+      <li className='border rounded-lg m-1'><NavLink to='/dashboard/my-orders'>My Orders</NavLink></li>
     }
     {
       userType === "seller" &&
       <>
-        <li className='border rounded-lg m-1'><Link to='/dashboard/add-product'>Add A Product</Link></li>
-        <li className='border rounded-lg m-1'><Link to='/dashboard/my-products'>My Products</Link></li>
-        <li className='border rounded-lg m-1'><Link to='/dashboard/my-buyers'>My Buyers</Link></li>
+        <li className='border rounded-lg m-1'><NavLink to='/dashboard/add-product'>Add A Product</NavLink></li>
+        <li className='border rounded-lg m-1'><NavLink to='/dashboard/my-products'>My Products</NavLink></li>
+        <li className='border rounded-lg m-1'><NavLink to='/dashboard/my-buyers'>My Buyers</NavLink></li>
       </>
     }
     {
       userType === "admin" &&
       <>
-        <li className='border rounded-lg m-1'><Link to='/dashboard/all-sellers'>All Sellers</Link></li>
-        <li className='border rounded-lg m-1'><Link to='/dashboard/all-buyers'>All Buyers</Link></li>
-        <li className='border rounded-lg m-1'><Link to='/dashboard/all-admins'>All Admins</Link></li>
-        <li className='border rounded-lg m-1'><Link to='/dashboard/reported-items'>Reported Items</Link></li>
-        <li className='border rounded-lg m-1'><Link to='/dashboard/add-category'>Add a Category</Link></li>
-        <li className='border rounded-lg m-1'><Link to='/dashboard/all-categories'>All Categories</Link></li>
+        <li className='border rounded-lg m-1'><NavLink to='/dashboard/all-sellers'>All Sellers</NavLink></li>
+        <li className='border rounded-lg m-1'><NavLink to='/dashboard/all-buyers'>All Buyers</NavLink></li>
+        <li className='border rounded-lg m-1'><NavLink to='/dashboard/all-admins'>All Admins</NavLink></li>
+        <li className='border rounded-lg m-1'><NavLink to='/dashboard/reported-items'>Reported Items</NavLink></li>
+        <li className='border rounded-lg m-1'><NavLink to='/dashboard/add-category'>Add a Category</NavLink></li>
+        <li className='border rounded-lg m-1'><NavLink to='/dashboard/all-categories'>All Categories</NavLink></li>
       </>
     }
   </>

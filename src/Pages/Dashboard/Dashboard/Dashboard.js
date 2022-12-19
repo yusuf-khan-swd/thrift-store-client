@@ -6,8 +6,8 @@ const Dashboard = () => {
 
   return (
     <div className='container mx-auto'>
-      <div className='mt-12 mb-24 m-2'>
-        <div className='card shadow-lg bg-white md:mt-16 md:ml-16 border w-full lg:w-96'>
+      <div className='mt-12 mb-24 m-2 w-11/12 mx-auto'>
+        <div className='card shadow-lg bg-white border w-full pb-6'>
           <div className='card-body'>
             <h2 className='card-title justify-center text-2xl cursor-pointer'>Profile</h2>
             <form>
