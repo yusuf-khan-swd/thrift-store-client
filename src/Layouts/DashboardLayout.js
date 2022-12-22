@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider/AuthProvider';
 import useAccount from '../hooks/useAccount';
 import Loading from '../Pages/Shared/Loading/Loading';
@@ -15,6 +15,10 @@ const DashboardLayout = () => {
   }
 
   const dashboardItems = <>
+    {
+      user &&
+      <li className='border rounded-lg m-1'><Link to='/dashboard'>Dashboard</Link></li>
+    }
     {
       userType === "buyer" &&
       <li className='border rounded-lg m-1'><NavLink to='/dashboard/my-orders'>My Orders</NavLink></li>
