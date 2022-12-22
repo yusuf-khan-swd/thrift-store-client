@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 import CategoryCard from './CategoryCard';
 import axios from 'axios';
