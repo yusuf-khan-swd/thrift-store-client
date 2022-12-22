@@ -108,7 +108,7 @@ const ProductCard = ({
               </div>
             </div>
             <div>
-              <p className="overflow-hidden text-ellipsis h-32">
+              <p className="overflow-hidden text-ellipsis lg:h-28 mb-3">
                 <span className="font-medium">Quick Overview</span> <br />
                 <span className="text-sm">
                   {description?.length > 200
