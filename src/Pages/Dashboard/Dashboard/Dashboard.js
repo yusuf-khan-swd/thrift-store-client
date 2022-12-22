@@ -1,8 +1,16 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import useAccount from '../../../hooks/useAccount';
+import Loading from '../../Shared/Loading/Loading';
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
+
+  const [userType, isAccountLoading] = useAccount(user.email);
+
+  if (isAccountLoading) {
+    return <Loading></Loading>
+  }
 
   return (
     <div className='container mx-auto'>
@@ -22,6 +30,12 @@ const Dashboard = () => {
                   <span className="label-text font-medium">Email</span>
                 </label>
                 <input type="text" defaultValue={user.email} disabled className="input input-bordered w-full" />
+              </div>
+              <div className="form-control w-full">
+                <label className="label">
+                  <span className="label-text font-medium">Account Type</span>
+                </label>
+                <input type="text" defaultValue={userType} disabled className="input input-bordered w-full" />
               </div>
             </form>
           </div>
