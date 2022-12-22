@@ -57,7 +57,7 @@ const ProductCard = ({
                 {productName}
               </h2>
               <p className="font-semibold text-xl sm:text-center mb-2">
-                Resale Price: <span className="ml-1 text-black">${resalePrice}</span>
+                Resale Price: <span className="ml-1 text-primary font-bold">${resalePrice}</span>
               </p>
             </div>
 
@@ -89,7 +89,7 @@ const ProductCard = ({
                   <span className="ml-1 font-bold"> {sellerName}</span>
                   {sellerIsVerified && (
                     <FaCheckCircle
-                      className="ml-3 text-blue-600"
+                      className="ml-1 text-blue-600"
                       title="Seller is verified"
                     ></FaCheckCircle>
                   )}
