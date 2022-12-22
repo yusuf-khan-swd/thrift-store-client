@@ -109,7 +109,7 @@ const MyProducts = () => {
           <table className="table w-full">
             <thead>
               <tr>
-                <th></th>
+                <th>S/N</th>
                 <th>Product</th>
                 <th>Category</th>
                 <th>Price</th>
@@ -133,7 +133,7 @@ const MyProducts = () => {
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{product.productName}</div>
+                        <div className="font-bold">{product.productName.length > 20 ? product.productName.slice(0, 20) + "..." : product.productName}</div>
                       </div>
                     </div>
                   </td>
