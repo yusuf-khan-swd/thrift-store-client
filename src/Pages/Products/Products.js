@@ -72,10 +72,10 @@ const Products = () => {
   };
 
   return (
-    <div className="container mx-auto mb-24 mt-10">
+    <div className="container mx-auto mb-24">
       <div className="m-2">
-        <dir className="pb-8">
-          <h2 className="text-3xl font-bold text-center mt-8 mb-2 uppercase">
+        <dir className="pb-0">
+          <h2 className="text-3xl font-bold text-center mb-2 uppercase">
             <Link to="/categories" className="text-sm text-info hover:link">
               Category
             </Link>
