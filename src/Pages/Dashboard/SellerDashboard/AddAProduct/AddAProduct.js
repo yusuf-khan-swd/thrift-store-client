@@ -87,11 +87,26 @@ const AddAProduct = () => {
                     reset();
                     navigate("/dashboard/my-products");
                   }
-                });
+                })
+                .catch(error => {
+                  console.log("product post error: ", error);
+                  toast.error(error.message);
+                  isAdding(false);
+                })
 
-            });
+            })
+            .catch(error => {
+              console.log("Users error: ", error);
+              toast.error(error.message);
+              isAdding(false);
+            })
         }
-      });
+      })
+      .catch(error => {
+        console.log("Image hosting error: ", error);
+        toast.error(error.message);
+        isAdding(false);
+      })
   };
 
   return (
@@ -125,6 +140,8 @@ const AddAProduct = () => {
                     required: "Resale price is required",
                   })}
                   type="number"
+                  step="0.01"
+                  min="0"
                   className="input input-bordered w-full"
                 />
                 <p className="text-red-500">{errors.resalePrice?.message}</p>
@@ -138,6 +155,8 @@ const AddAProduct = () => {
                     required: "Original price is required",
                   })}
                   type="number"
+                  step="0.01"
+                  min="0"
                   className="input input-bordered w-full"
                 />
                 <p className="text-red-500 mt-2">{errors.originalPrice?.message}</p>
@@ -151,7 +170,9 @@ const AddAProduct = () => {
                     {...register("monthsUsed", {
                       required: "Months of use is required",
                     })}
-                    type="text"
+                    type="number"
+                    step="0.1"
+                    min="0"
                     className="input input-bordered w-full"
                   />
                   <p className="text-red-500 mt-2">{errors.monthsUsed?.message}</p>
@@ -207,6 +228,7 @@ const AddAProduct = () => {
                   {...register("image", { required: "Image is required" })}
                   type="file"
                   className="file-input file-input-bordered w-full"
+                  disabled={isAdding}
                 />
                 <p className="text-red-500">{errors.image?.message}</p>
               </div>

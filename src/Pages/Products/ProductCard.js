@@ -53,7 +53,7 @@ const ProductCard = ({
         <div className="card h-full lg:col-span-2 text-zinc-500">
           <div className="card-body p-8 pt-2 md:pt-8">
             <div className="border-b mb-2">
-              <h2 className="card-title uppercase justify-start sm:justify-center font-bold">
+              <h2 className="card-title capitalize justify-start sm:justify-center font-bold">
                 {productName}
               </h2>
               <p className="font-semibold text-xl sm:text-center mb-2">
