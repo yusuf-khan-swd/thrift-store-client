@@ -68,11 +68,11 @@ const ProductCard = ({
                   <span className=" font-bold ml-1">{monthsUsed} Month</span>
                 </p>
                 <p className="font-medium mb-1">
-                  Location: <span className=" font-bold ml-1">{location}</span>
+                  Location: <span className=" font-bold ml-1 capitalize">{location}</span>
                 </p>
                 <p className="font-medium mb-1">
                   Condition Type:
-                  <span className="ml-1 font-bold ">{conditionType}</span>
+                  <span className="ml-1 font-bold capitalize">{conditionType}</span>
                 </p>
                 <p className="font-medium mb-1">
                   Sale Status:

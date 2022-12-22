@@ -171,7 +171,6 @@ const AddAProduct = () => {
                       required: "Months of use is required",
                     })}
                     type="number"
-                    step="0.1"
                     min="0"
                     className="input input-bordered w-full"
                   />
