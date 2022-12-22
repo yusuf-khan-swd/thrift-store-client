@@ -120,6 +120,7 @@ const ProductCard = ({
             </div>
             <div className="card-actions justify-start lg:justify-end">
               <label
+                disabled={isDataLoading}
                 onClick={() => handleBooked(true, product)}
                 htmlFor="book-modal"
                 className="btn btn-primary text-white w-full sm:w-44"

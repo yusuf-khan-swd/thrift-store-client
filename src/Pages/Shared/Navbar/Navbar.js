@@ -5,18 +5,10 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import './Navbar.css';
 import logo from '../../../assets/android-chrome-192x192.png';
-import Loading from '../Loading/Loading';
-import useAccount from '../../../hooks/useAccount';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const currentLocation = useLocation().pathname;
-
-  const [userType, isAccountLoading] = useAccount(user.email);
-
-  if (isAccountLoading) {
-    return <Loading></Loading>
-  }
 
   const handleLogOut = () => {
     logOut()
@@ -42,7 +34,7 @@ const Navbar = () => {
         <>
           <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to="/dashboard">Dashboard</NavLink></li>
           <li className='mb-1 lg:m-0 lg:mr-1'><button className='rounded-lg' onClick={handleLogOut}>Logout</button></li>
-          <li className='mb-1 lg:m-0 lg:mr-1'><button className='rounded-lg' title={`${user?.email} ${userType.toUpperCase()}`}><FaUser className='text-xl'></FaUser></button></li>
+          <li className='mb-1 lg:m-0 lg:mr-1'><button className='rounded-lg' title={`${user?.email}}`}><FaUser className='text-xl'></FaUser></button></li>
         </>
         :
         <li className='mb-1 lg:m-0 lg:mr-1'><NavLink className={`rounded-lg`} to="/login">Login</NavLink></li>
