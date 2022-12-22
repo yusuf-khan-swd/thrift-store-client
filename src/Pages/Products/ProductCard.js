@@ -101,7 +101,7 @@ const ProductCard = ({
                 <p className="font-medium mb-1">
                   Posted Time:
                   <span className="ml-1 font-bold">
-                    {postedDate} {hour}
+                    {postedDate} At {hour}
                     {AmOrPm}
                   </span>
                 </p>
