@@ -21,7 +21,7 @@ const CategoryName = () => {
   return (
     <div className="container mx-auto mb-24">
       <h2 className='text-3xl font-bold text-center capitalize mb-5'>
-        <Link to="/categories" title="Categories">Category</Link>
+        <Link to="/categories" title="Categories">Categories</Link>
       </h2>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 m-2">
         {
