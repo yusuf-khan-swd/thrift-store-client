@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useLoaderData, useNavigation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CategoryName from "../Shared/CategoryName/CategoryName";
 import Loading from "../Shared/Loading/Loading";
 import BookModal from "./BookModal";
@@ -10,9 +11,25 @@ const Products = () => {
   const [openModal, setOpenModal] = useState(true);
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [productBooked, setProductBooked] = useState({});
+  const { id } = useParams();
 
-  const products = useLoaderData();
-  const navigation = useNavigation();
+  let { data: products, isLoading, refetch } = useQuery({
+    queryKey: ["products", id],
+    queryFn: async () => {
+      const res = await fetch(`https://thrift-store-server.vercel.app/category/${id}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
+      });
+      const data = await res.json();
+      return data
+    }
+  });
+
+  if (isLoading) {
+    return <Loading></Loading>
+  }
+
 
   if (!products.length) {
     return (
@@ -42,8 +59,9 @@ const Products = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
-          toast.success(`${reported ? "Remove report" : "Reported to admin"}`);
+          toast.success(`${reported ? "Report is remove" : "Reported to admin"}`);
           setIsDataLoading(false);
+          refetch();
         }
       })
       .catch((error) => {
@@ -68,23 +86,18 @@ const Products = () => {
               </h2>
               <p className="text-center font-bold text-zinc-400 text-xl mb-5">Total {products.length} Products Available</p>
             </div>
-            {
-              navigation.state === "loading" ?
-                <Loading style={`h-[50vh]`}></Loading>
-                :
-                <div className="grid grid-cols-1 gap-6">
-                  {products.map((product) => (
-                    <ProductCard
-                      key={product._id}
-                      product={product}
-                      setOpenModal={setOpenModal}
-                      handleBookProduct={handleBookProduct}
-                      handleReport={handleReport}
-                      isDataLoading={isDataLoading}
-                    ></ProductCard>
-                  ))}
-                </div>
-            }
+            <div className="grid grid-cols-1 gap-6">
+              {products.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  setOpenModal={setOpenModal}
+                  handleBookProduct={handleBookProduct}
+                  handleReport={handleReport}
+                  isDataLoading={isDataLoading}
+                ></ProductCard>
+              ))}
+            </div>
           </div>
         </section>
         <div>
