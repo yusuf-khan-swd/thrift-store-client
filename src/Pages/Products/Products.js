@@ -81,7 +81,7 @@ const Products = () => {
     <div className="container mx-auto mb-24">
       <div className="m-2 pt-8">
         <section className="grid grid-cols-1 md:grid-cols-5 md:gap-6">
-          <ul className="grid grid-cols-2 sm:gird-cols-3 mb-8 mt-5 md:block md:gap-0 md:my-0 menu top-0">
+          <ul className="grid grid-cols-2 sm:gird-cols-3 mb-8 mt-5 md:block md:gap-0 md:my-0 menu">
             <CategoryName
               listStyle={`border rounded-lg m-1`}
               linkStyle={`rounded-lg`}
