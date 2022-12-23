@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CategoryName from "../Shared/CategoryName/CategoryName";
 import Loading from "../Shared/Loading/Loading";
 import BookModal from "./BookModal";
