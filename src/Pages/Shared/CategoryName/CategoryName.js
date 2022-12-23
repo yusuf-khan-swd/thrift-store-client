@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 
-const CategoryName = ({ listMargin, linkStyle }) => {
+const CategoryName = ({ listStyle, linkStyle }) => {
 
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ['categories'],
@@ -22,7 +22,7 @@ const CategoryName = ({ listMargin, linkStyle }) => {
   return (
     <>
       {
-        categories.map(category => <li className={listMargin} key={category._id}> <Link className={`${linkStyle} overflow-hidden text-ellipsis`} to={`/category/${category._id}`}>{category.categoryName}</Link> </li>)
+        categories.map(category => <li className={listStyle} key={category._id}> <NavLink className={`${linkStyle} overflow-hidden text-ellipsis`} to={`/category/${category._id}`}>{category.categoryName}</NavLink> </li>)
       }
     </>
   );
