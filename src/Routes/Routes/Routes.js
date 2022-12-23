@@ -46,6 +46,11 @@ const routes = createBrowserRouter([
       {
         path: '/category/:id',
         element: <PrivateRoute><Products></Products></PrivateRoute>,
+        loader: ({ params }) => fetch(`https://thrift-store-server.vercel.app/category/${params.id}`, {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
+        })
       },
       {
         path: '/blog',

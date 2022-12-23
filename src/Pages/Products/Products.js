@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigation, useParams } from "react-router-dom";
 import CategoryName from "../Shared/CategoryName/CategoryName";
 import Loading from "../Shared/Loading/Loading";
 import BookModal from "./BookModal";
@@ -13,25 +13,12 @@ const Products = () => {
   const [productBooked, setProductBooked] = useState({});
   const { id } = useParams();
 
-  const {
-    data: products,
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["products"],
-    queryFn: async () => {
-      const res = await fetch(`https://thrift-store-server.vercel.app/category/${id}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-        },
-      });
-      const data = await res.json();
-      return data;
-    },
-  });
+  const products = useLoaderData();
 
-  if (isLoading) {
-    return <Loading></Loading>;
+  const navigation = useNavigation();
+
+  if (navigation.state === "loading") {
+    return <Loading></Loading>
   }
 
   if (!products.length) {
@@ -63,7 +50,7 @@ const Products = () => {
       .then((data) => {
         if (data.modifiedCount) {
           toast.success(`${reported ? "Reported to admin" : "Remove report"}`);
-          refetch();
+          // refetch();
           setIsDataLoading(false);
         }
       })
