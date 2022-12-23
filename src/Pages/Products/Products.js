@@ -13,23 +13,29 @@ const Products = () => {
   const [productBooked, setProductBooked] = useState({});
   const { id } = useParams();
 
-  let { data: products, isLoading, refetch } = useQuery({
+  let {
+    data: products,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["products", id],
     queryFn: async () => {
-      const res = await fetch(`https://thrift-store-server.vercel.app/category/${id}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-        },
-      });
+      const res = await fetch(
+        `https://thrift-store-server.vercel.app/category/${id}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
+        }
+      );
       const data = await res.json();
-      return data
-    }
+      return data;
+    },
   });
 
   if (isLoading) {
-    return <Loading></Loading>
+    return <Loading></Loading>;
   }
-
 
   if (!products.length) {
     return (
@@ -59,7 +65,9 @@ const Products = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
-          toast.success(`${reported ? "Report is remove" : "Reported to admin"}`);
+          toast.success(
+            `${reported ? "Report is remove" : "Reported to admin"}`
+          );
           setIsDataLoading(false);
           refetch();
         }
@@ -79,11 +87,16 @@ const Products = () => {
             </Link>
             <br /> <span>{products[0]?.productCategory}</span>
           </h2>
-          <p className="text-center font-bold text-zinc-400 text-xl mb-5">Total {products.length} Products Available</p>
+          <p className="text-center font-bold text-zinc-400 text-xl mb-5">
+            Total {products.length} Products Available
+          </p>
         </div>
         <section className="grid grid-cols-1 md:grid-cols-5 md:gap-6">
-          <ul className="grid grid-cols-2 sm:gird-cols-3 mb-8 mt-5 md:block md:gap-0 md:my-0 menu w-full">
-            <CategoryName listStyle={`border rounded-lg m-1`} linkStyle={`rounded-lg`}></CategoryName>
+          <ul className="grid grid-cols-2 sm:gird-cols-3 mb-8 mt-5 md:block md:gap-0 md:my-0 menu">
+            <CategoryName
+              listStyle={`border rounded-lg m-1`}
+              linkStyle={`rounded-lg`}
+            ></CategoryName>
           </ul>
           <div className="col-span-4">
             <div className="grid grid-cols-1 gap-6">
