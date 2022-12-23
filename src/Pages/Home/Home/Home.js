@@ -32,7 +32,7 @@ const Home = () => {
           <Link to="/categories" title="Categories">Categories</Link>
         </h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-2 m-2">
-          <CategoryName listMargin={'m-1'} linkStyle={'btn btn-primary w-full text-white rounded-lg'}></CategoryName>
+          <CategoryName listStyle={'m-1'} linkStyle={'btn btn-primary w-full text-white rounded-lg'}></CategoryName>
         </ul>
       </div>
       {advertisedItems.length !== 0 && (
