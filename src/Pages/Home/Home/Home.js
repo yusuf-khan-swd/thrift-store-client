@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 import CategoryName from "../../Shared/CategoryName/CategoryName";
 import Loading from "../../Shared/Loading/Loading";
 import Advertised from "../Advertised/Advertised";
@@ -26,7 +27,14 @@ const Home = () => {
   return (
     <div className="container mx-auto">
       <Banner></Banner>
-      <CategoryName></CategoryName>
+      <div className="mb-24 mt-5">
+        <h2 className='text-3xl font-bold text-center capitalize mb-5'>
+          <Link to="/categories" title="Categories">Categories</Link>
+        </h2>
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-2 m-2">
+          <CategoryName listMargin={'m-1'} linkStyle={'btn btn-primary w-full text-white rounded-lg'}></CategoryName>
+        </ul>
+      </div>
       {advertisedItems.length !== 0 && (
         <Advertised advertisedItems={advertisedItems}></Advertised>
       )}

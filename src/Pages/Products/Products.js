@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useParams } from "react-router-dom";
+import CategoryName from "../Shared/CategoryName/CategoryName";
 import Loading from "../Shared/Loading/Loading";
 import BookModal from "./BookModal";
 import ProductCard from "./ProductCard";
@@ -74,7 +75,7 @@ const Products = () => {
   return (
     <div className="container mx-auto mb-24">
       <div className="m-2">
-        <dir className="pb-0">
+        <div className="pb-0">
           <h2 className="text-3xl font-bold text-center mb-2 uppercase">
             <Link to="/categories" className="text-sm text-info hover:link">
               Category
@@ -82,19 +83,24 @@ const Products = () => {
             <br /> <span>{products[0]?.productCategory}</span>
           </h2>
           <p className="text-center font-bold text-zinc-400 text-xl mb-5">Total {products.length} Products Available</p>
-        </dir>
-        <div className="grid grid-cols-1 gap-6 ">
-          {products.map((product) => (
-            <ProductCard
-              key={product._id}
-              product={product}
-              setOpenModal={setOpenModal}
-              handleBookProduct={handleBookProduct}
-              handleReport={handleReport}
-              isDataLoading={isDataLoading}
-            ></ProductCard>
-          ))}
         </div>
+        <section className="grid grid-cols-5">
+          <ul>
+            <CategoryName listMargin={`m-1`} linkStyle={``}></CategoryName>
+          </ul>
+          <div className="grid grid-cols-1 gap-6 col-span-4">
+            {products.map((product) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+                setOpenModal={setOpenModal}
+                handleBookProduct={handleBookProduct}
+                handleReport={handleReport}
+                isDataLoading={isDataLoading}
+              ></ProductCard>
+            ))}
+          </div>
+        </section>
         <div>
           {openModal && (
             <BookModal
