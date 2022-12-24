@@ -41,7 +41,7 @@ const CheckOutForm = ({ product }) => {
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: 'card',
       card
     });
@@ -50,7 +50,7 @@ const CheckOutForm = ({ product }) => {
       console.log('[payment error]', error);
       setCardError(error?.message)
     } else {
-      // console.log('[Payment method]', paymentMethod)
+
     }
 
     setIsDataLoading(true);
