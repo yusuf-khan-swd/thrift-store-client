@@ -110,7 +110,7 @@ const AddAProduct = () => {
   };
 
   return (
-    <div className="container mx-auto p-3 my-8 md:my-0">
+    <div className="container mx-auto p-3 my-8 md:my-0 md:mt-2">
       <div className="card mx-auto bg-white">
         <div className="card-body border rounded-md pt-2">
           <h2 className="card-title justify-center cursor-pointer font-bold">
@@ -276,7 +276,7 @@ const AddAProduct = () => {
                     }
                   })}
                   className="textarea textarea-bordered"
-                  rows="3"
+                  rows="2"
                 ></textarea>
                 <p className="text-red-500 mt-2">{errors.description?.message}</p>
               </div>
