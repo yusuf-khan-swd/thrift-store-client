@@ -154,7 +154,7 @@ const AllSellers = () => {
                     onClick={() =>
                       handleVerifySeller(seller._id, seller.userIsVerified, seller.userEmail)
                     }
-                    className={`btn btn-xs text-gray-600 font-bold ${seller.userIsVerified ? 'btn-success' : 'btn-primary text-white'}`}
+                    className={`btn btn-xs font-bold ${seller.userIsVerified ? 'btn-success' : 'btn-primary text-white'}`}
                     disabled={isDataLoading}
                   >
                     {seller.userIsVerified ? "Remove Verification" : "Verify"}
