@@ -117,38 +117,40 @@ const CheckOutForm = ({ product }) => {
 
   return (
     <div className='my-16'>
-      <h2 className="text-center my-8 text-3xl font-bold">Payment for <span className='text-info'>{productName}</span> which price <span className='text-info'>${productPrice}</span> </h2>
-      <div className='card max-w-md bg-white m-3 mx-auto'>
-        <div className='card-body'>
-          <form onSubmit={handleSubmit} className="">
-            <CardElement
-              options={{
-                style: {
-                  base: {
-                    fontSize: '16px',
-                    color: '#424770',
-                    '::placeholder': {
-                      color: '#aab7c4',
+      <h2 className="text-center my-8 mx-1 text-3xl font-bold">Payment for <span className='text-info'>{productName}</span> which price <span className='text-primary'>${productPrice}</span> </h2>
+      <div className="m-2">
+        <div className='card max-w-md bg-white mx-auto border shadow-md'>
+          <div className='card-body'>
+            <form onSubmit={handleSubmit} className="">
+              <CardElement
+                options={{
+                  style: {
+                    base: {
+                      fontSize: '16px',
+                      color: '#424770',
+                      '::placeholder': {
+                        color: '#aab7c4',
+                      },
+                    },
+                    invalid: {
+                      color: '#9e2146',
                     },
                   },
-                  invalid: {
-                    color: '#9e2146',
-                  },
-                },
-              }}
-            />
-            <button className='btn btn-sm btn-primary text-white mt-3' type="submit" disabled={!stripe || !clientSecret || isDataLoading}>
-              Pay
-            </button>
-          </form>
-          <p className='text-red-500 mt-2'> {cardError} </p>
-          {
-            success &&
-            <div>
-              <p className='text-green-500'>{success}</p>
-              <p className='font-semibold'>Your Transaction Id: {transactionId}</p>
-            </div>
-          }
+                }}
+              />
+              <button className='btn btn-sm btn-primary text-white mt-3' type="submit" disabled={!stripe || !clientSecret || isDataLoading}>
+                Pay
+              </button>
+            </form>
+            <p className='text-red-500 mt-2'> {cardError} </p>
+            {
+              success &&
+              <div>
+                <p className='text-green-500'>{success}</p>
+                <p className='font-semibold'>Your Transaction Id: {transactionId}</p>
+              </div>
+            }
+          </div>
         </div>
       </div>
     </div>
