@@ -72,7 +72,7 @@ const MyBuyers = () => {
   return (
     <div>
       <h2 className="text-3xl font-bold text-center cursor-pointer underline pt-4 pb-4 underline-offset-4 uppercase">
-        My Orders: <span className="text-teal-500">{products.length}</span>
+        Total Buyer: <span className="text-teal-500">{products.length}</span>
       </h2>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
       {
@@ -104,7 +104,7 @@ const MyBuyers = () => {
                           </div>
                         </div>
                         <div>
-                          <div className="font-bold">{product.productName}</div>
+                          <div className="font-bold">{product.productName.length > 20 ? product.productName.slice(0, 20) + "..." : product.productName}</div>
                         </div>
                       </div>
                     </td>
