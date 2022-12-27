@@ -18,7 +18,7 @@ const Dashboard = () => {
   const handleDeleteAccount = async () => {
 
     setIsDataLoading(true);
-    const res = await fetch(`http://localhost:5000/users?email=${user.email}`, {
+    const res = await fetch(`https://thrift-store-server.vercel.app/users?email=${user.email}`, {
       method: 'DELETE',
       headers: {
         authorization: `bearer ${localStorage.getItem("thrift-token")}`

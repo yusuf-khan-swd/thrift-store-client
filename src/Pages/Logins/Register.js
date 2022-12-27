@@ -14,6 +14,7 @@ const Register = () => {
 
   const [registerUserEmail, setRegisterUserEmail] = useState("");
   const [token] = useToken(registerUserEmail);
+
   const navigate = useNavigate();
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
