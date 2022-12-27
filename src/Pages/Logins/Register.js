@@ -17,6 +17,10 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  if (token) {
+    navigate("/home");
+  }
+
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   const onSubmit = data => {
@@ -55,7 +59,6 @@ const Register = () => {
               setRegisterError("");
               reset();
               setIsDataLoading(false);
-              navigate("/home");
             }
           })
       })
