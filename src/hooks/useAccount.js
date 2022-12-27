@@ -19,7 +19,7 @@ const useAccount = (email) => {
           if (res.status > 399) {
             return logOut()
               .then(() => {
-                toast.error("Please login again");
+                toast.success("Please login again");
               })
               .catch(error => {
                 console.log("logout error: ", error)
