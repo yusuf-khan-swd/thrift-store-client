@@ -39,7 +39,7 @@ const Dashboard = () => {
 
         logOut()
           .then(() => {
-            toast.success("Please login again");
+            toast.success("Please login again to delete your account.");
           })
           .catch(error => {
             console.log("logout error: ", error)
