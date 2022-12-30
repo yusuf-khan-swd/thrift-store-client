@@ -32,14 +32,6 @@ const Navbar = () => {
         <NavLink className={`rounded-lg`} to="/categories">
           Categories
         </NavLink>
-        {/* <ul className="p-5 bg-[#333] w-56">
-        <CategoryName></CategoryName>
-      </ul> */}
-      </li>
-      <li className="mb-1 lg:m-0 lg:mr-1">
-        <NavLink className={`rounded-lg`} to="/blog">
-          Blog
-        </NavLink>
       </li>
       {user?.uid ? (
         <>
@@ -47,19 +39,6 @@ const Navbar = () => {
             <NavLink className={`rounded-lg`} to={`/category/${'all-products'}`}>
               All Products
             </NavLink>
-            <NavLink className={`rounded-lg`} to="/dashboard">
-              Dashboard
-            </NavLink>
-          </li>
-          <li className="mb-1 lg:m-0 lg:mr-1">
-            <button className="rounded-lg" onClick={handleLogOut}>
-              Logout
-            </button>
-          </li>
-          <li className="mb-1 lg:m-0 lg:mr-1">
-            <button className="rounded-lg" title={`${user?.email}`}>
-              <FaUser className="text-xl"></FaUser>
-            </button>
           </li>
         </>
       ) : (
@@ -69,6 +48,11 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
+      <li className="mb-1 lg:m-0 lg:mr-1">
+        <NavLink className={`rounded-lg`} to="/blog">
+          Blog
+        </NavLink>
+      </li>
     </>
   );
 
@@ -136,6 +120,30 @@ const Navbar = () => {
           <div className="navbar navbar-end hidden lg:flex w-full">
             <ul className="menu menu-horizontal p-0">{menuItems}</ul>
           </div>
+          {
+            user?.uid &&
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <ul className="w-10 rounded-full">
+                  <li className="rounded-lg" title={`${user?.email}`}>
+                    <FaUser className="text-xl"></FaUser>
+                  </li>
+                </ul>
+              </label>
+              <ul tabIndex={0} className="menu menu-compact bg-base-100 dropdown-content mt-3 p-2 shadow rounded-box w-52 text-slate-800">
+                <li className="mb-1 lg:m-0 lg:mr-1">
+                  <NavLink className={`rounded-lg`} to="/dashboard">
+                    Dashboard
+                  </NavLink>
+                </li>
+                <li className="mb-1 lg:m-0 lg:mr-1">
+                  <button className="rounded-lg" onClick={handleLogOut}>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          }
         </div>
       </div>
     </div>
