@@ -38,6 +38,8 @@ const ProductCard = ({
     return <Loading></Loading>
   }
 
+  const userNotLogIn = user?.email ? false : true;
+
   const userIsNotBuyer = accountType !== "buyer";
 
   const convertToISO = parseISO(time);
@@ -133,7 +135,7 @@ const ProductCard = ({
             </div>
             <div className="card-actions justify-start lg:justify-end">
               <label
-                disabled={userIsNotBuyer || isDataLoading}
+                disabled={userIsNotBuyer || isDataLoading || userNotLogIn}
                 onClick={() => handleBooked(true, product)}
                 htmlFor="book-modal"
                 className="btn btn-primary text-white w-full sm:w-44"
@@ -141,7 +143,7 @@ const ProductCard = ({
                 Book Now
               </label>
               <button
-                disabled={userIsNotBuyer || isDataLoading}
+                disabled={userIsNotBuyer || isDataLoading || userNotLogIn}
                 onClick={() => handleReport(_id, reported)}
                 className={`btn w-full sm:w-44 ${reported ? "btn-warning" : "btn-accent text-white"
                   }`}
