@@ -34,7 +34,7 @@ const ProductCard = ({
   const { user } = useContext(AuthContext);
   const [accountType, isAccountLoading] = useAccount(user?.email);
 
-  if (isAccountLoading) {
+  if (isAccountLoading && user?.email) {
     return <Loading></Loading>
   }
 
