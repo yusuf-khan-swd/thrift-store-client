@@ -1,6 +1,10 @@
 import { format, parseISO } from "date-fns";
 import React from "react";
+import { useContext } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+import useAccount from "../../hooks/useAccount";
+import Loading from "../Shared/Loading/Loading";
 
 const ProductCard = ({
   product,
@@ -26,6 +30,15 @@ const ProductCard = ({
     reported,
     saleStatus,
   } = product;
+
+  const { user } = useContext(AuthContext);
+  const [accountType, isAccountLoading] = useAccount(user?.email);
+
+  if (isAccountLoading) {
+    return <Loading></Loading>
+  }
+
+  const userIsNotBuyer = accountType !== "buyer";
 
   const convertToISO = parseISO(time);
 
@@ -120,7 +133,7 @@ const ProductCard = ({
             </div>
             <div className="card-actions justify-start lg:justify-end">
               <label
-                disabled={isDataLoading}
+                disabled={userIsNotBuyer || isDataLoading}
                 onClick={() => handleBooked(true, product)}
                 htmlFor="book-modal"
                 className="btn btn-primary text-white w-full sm:w-44"
@@ -128,7 +141,7 @@ const ProductCard = ({
                 Book Now
               </label>
               <button
-                disabled={isDataLoading}
+                disabled={userIsNotBuyer || isDataLoading}
                 onClick={() => handleReport(_id, reported)}
                 className={`btn w-full sm:w-44 ${reported ? "btn-warning" : "btn-accent text-white"
                   }`}
