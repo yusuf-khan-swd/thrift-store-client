@@ -48,6 +48,10 @@ const routes = createBrowserRouter([
         element: <PrivateRoute><Products></Products></PrivateRoute>,
       },
       {
+        path: '/all-products',
+        element: <PrivateRoute><Products></Products></PrivateRoute>
+      },
+      {
         path: '/blog',
         element: <Blog></Blog>
       },

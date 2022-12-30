@@ -44,6 +44,9 @@ const Navbar = () => {
       {user?.uid ? (
         <>
           <li className="mb-1 lg:m-0 lg:mr-1">
+            <NavLink className={`rounded-lg`} to={`/category/${'all-products'}`}>
+              All Products
+            </NavLink>
             <NavLink className={`rounded-lg`} to="/dashboard">
               Dashboard
             </NavLink>
