@@ -60,7 +60,7 @@ const Navbar = () => {
     <div className="sticky top-0 z-50">
       <div className="bg-[#222] text-white">
         <div className="navbar container mx-auto p-0">
-          <div className="navbar-start">
+          <div className="navbar-start w-full lg:w-1/2">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
                 <svg
@@ -117,7 +117,7 @@ const Navbar = () => {
               </label>
             </div>
           )}
-          <div className="navbar navbar-end hidden lg:flex w-full">
+          <div className="navbar navbar-start hidden lg:flex w-3/4">
             <ul className="menu menu-horizontal p-0">{menuItems}</ul>
           </div>
           {
