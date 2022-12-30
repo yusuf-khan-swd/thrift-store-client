@@ -9,7 +9,7 @@ import Banner from "../Banner/Banner";
 import OurStates from "../OurStats/OurStates";
 
 const Home = () => {
-  const { data: advertisedItems, isLoading } = useQuery({
+  const { data: advertisedItems, isLoading, refetch } = useQuery({
     queryKey: ["advertised"],
     queryFn: async () => {
       const res = await axios.get(
@@ -36,7 +36,7 @@ const Home = () => {
         </ul>
       </div>
       {advertisedItems.length !== 0 && (
-        <Advertised advertisedItems={advertisedItems}></Advertised>
+        <Advertised advertisedItems={advertisedItems} refetch={refetch}></Advertised>
       )}
       <OurStates></OurStates>
     </div>
