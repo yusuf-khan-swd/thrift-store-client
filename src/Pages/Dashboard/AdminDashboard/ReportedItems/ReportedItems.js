@@ -11,7 +11,7 @@ const ReportedItems = () => {
   const [deleteItem, setDeleteItem] = useState(false);
   const [closeModal, setCloseModal] = useState(true);
 
-  const { data: reports, isLoading, refetch } = useQuery({
+  const { data: products, isLoading, refetch } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
       const res = await fetch("https://thrift-store-server.vercel.app/reported-products", {
@@ -53,7 +53,7 @@ const ReportedItems = () => {
     return <Loading></Loading>;
   }
 
-  if (!reports.length) {
+  if (!products.length) {
     return (
       <div className="h-screen flex justify-center items-center lg:items-start lg:mt-8">
         <h2 className="text-5xl font-bold">
@@ -73,7 +73,7 @@ const ReportedItems = () => {
       <div className='container mx-auto mb-24'>
         <div className="text-center py-8">
           <h2 className="text-3xl font-bold uppercase cursor-pointer text-teal-400 underline">
-            Total reported product - {reports.length}
+            Total reported product - {products.length}
           </h2>
         </div>
         <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
@@ -91,31 +91,31 @@ const ReportedItems = () => {
               </tr>
             </thead>
             <tbody>
-              {reports.map((report, index) => (
-                <tr key={report._id}>
+              {products.map((product, index) => (
+                <tr key={product._id}>
                   <th>{index + 1 < 10 ? "0" + (index + 1) : index + 1}</th>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
-                            src={report.image}
-                            alt={report.productName}
+                            src={product.image}
+                            alt={product.productName}
                           />
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{report.productName}</div>
+                        <div className="font-bold">{product.productName.length > 20 ? product.productName.slice(0, 20) + "..." : product.productName}</div>
                       </div>
                     </div>
                   </td>
-                  <td>{report.productCategory}</td>
-                  <td>{report.sellerEmail}</td>
+                  <td>{product.productCategory}</td>
+                  <td>{product.sellerEmail}</td>
                   <td>User</td>
                   <td>
                     <label
                       htmlFor="confirmation-modal"
-                      onClick={() => handleConfirmation(report)}
+                      onClick={() => handleConfirmation(product)}
                       className="btn btn-error btn-xs btn-outline font-bold mr-4"
                     >
                       Delete
