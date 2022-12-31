@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { AuthContext } from "../contexts/AuthProvider/AuthProvider";
 
 const useAccount = (email) => {
