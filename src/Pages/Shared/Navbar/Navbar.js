@@ -94,7 +94,7 @@ const Navbar = () => {
             </Link>
           </div>
           {currentLocation.includes("/dashboard") && (
-            <div div className="navbar-end">
+            <div className="navbar-end">
               <label
                 htmlFor="dashboard-drawer"
                 tabIndex={0}
