@@ -55,7 +55,7 @@ const AllSellers = () => {
   }, [deleteItem, refetch]);
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   if (!sellers.length) {

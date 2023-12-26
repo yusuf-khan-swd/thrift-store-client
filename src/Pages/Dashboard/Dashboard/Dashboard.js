@@ -13,7 +13,7 @@ const Dashboard = () => {
   const [userType, isAccountLoading] = useAccount(user.email);
 
   if (isAccountLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   const handleDeleteAccount = () => {

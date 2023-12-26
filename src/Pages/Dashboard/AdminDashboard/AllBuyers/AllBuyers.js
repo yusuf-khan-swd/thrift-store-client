@@ -59,7 +59,7 @@ const AllBuyers = () => {
   }, [deleteItem, refetch]);
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   if (!buyers.length) {

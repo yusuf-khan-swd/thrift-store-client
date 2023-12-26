@@ -60,7 +60,7 @@ const AllAdmin = () => {
   }, [deleteItem, refetch]);
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   if (!admins.length) {

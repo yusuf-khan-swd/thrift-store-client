@@ -34,7 +34,7 @@ const ProductCard = ({
   const [accountType, isAccountLoading] = useAccount(user?.email);
 
   if (isAccountLoading && user?.email) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   const userNotLogIn = user?.email ? false : true;

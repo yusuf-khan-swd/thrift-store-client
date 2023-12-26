@@ -34,7 +34,7 @@ const Products = () => {
   });
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   if (!products.length) {

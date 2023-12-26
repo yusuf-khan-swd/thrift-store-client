@@ -31,7 +31,7 @@ const AddAProduct = () => {
   });
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   const onSubmit = (data) => {

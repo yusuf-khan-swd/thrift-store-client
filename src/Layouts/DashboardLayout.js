@@ -11,7 +11,7 @@ const DashboardLayout = () => {
   const [userType, isAccountLoading] = useAccount(user.email);
 
   if (isAccountLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   const dashboardItems = (

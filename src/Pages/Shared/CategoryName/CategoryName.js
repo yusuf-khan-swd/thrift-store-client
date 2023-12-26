@@ -17,7 +17,7 @@ const CategoryName = ({ listStyle, linkStyle }) => {
   });
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   return (

@@ -51,7 +51,7 @@ const MyOrders = () => {
   }, [deleteItem, refetch]);
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   const handleConfirmation = (item) => {

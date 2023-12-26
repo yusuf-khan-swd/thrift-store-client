@@ -55,7 +55,7 @@ const AllCategories = () => {
   }, [deleteItem, refetch]);
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   if (!categories.length) {

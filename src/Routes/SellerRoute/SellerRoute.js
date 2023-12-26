@@ -11,7 +11,7 @@ const SellerRoute = ({ children }) => {
   const location = useLocation();
 
   if (loading || isAccountLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   if (user && userType === "seller") {

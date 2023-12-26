@@ -59,7 +59,7 @@ const ReportedItems = () => {
   }, [deleteItem, refetch]);
 
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   if (!products.length) {
