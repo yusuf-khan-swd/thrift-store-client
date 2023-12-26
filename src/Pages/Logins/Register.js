@@ -146,7 +146,7 @@ const Register = () => {
 
   return (
     <div className="container mx-auto p-3 mb-24">
-      {token && <Navigate to="/"></Navigate>}
+      {token && <Navigate to="/" />}
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
       <div className="card max-w-lg mx-auto bg-white">
         <div className="card-body border rounded-md">

@@ -23,7 +23,7 @@ const AdminRoute = ({ children }) => {
       to={user ? "/dashboard" : "/login"}
       state={{ from: location }}
       replace
-    ></Navigate>
+    />
   );
 };
 
