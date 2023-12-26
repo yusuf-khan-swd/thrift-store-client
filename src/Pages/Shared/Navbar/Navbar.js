@@ -38,9 +38,7 @@ const Navbar = () => {
           All Products
         </NavLink>
       </li>
-      {user?.uid ? (
-        <></>
-      ) : (
+      {!user?.uid && (
         <li className="mb-1 lg:m-0 lg:mr-1">
           <NavLink className={`rounded-lg`} to="/login">
             Login
