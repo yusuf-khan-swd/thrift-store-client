@@ -43,7 +43,15 @@ const Footer = () => {
         <div className="flex flex-col space-y-4">
           <h2 className="font-medium">Community</h2>
           <div className="flex flex-col space-y-2 text-sm dark:text-gray-400">
-            <Link className="hover:link">GitHub</Link>
+            <a
+              target="_blank"
+              className="hover:link"
+              href="https://github.com/yusuf-khan-swd/thrift-store-client"
+              title="Click to view github code"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
             <Link className="hover:link">Discord</Link>
             <Link className="hover:link">Twitter</Link>
             <Link className="hover:link">YouTube</Link>
