@@ -1,7 +1,19 @@
 # Thrift Store
 
-- adminEmail: admin@admin.com
-- adminPassword: 123456
+Buyer Credential
+
+- Email: buyer@buyer.com
+- Password: 123456
+
+Seller Credential
+
+- Email: seller@seller.com
+- Password: 123456
+
+Admin Credential
+
+- Email: admin@admin.com
+- Password: 123456
 
 ### Project live site [Thrift Store](https://thrift-store-88291.web.app/).
 
