@@ -116,7 +116,7 @@ const Dashboard = () => {
               <button
                 onClick={() => handleDeleteAccount()}
                 className="btn btn-error mx-auto btn-sm"
-                disabled={isDataLoading}
+                disabled={isDataLoading || true}
               >
                 Delete Account
               </button>
