@@ -1,10 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
-import Loading from '../../../Shared/Loading/Loading';
-import Spinner from '../../../Shared/Spinner/Spinner';
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
+import Loading from "../../../Shared/Loading/Loading";
+import Spinner from "../../../Shared/Spinner/Spinner";
 
 const AllCategories = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
@@ -12,48 +12,58 @@ const AllCategories = () => {
   const [deleteItem, setDeleteItem] = useState(false);
   const [closeModal, setCloseModal] = useState(true);
 
-  const { data: categories, isLoading, refetch } = useQuery({
-    queryKey: ['categories'],
+  const {
+    data: categories,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["categories"],
     queryFn: async () => {
-      const res = await axios.get('https://thrift-store-server.vercel.app/categories');
+      const res = await axios.get(
+        "https://thrift-store-server.vercel.app/categories"
+      );
       const data = await res.data;
       return data;
-    }
+    },
   });
 
   useEffect(() => {
     if (deleteItem) {
       setIsDataLoading(true);
-      fetch(`https://thrift-store-server.vercel.app/categories/${deleteItem._id}?categoryName=${deleteItem.categoryName}`, {
-        method: 'DELETE',
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      fetch(
+        `https://thrift-store-server.vercel.app/categories/${deleteItem._id}?categoryName=${deleteItem.categoryName}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
         }
-      })
-        .then(res => res.json())
-        .then(data => {
+      )
+        .then((res) => res.json())
+        .then((data) => {
           if (data.deletedCount) {
             toast.success("Category Deleted Successfully.");
             refetch();
             setIsDataLoading(false);
           }
         })
-        .catch(error => {
+        .catch((error) => {
           setIsDataLoading(false);
-          console.log('error: ', error);
-        })
+          console.log("error: ", error);
+        });
     }
   }, [deleteItem, refetch]);
 
   if (isLoading) {
-    return <Loading></Loading>
+    return <Loading></Loading>;
   }
 
   if (!categories.length) {
     return (
       <div className="h-screen flex justify-center items-center lg:items-start lg:mt-8">
         <h2 className="text-3xl font-bold">
-          Please add a Category. Total <span className='text-teal-500'>0</span> category.
+          Please add a Category. Total <span className="text-teal-500">0</span>{" "}
+          category.
         </h2>
       </div>
     );
@@ -66,7 +76,7 @@ const AllCategories = () => {
 
   return (
     <>
-      <div className='container mx-auto mb-24'>
+      <div className="container mx-auto mb-24">
         <div className="text-center py-8">
           <h2 className="text-3xl font-bold uppercase cursor-pointer text-teal-400 underline">
             Total Categories - {categories.length}
@@ -121,8 +131,7 @@ const AllCategories = () => {
           </table>
         </div>
       </div>
-      {
-        !closeModal &&
+      {!closeModal && (
         <ConfirmationModal
           title={`Are you sure you want to delete`}
           message={`If delete admin ${selectedItem?.userName} it can't be undone.`}
@@ -130,7 +139,7 @@ const AllCategories = () => {
           selectedItem={selectedItem}
           setCloseModal={setCloseModal}
         ></ConfirmationModal>
-      }
+      )}
     </>
   );
 };

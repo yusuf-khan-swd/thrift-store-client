@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { useNavigate, useRouteError } from 'react-router-dom';
-import { FaExclamationTriangle } from 'react-icons/fa';
-import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
-import toast from 'react-hot-toast';
-import errorImage from '../../../assets/error-image.png';
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { FaExclamationTriangle } from "react-icons/fa";
+import { useNavigate, useRouteError } from "react-router-dom";
+import errorImage from "../../../assets/error-image.png";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const DisplayError = () => {
   const { logOut } = useContext(AuthContext);
@@ -16,26 +16,36 @@ const DisplayError = () => {
         navigate("/");
         toast.success("Successfully logout.");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("logout error: ", error);
-      })
+      });
   };
   return (
     <section>
-      <div className='flex items-center h-screen p-2 border'>
+      <div className="flex items-center h-screen p-2 border">
         <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
           <div className="max-w-md text-center">
             <div>
-              <button className='cursor-default'>
-                <FaExclamationTriangle className='text-red-500 text-7xl'></FaExclamationTriangle>
+              <button className="cursor-default">
+                <FaExclamationTriangle className="text-red-500 text-7xl"></FaExclamationTriangle>
               </button>
             </div>
             <h2 className="mb-5 font-extrabold text-9xl text-gray-600">
-              <span className="sr-only">Error</span>{error.status}
+              <span className="sr-only">Error</span>
+              {error.status}
             </h2>
-            <p className='text-red-600 font-bold mb-3'>{error.statusText || error.message}</p>
-            <p className="text-2xl font-semibold md:text-3xl mb-8">Sorry, we couldn't find this page.</p>
-            <button onClick={handleLogOut} className="px-8 py-1 font-semibold rounded bg-gray-400 text-gray-900 hover:bg-gray-300 mr-2">Logout</button>
+            <p className="text-red-600 font-bold mb-3">
+              {error.statusText || error.message}
+            </p>
+            <p className="text-2xl font-semibold md:text-3xl mb-8">
+              Sorry, we couldn't find this page.
+            </p>
+            <button
+              onClick={handleLogOut}
+              className="px-8 py-1 font-semibold rounded bg-gray-400 text-gray-900 hover:bg-gray-300 mr-2"
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>

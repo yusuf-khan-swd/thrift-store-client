@@ -18,11 +18,14 @@ const AllBuyers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("https://thrift-store-server.vercel.app/all-buyers", {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-        },
-      });
+      const res = await fetch(
+        "https://thrift-store-server.vercel.app/all-buyers",
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -31,12 +34,15 @@ const AllBuyers = () => {
   useEffect(() => {
     if (deleteItem) {
       setIsDataLoading(true);
-      fetch(`https://thrift-store-server.vercel.app/all-buyers/${deleteItem._id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-        },
-      })
+      fetch(
+        `https://thrift-store-server.vercel.app/all-buyers/${deleteItem._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
@@ -45,13 +51,12 @@ const AllBuyers = () => {
           }
           setIsDataLoading(false);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log("delete buyer error: ", error);
           setIsDataLoading(false);
-        })
+        });
     }
   }, [deleteItem, refetch]);
-
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -78,25 +83,24 @@ const AllBuyers = () => {
 
     setIsDataLoading(true);
     fetch(`https://thrift-store-server.vercel.app/users/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'content-type': 'application/json',
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`
-      }
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+      },
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.modifiedCount) {
-          toast.success("Successfully added user as admin.")
+          toast.success("Successfully added user as admin.");
         }
         refetch();
         setIsDataLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         setIsDataLoading(false);
         console.log("make admin error: ", error);
-      })
-
+      });
   };
 
   const handleConfirmation = (item) => {
@@ -129,7 +133,13 @@ const AllBuyers = () => {
                 <td>{buyer.userName}</td>
                 <td>{buyer.userEmail}</td>
                 <td>
-                  <button onClick={() => handleMakeAdmin(buyer._id, buyer.userName)} className="btn btn-xs btn-info mr-2" disabled={isDataLoading}>Make Admin</button>
+                  <button
+                    onClick={() => handleMakeAdmin(buyer._id, buyer.userName)}
+                    className="btn btn-xs btn-info mr-2"
+                    disabled={isDataLoading}
+                  >
+                    Make Admin
+                  </button>
                   <label
                     htmlFor="confirmation-modal"
                     onClick={() => handleConfirmation(buyer)}
@@ -144,8 +154,7 @@ const AllBuyers = () => {
           </tbody>
         </table>
       </div>
-      {
-        !closeModal &&
+      {!closeModal && (
         <ConfirmationModal
           title={`Are you sure you want to delete`}
           message={`If delete buyer ${selectedItem?.userName} it can't be undone.`}
@@ -153,8 +162,7 @@ const AllBuyers = () => {
           selectedItem={selectedItem}
           setCloseModal={setCloseModal}
         ></ConfirmationModal>
-      }
-
+      )}
     </div>
   );
 };

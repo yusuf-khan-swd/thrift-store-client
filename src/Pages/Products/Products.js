@@ -21,11 +21,12 @@ const Products = () => {
     queryKey: ["singleCategoryProducts", id],
     queryFn: async () => {
       const res = await fetch(
-        `https://thrift-store-server.vercel.app/category/${id}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-        },
-      }
+        `https://thrift-store-server.vercel.app/category/${id}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
+        }
       );
       const data = await res.json();
       return data;
@@ -83,7 +84,12 @@ const Products = () => {
           <div>
             <ul className="grid grid-cols-2 sm:gird-cols-3 mb-8 mt-5 md:block md:gap-0 md:my-0 menu sticky top-16">
               <li className="border rounded-lg m-1">
-                <NavLink className="rounded-lg" to={`/category/${'all-products'}`}>All Products</NavLink>
+                <NavLink
+                  className="rounded-lg"
+                  to={`/category/${"all-products"}`}
+                >
+                  All Products
+                </NavLink>
               </li>
               <CategoryName
                 listStyle={`border rounded-lg m-1`}

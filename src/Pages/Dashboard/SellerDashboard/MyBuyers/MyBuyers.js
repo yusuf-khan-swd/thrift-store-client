@@ -1,11 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
-import { useContext } from 'react';
-import toast from 'react-hot-toast';
-import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
-import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
-import Loading from '../../../Shared/Loading/Loading';
-import Spinner from '../../../Shared/Spinner/Spinner';
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { AuthContext } from "../../../../contexts/AuthProvider/AuthProvider";
+import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
+import Loading from "../../../Shared/Loading/Loading";
+import Spinner from "../../../Shared/Spinner/Spinner";
 
 const MyBuyers = () => {
   const { user } = useContext(AuthContext);
@@ -14,39 +13,44 @@ const MyBuyers = () => {
   const [deleteItem, setDeleteItem] = useState(false);
   const [closeModal, setCloseModal] = useState(true);
 
-
-  const { data: products, isLoading, refetch } = useQuery({
-    queryKey: ['ordered-products'],
+  const {
+    data: products,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["ordered-products"],
     queryFn: async () => {
-      const res = await fetch(`https://thrift-store-server.vercel.app/ordered-products?email=${user.email}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      const res = await fetch(
+        `https://thrift-store-server.vercel.app/ordered-products?email=${user.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
         }
-      });
+      );
 
       const data = await res.json();
       return data;
-    }
+    },
   });
-
 
   useEffect(() => {
     if (deleteItem) {
       setIsDataLoading(true);
       fetch(`https://thrift-store-server.vercel.app/orders/${deleteItem._id}`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`
-        }
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
       })
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           if (data.deletedCount) {
             toast.success("Product is deleted.");
             refetch();
           }
           setIsDataLoading(false);
-        })
+        });
     }
   }, [deleteItem, refetch]);
 
@@ -75,8 +79,7 @@ const MyBuyers = () => {
         Total Buyer: <span className="text-teal-500">{products.length}</span>
       </h2>
       <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
-      {
-        products.length !== 0 &&
+      {products.length !== 0 && (
         <div className="overflow-x-auto m-2 lg:m-5">
           <div className="overflow-x-auto w-full">
             <table className="table w-full">
@@ -104,7 +107,11 @@ const MyBuyers = () => {
                           </div>
                         </div>
                         <div>
-                          <div className="font-bold">{product.productName.length > 20 ? product.productName.slice(0, 20) + "..." : product.productName}</div>
+                          <div className="font-bold">
+                            {product.productName.length > 20
+                              ? product.productName.slice(0, 20) + "..."
+                              : product.productName}
+                          </div>
                         </div>
                       </div>
                     </td>
@@ -127,9 +134,8 @@ const MyBuyers = () => {
             </table>
           </div>
         </div>
-      }
-      {
-        !closeModal &&
+      )}
+      {!closeModal && (
         <ConfirmationModal
           title={`Are you sure you want to delete`}
           message={`If delete product ${selectedItem?.productName} it can't be undone.`}
@@ -137,8 +143,7 @@ const MyBuyers = () => {
           selectedItem={selectedItem}
           setCloseModal={setCloseModal}
         ></ConfirmationModal>
-
-      }
+      )}
     </div>
   );
 };

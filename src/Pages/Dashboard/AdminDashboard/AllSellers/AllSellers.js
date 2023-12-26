@@ -11,7 +11,6 @@ const AllSellers = () => {
   const [deleteItem, setDeleteItem] = useState(false);
   const [closeModal, setCloseModal] = useState(true);
 
-
   const {
     data: sellers,
     isLoading,
@@ -19,11 +18,14 @@ const AllSellers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("https://thrift-store-server.vercel.app/all-sellers", {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-        },
-      });
+      const res = await fetch(
+        "https://thrift-store-server.vercel.app/all-sellers",
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
@@ -32,12 +34,15 @@ const AllSellers = () => {
   useEffect(() => {
     if (deleteItem) {
       setIsDataLoading(true);
-      fetch(`https://thrift-store-server.vercel.app/all-sellers/${deleteItem._id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-        },
-      })
+      fetch(
+        `https://thrift-store-server.vercel.app/all-sellers/${deleteItem._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
@@ -48,7 +53,6 @@ const AllSellers = () => {
         });
     }
   }, [deleteItem, refetch]);
-
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -66,14 +70,17 @@ const AllSellers = () => {
 
   const handleVerifySeller = (id, verified, email) => {
     setIsDataLoading(true);
-    fetch(`https://thrift-store-server.vercel.app/all-sellers/${id}?email=${email}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-      },
-      body: JSON.stringify({ verified }),
-    })
+    fetch(
+      `https://thrift-store-server.vercel.app/all-sellers/${id}?email=${email}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
+        body: JSON.stringify({ verified }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
@@ -97,32 +104,30 @@ const AllSellers = () => {
 
     setIsDataLoading(true);
     fetch(`https://thrift-store-server.vercel.app/users/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'content-type': 'application/json',
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`
-      }
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+      },
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.modifiedCount) {
-          toast.success("Successfully added user as admin.")
+          toast.success("Successfully added user as admin.");
         }
         refetch();
         setIsDataLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         setIsDataLoading(false);
         console.log("make admin error: ", error);
-      })
-
+      });
   };
 
   const handleConfirmation = (item) => {
     setCloseModal(false);
     setSelectedItem(item);
   };
-
 
   return (
     <div>
@@ -152,16 +157,30 @@ const AllSellers = () => {
                 <td>
                   <button
                     onClick={() =>
-                      handleVerifySeller(seller._id, seller.userIsVerified, seller.userEmail)
+                      handleVerifySeller(
+                        seller._id,
+                        seller.userIsVerified,
+                        seller.userEmail
+                      )
                     }
-                    className={`btn btn-xs font-bold ${seller.userIsVerified ? 'btn-success' : 'btn-primary text-white'}`}
+                    className={`btn btn-xs font-bold ${
+                      seller.userIsVerified
+                        ? "btn-success"
+                        : "btn-primary text-white"
+                    }`}
                     disabled={isDataLoading}
                   >
                     {seller.userIsVerified ? "Remove Verification" : "Verify"}
                   </button>
                 </td>
                 <td>
-                  <button onClick={() => handleMakeAdmin(seller._id, seller.userName)} className="btn btn-xs btn-info mr-2" disabled={isDataLoading}>Make Admin</button>
+                  <button
+                    onClick={() => handleMakeAdmin(seller._id, seller.userName)}
+                    className="btn btn-xs btn-info mr-2"
+                    disabled={isDataLoading}
+                  >
+                    Make Admin
+                  </button>
                   <label
                     htmlFor="confirmation-modal"
                     onClick={() => handleConfirmation(seller)}
@@ -176,8 +195,7 @@ const AllSellers = () => {
           </tbody>
         </table>
       </div>
-      {
-        !closeModal &&
+      {!closeModal && (
         <ConfirmationModal
           title={`Are you sure you want to delete`}
           message={`If delete Seller ${selectedItem?.userName} it can't be undone.`}
@@ -185,7 +203,7 @@ const AllSellers = () => {
           selectedItem={selectedItem}
           setCloseModal={setCloseModal}
         ></ConfirmationModal>
-      }
+      )}
     </div>
   );
 };

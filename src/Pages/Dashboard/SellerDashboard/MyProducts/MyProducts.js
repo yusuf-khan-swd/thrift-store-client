@@ -36,12 +36,15 @@ const MyProducts = () => {
   useEffect(() => {
     if (deleteItem) {
       setIsDataLoading(true);
-      fetch(`https://thrift-store-server.vercel.app/seller-product/${deleteItem._id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-        },
-      })
+      fetch(
+        `https://thrift-store-server.vercel.app/seller-product/${deleteItem._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
@@ -52,7 +55,6 @@ const MyProducts = () => {
         });
     }
   }, [deleteItem, refetch]);
-
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -82,9 +84,10 @@ const MyProducts = () => {
       .then((data) => {
         if (data.modifiedCount) {
           toast.success(
-            `${advertise
-              ? "Product remove from advertised list"
-              : "Product on advertised list."
+            `${
+              advertise
+                ? "Product remove from advertised list"
+                : "Product on advertised list."
             }`
           );
           refetch();
@@ -103,7 +106,9 @@ const MyProducts = () => {
       <h2 className="text-3xl font-bold text-center cursor-pointer underline pt-4 pb-4 underline-offset-4 uppercase">
         Total Products: <span className="text-teal-500">{products.length}</span>
       </h2>
-      <div className="h-8 flex justify-center items-center mt-2">{isDataLoading && <Spinner></Spinner>}</div>
+      <div className="h-8 flex justify-center items-center mt-2">
+        {isDataLoading && <Spinner></Spinner>}
+      </div>
       <div className="overflow-x-auto m-2 lg:m-5">
         <div className="overflow-x-auto w-full">
           <table className="table w-full">
@@ -121,7 +126,7 @@ const MyProducts = () => {
             <tbody>
               {products.map((product, index) => (
                 <tr key={product._id}>
-                  <th>{(index + 1) < 10 ? ("0" + (index + 1)) : (index + 1)}</th>
+                  <th>{index + 1 < 10 ? "0" + (index + 1) : index + 1}</th>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
@@ -133,7 +138,11 @@ const MyProducts = () => {
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{product.productName.length > 20 ? product.productName.slice(0, 20) + "..." : product.productName}</div>
+                        <div className="font-bold">
+                          {product.productName.length > 20
+                            ? product.productName.slice(0, 20) + "..."
+                            : product.productName}
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -147,14 +156,19 @@ const MyProducts = () => {
                       onClick={() =>
                         handleAdvertised(product._id, product.advertised)
                       }
-                      className={`btn btn-xs ${product.advertised ? "btn-success" : "btn-primary text-white"
-                        }`}
+                      className={`btn btn-xs ${
+                        product.advertised
+                          ? "btn-success"
+                          : "btn-primary text-white"
+                      }`}
                       disabled={
-                        (product.saleStatus === "available" ? false : true) || isDataLoading
+                        (product.saleStatus === "available" ? false : true) ||
+                        isDataLoading
                       }
                     >
-                      {`${product.advertised ? "Remove Advertise" : "Advertise"
-                        }`}
+                      {`${
+                        product.advertised ? "Remove Advertise" : "Advertise"
+                      }`}
                     </button>
                   </th>
                   <td>
@@ -173,8 +187,7 @@ const MyProducts = () => {
           </table>
         </div>
       </div>
-      {
-        !closeModal &&
+      {!closeModal && (
         <ConfirmationModal
           title={`Are you sure you want to delete`}
           message={`If delete product ${selectedItem?.productName} it can't be undone.`}
@@ -182,8 +195,7 @@ const MyProducts = () => {
           selectedItem={selectedItem}
           setCloseModal={setCloseModal}
         ></ConfirmationModal>
-
-      }
+      )}
     </div>
   );
 };

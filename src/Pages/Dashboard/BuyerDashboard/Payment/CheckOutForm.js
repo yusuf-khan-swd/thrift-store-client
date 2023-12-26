@@ -1,7 +1,7 @@
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = ({ product }) => {
   const [clientSecret, setClientSecret] = useState("");
@@ -13,19 +13,20 @@ const CheckOutForm = ({ product }) => {
   const elements = useElements();
   const navigate = useNavigate();
 
-  const { productName, productPrice, buyerName, buyerEmail, _id, productId } = product;
+  const { productName, productPrice, buyerName, buyerEmail, _id, productId } =
+    product;
 
   useEffect(() => {
     fetch("https://thrift-store-server.vercel.app/create-payment-intent", {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
       },
-      body: JSON.stringify({ productPrice })
+      body: JSON.stringify({ productPrice }),
     })
-      .then(res => res.json())
-      .then(data => setClientSecret(data.clientSecret))
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
   }, [productPrice]);
 
   const handleSubmit = async (event) => {
@@ -42,33 +43,30 @@ const CheckOutForm = ({ product }) => {
     }
 
     const { error } = await stripe.createPaymentMethod({
-      type: 'card',
-      card
+      type: "card",
+      card,
     });
 
     if (error) {
-      console.log('[payment error]', error);
-      setCardError(error?.message)
+      console.log("[payment error]", error);
+      setCardError(error?.message);
     } else {
-
     }
 
     setIsDataLoading(true);
 
-    const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
-      clientSecret,
-      {
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
           billing_details: {
             name: buyerName,
-            email: buyerEmail
+            email: buyerEmail,
           },
         },
-      },
-    );
+      });
 
-    setSuccess('');
+    setSuccess("");
     if (confirmError) {
       setCardError(confirmError.message);
       setIsDataLoading(false);
@@ -81,75 +79,79 @@ const CheckOutForm = ({ product }) => {
         transactionId: paymentIntent.id,
         email: buyerEmail,
         orderId: _id,
-        productId
+        productId,
       };
 
       fetch("https://thrift-store-server.vercel.app/payments", {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'content-type': 'application/json',
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
         },
-        body: JSON.stringify(payment)
+        body: JSON.stringify(payment),
       })
-        .then(res => res.json())
-        .then(data => {
-
+        .then((res) => res.json())
+        .then((data) => {
           if (data.acknowledged) {
             toast.success("Payment Done");
             setSuccess("Congrats!! Your payment completed.");
             setTransactionId(paymentIntent.id);
             setIsDataLoading(false);
             setCardError(false);
-            navigate("/dashboard/my-orders")
+            navigate("/dashboard/my-orders");
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log("payment error: ", error);
           setCardError(error.message);
           setIsDataLoading(false);
-        })
-
+        });
     }
-
-
   };
 
   return (
-    <div className='my-16'>
-      <h2 className="text-center my-8 mx-1 text-3xl font-bold">Payment for <span className='text-info'>{productName}</span> which price <span className='text-primary'>${productPrice}</span> </h2>
+    <div className="my-16">
+      <h2 className="text-center my-8 mx-1 text-3xl font-bold">
+        Payment for <span className="text-info">{productName}</span> which price{" "}
+        <span className="text-primary">${productPrice}</span>{" "}
+      </h2>
       <div className="m-2">
-        <div className='card max-w-md bg-white mx-auto border shadow-md'>
-          <div className='card-body'>
+        <div className="card max-w-md bg-white mx-auto border shadow-md">
+          <div className="card-body">
             <form onSubmit={handleSubmit} className="">
               <CardElement
                 options={{
                   style: {
                     base: {
-                      fontSize: '16px',
-                      color: '#424770',
-                      '::placeholder': {
-                        color: '#aab7c4',
+                      fontSize: "16px",
+                      color: "#424770",
+                      "::placeholder": {
+                        color: "#aab7c4",
                       },
                     },
                     invalid: {
-                      color: '#9e2146',
+                      color: "#9e2146",
                     },
                   },
                 }}
               />
-              <button className='btn btn-sm btn-primary text-white mt-3' type="submit" disabled={!stripe || !clientSecret || isDataLoading}>
+              <button
+                className="btn btn-sm btn-primary text-white mt-3"
+                type="submit"
+                disabled={!stripe || !clientSecret || isDataLoading}
+              >
                 Pay
               </button>
             </form>
-            <p className='text-red-500 mt-2'> {cardError} </p>
-            {
-              success &&
+            <p className="text-red-500 mt-2"> {cardError} </p>
+            {success && (
               <div>
-                <p className='text-green-500'>{success}</p>
-                <p className='font-semibold'>Your Transaction Id: {transactionId}</p>
+                <p className="text-green-500">{success}</p>
+                <p className="font-semibold">
+                  Your Transaction Id: {transactionId}
+                </p>
               </div>
-            }
+            )}
           </div>
         </div>
       </div>

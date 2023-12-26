@@ -11,28 +11,27 @@ const useAccount = (email) => {
     if (email) {
       fetch(`https://thrift-store-server.vercel.app/usersType?email=${email}`, {
         headers: {
-          authorization: `bearer ${localStorage.getItem('thrift-token')}`
-        }
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
       })
-        .then(res => {
+        .then((res) => {
           if (res.status > 399) {
             return logOut()
-              .then(() => {
-              })
-              .catch(error => {
-                console.log("logout error: ", error)
-              })
+              .then(() => {})
+              .catch((error) => {
+                console.log("logout error: ", error);
+              });
           }
           return res.json();
         })
-        .then(data => {
+        .then((data) => {
           if (data?.result) {
             setUserType(data.result.userType);
             setIsAccountLoading(false);
           }
-        })
+        });
     }
-  }, [email, logOut])
+  }, [email, logOut]);
 
   return [userType, isAccountLoading];
 };

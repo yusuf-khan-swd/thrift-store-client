@@ -17,14 +17,15 @@ const Dashboard = () => {
   }
 
   const handleDeleteAccount = () => {
-    const confirmation = window.confirm("Are sure you want to delete your account!");
+    const confirmation = window.confirm(
+      "Are sure you want to delete your account!"
+    );
 
     if (!confirmation) {
-      return
+      return;
     }
 
     handleDeleteAccountFromFirebase();
-
   };
 
   const handleDeleteAccountFromFirebase = () => {
@@ -41,27 +42,29 @@ const Dashboard = () => {
           .then(() => {
             toast.success("Please login again to delete your account.");
           })
-          .catch(error => {
-            console.log("logout error: ", error)
-          })
+          .catch((error) => {
+            console.log("logout error: ", error);
+          });
       });
   };
 
   const handleDeleteAccountFromDB = async () => {
-    const res = await fetch(`https://thrift-store-server.vercel.app/users?email=${userEmail}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-      },
-    });
+    const res = await fetch(
+      `https://thrift-store-server.vercel.app/users?email=${userEmail}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+        },
+      }
+    );
 
     const data = await res.json();
     setIsDataLoading(false);
     if (data?.deletedCount) {
       toast.success("User Deleted successfully");
     }
-
-  }
+  };
 
   return (
     <div className="container mx-auto">

@@ -64,7 +64,7 @@ const Advertised = ({ advertisedItems, refetch }) => {
           )}
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

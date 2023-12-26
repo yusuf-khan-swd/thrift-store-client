@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
@@ -48,7 +47,6 @@ const MyOrders = () => {
             setIsDataLoading(false);
           }
         });
-
     }
   }, [deleteItem, refetch]);
 
@@ -60,8 +58,6 @@ const MyOrders = () => {
     setCloseModal(false);
     setSelectedItem(item);
   };
-
-
 
   return (
     <div>
@@ -97,7 +93,11 @@ const MyOrders = () => {
                           </div>
                         </div>
                         <div>
-                          <div className="font-bold">{product.productName.length > 20 ? product.productName.slice(0, 20) + "..." : product.productName}</div>
+                          <div className="font-bold">
+                            {product.productName.length > 20
+                              ? product.productName.slice(0, 20) + "..."
+                              : product.productName}
+                          </div>
                         </div>
                       </div>
                     </td>
@@ -128,8 +128,7 @@ const MyOrders = () => {
           </div>
         </div>
       )}
-      {
-        !closeModal &&
+      {!closeModal && (
         <ConfirmationModal
           title={`Are you sure you want to delete`}
           message={`If delete product ${selectedItem?.productName} it can't be undone.`}
@@ -137,8 +136,7 @@ const MyOrders = () => {
           selectedItem={selectedItem}
           setCloseModal={setCloseModal}
         ></ConfirmationModal>
-
-      }
+      )}
     </div>
   );
 };

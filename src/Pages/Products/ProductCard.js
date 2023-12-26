@@ -1,6 +1,5 @@
 import { format, parseISO } from "date-fns";
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useAccount from "../../hooks/useAccount";
@@ -35,7 +34,7 @@ const ProductCard = ({
   const [accountType, isAccountLoading] = useAccount(user?.email);
 
   if (isAccountLoading && user?.email) {
-    return <Loading></Loading>
+    return <Loading></Loading>;
   }
 
   const userNotLogIn = user?.email ? false : true;
@@ -72,7 +71,10 @@ const ProductCard = ({
                 {productName}
               </h2>
               <p className="font-semibold text-xl sm:text-center mb-2">
-                Resale Price: <span className="ml-1 text-primary font-bold">${resalePrice}</span>
+                Resale Price:{" "}
+                <span className="ml-1 text-primary font-bold">
+                  ${resalePrice}
+                </span>
               </p>
             </div>
 
@@ -83,15 +85,20 @@ const ProductCard = ({
                   <span className=" font-bold ml-1">{monthsUsed} Month</span>
                 </p>
                 <p className="font-medium mb-1">
-                  Location: <span className=" font-bold ml-1 capitalize">{location}</span>
+                  Location:{" "}
+                  <span className=" font-bold ml-1 capitalize">{location}</span>
                 </p>
                 <p className="font-medium mb-1">
                   Condition Type:
-                  <span className="ml-1 font-bold capitalize">{conditionType}</span>
+                  <span className="ml-1 font-bold capitalize">
+                    {conditionType}
+                  </span>
                 </p>
                 <p className="font-medium mb-1">
                   Sale Status:
-                  <span className="ml-1 uppercase text-green-500">{saleStatus}</span>
+                  <span className="ml-1 uppercase text-green-500">
+                    {saleStatus}
+                  </span>
                 </p>
               </div>
               <div>
@@ -128,8 +135,7 @@ const ProductCard = ({
                 <span className="text-sm">
                   {description?.length > 200
                     ? description.slice(0, 198) + "..."
-                    : description
-                  }
+                    : description}
                 </span>
               </p>
             </div>
@@ -145,8 +151,9 @@ const ProductCard = ({
               <button
                 disabled={userIsNotBuyer || isDataLoading || userNotLogIn}
                 onClick={() => handleReport(_id, reported)}
-                className={`btn w-full sm:w-44 ${reported ? "btn-warning" : "btn-accent text-white"
-                  }`}
+                className={`btn w-full sm:w-44 ${
+                  reported ? "btn-warning" : "btn-accent text-white"
+                }`}
               >{`${reported ? "Remove Report" : "Report to admin"}`}</button>
             </div>
           </div>

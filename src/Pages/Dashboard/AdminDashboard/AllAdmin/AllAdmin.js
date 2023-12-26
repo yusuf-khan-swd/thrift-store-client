@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
-import Loading from '../../../Shared/Loading/Loading';
-import Spinner from '../../../Shared/Spinner/Spinner';
+import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
+import Loading from "../../../Shared/Loading/Loading";
+import Spinner from "../../../Shared/Spinner/Spinner";
 
 const AllAdmin = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
@@ -11,29 +11,39 @@ const AllAdmin = () => {
   const [deleteItem, setDeleteItem] = useState(false);
   const [closeModal, setCloseModal] = useState(true);
 
-  const { data: admins, isLoading, refetch } = useQuery({
-    queryKey: ['users'],
+  const {
+    data: admins,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("https://thrift-store-server.vercel.app/all-admins", {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`
+      const res = await fetch(
+        "https://thrift-store-server.vercel.app/all-admins",
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
         }
-      });
+      );
 
       const data = await res.json();
       return data;
-    }
+    },
   });
 
   useEffect(() => {
     if (deleteItem) {
       setIsDataLoading(true);
-      fetch(`https://thrift-store-server.vercel.app/all-admins/${deleteItem._id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("thrift-token")}`,
-        },
-      })
+      fetch(
+        `https://thrift-store-server.vercel.app/all-admins/${deleteItem._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("thrift-token")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
@@ -42,16 +52,15 @@ const AllAdmin = () => {
           }
           setIsDataLoading(false);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log("Delete admin error: ", error);
           setIsDataLoading(true);
-        })
+        });
     }
   }, [deleteItem, refetch]);
 
-
   if (isLoading) {
-    return <Loading></Loading>
+    return <Loading></Loading>;
   }
 
   if (!admins.length) {
@@ -68,7 +77,6 @@ const AllAdmin = () => {
     setCloseModal(false);
     setSelectedItem(item);
   };
-
 
   return (
     <div>
@@ -109,8 +117,7 @@ const AllAdmin = () => {
           </tbody>
         </table>
       </div>
-      {
-        !closeModal &&
+      {!closeModal && (
         <ConfirmationModal
           title={`Are you sure you want to delete`}
           message={`If delete admin ${selectedItem?.userName} it can't be undone.`}
@@ -118,9 +125,8 @@ const AllAdmin = () => {
           selectedItem={selectedItem}
           setCloseModal={setCloseModal}
         ></ConfirmationModal>
-      }
+      )}
     </div>
-
   );
 };
 

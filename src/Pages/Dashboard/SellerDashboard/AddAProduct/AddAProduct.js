@@ -22,7 +22,9 @@ const AddAProduct = () => {
   const { data: categories, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch("https://thrift-store-server.vercel.app/categories");
+      const res = await fetch(
+        "https://thrift-store-server.vercel.app/categories"
+      );
       const data = await res.json();
       return data;
     },
@@ -51,7 +53,9 @@ const AddAProduct = () => {
             (category) => category.categoryName === data.productCategory
           );
 
-          fetch(`https://thrift-store-server.vercel.app/users?email=${user.email}`)
+          fetch(
+            `https://thrift-store-server.vercel.app/users?email=${user.email}`
+          )
             .then((res) => res.json())
             .then((userData) => {
               const userInfo = userData.result;
@@ -88,25 +92,24 @@ const AddAProduct = () => {
                     navigate("/dashboard/my-products");
                   }
                 })
-                .catch(error => {
+                .catch((error) => {
                   console.log("product post error: ", error);
                   toast.error(error.message);
                   isAdding(false);
-                })
-
+                });
             })
-            .catch(error => {
+            .catch((error) => {
               console.log("Users error: ", error);
               toast.error(error.message);
               isAdding(false);
-            })
+            });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Image hosting error: ", error);
         toast.error(error.message);
         isAdding(false);
-      })
+      });
   };
 
   return (
@@ -148,7 +151,9 @@ const AddAProduct = () => {
               </div>
               <div className="form-control w-full">
                 <label className="label">
-                  <span className="label-text font-medium">Original Price*</span>
+                  <span className="label-text font-medium">
+                    Original Price*
+                  </span>
                 </label>
                 <input
                   {...register("originalPrice", {
@@ -159,12 +164,16 @@ const AddAProduct = () => {
                   min="0"
                   className="input input-bordered w-full"
                 />
-                <p className="text-red-500 mt-2">{errors.originalPrice?.message}</p>
+                <p className="text-red-500 mt-2">
+                  {errors.originalPrice?.message}
+                </p>
               </div>
               <div className="form-control w-full">
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text font-medium">Month of Use*</span>
+                    <span className="label-text font-medium">
+                      Month of Use*
+                    </span>
                   </label>
                   <input
                     {...register("monthsUsed", {
@@ -174,13 +183,17 @@ const AddAProduct = () => {
                     min="0"
                     className="input input-bordered w-full"
                   />
-                  <p className="text-red-500 mt-2">{errors.monthsUsed?.message}</p>
+                  <p className="text-red-500 mt-2">
+                    {errors.monthsUsed?.message}
+                  </p>
                 </div>
               </div>
               <div className="form-control w-full">
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text font-medium">Condition Type*</span>
+                    <span className="label-text font-medium">
+                      Condition Type*
+                    </span>
                   </label>
                   <select
                     {...register("conditionType", {
@@ -192,15 +205,17 @@ const AddAProduct = () => {
                     <option>Good</option>
                     <option>Fair</option>
                   </select>
-                  <p className="text-red-500 mt-2">{errors.conditionType?.message}</p>
+                  <p className="text-red-500 mt-2">
+                    {errors.conditionType?.message}
+                  </p>
                 </div>
               </div>
               <div className="form-control w-full">
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text font-medium">
-                      Product Category
-                      *</span>
+                      Product Category *
+                    </span>
                   </label>
                   <select
                     {...register("productCategory", {
@@ -209,7 +224,9 @@ const AddAProduct = () => {
                     className="select select-bordered w-full  "
                   >
                     {categories.map((category) => (
-                      <option key={category._id}>{category.categoryName}</option>
+                      <option key={category._id}>
+                        {category.categoryName}
+                      </option>
                     ))}
                   </select>
                   <p className="text-red-500 mt-2">
@@ -236,7 +253,9 @@ const AddAProduct = () => {
                   <span className="label-text font-medium">Location*</span>
                 </label>
                 <input
-                  {...register("location", { required: "Location is required" })}
+                  {...register("location", {
+                    required: "Location is required",
+                  })}
                   type="text"
                   className="input input-bordered w-full"
                 />
@@ -245,7 +264,9 @@ const AddAProduct = () => {
               <div className="form-control w-full">
                 <div className="form-control w-full">
                   <label className="label">
-                    <span className="label-text font-medium">Mobile Number*</span>
+                    <span className="label-text font-medium">
+                      Mobile Number*
+                    </span>
                   </label>
                   <input
                     {...register("sellerNumber", {
@@ -254,7 +275,9 @@ const AddAProduct = () => {
                     type="number"
                     className="input input-bordered w-full"
                   />
-                  <p className="text-red-500 mt-2">{errors.sellerNumber?.message}</p>
+                  <p className="text-red-500 mt-2">
+                    {errors.sellerNumber?.message}
+                  </p>
                 </div>
               </div>
             </div>
@@ -272,13 +295,16 @@ const AddAProduct = () => {
                     },
                     minLength: {
                       value: 10,
-                      message: "Please write something about your product at least 10 character"
-                    }
+                      message:
+                        "Please write something about your product at least 10 character",
+                    },
                   })}
                   className="textarea textarea-bordered"
                   rows="2"
                 ></textarea>
-                <p className="text-red-500 mt-2">{errors.description?.message}</p>
+                <p className="text-red-500 mt-2">
+                  {errors.description?.message}
+                </p>
               </div>
             </div>
             <div className="form-control w-full mt-2">

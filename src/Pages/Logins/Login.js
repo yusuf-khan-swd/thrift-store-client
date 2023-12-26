@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import googleLogo from "../../assets/google.png";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import useToken from "../../hooks/useToken";
 import Spinner from "../Shared/Spinner/Spinner";
 

@@ -1,16 +1,21 @@
 import React from "react";
 
-const ConfirmationModal = ({ title, message, setDeleteItem, selectedItem, setCloseModal }) => {
+const ConfirmationModal = ({
+  title,
+  message,
+  setDeleteItem,
+  selectedItem,
+  setCloseModal,
+}) => {
   const handleSuccessAction = () => {
     setCloseModal(true);
     setDeleteItem(selectedItem);
-  }
+  };
 
   const handleCancelAction = () => {
     setDeleteItem(false);
     setCloseModal(true);
-  }
-
+  };
 
   return (
     <div>
@@ -27,7 +32,13 @@ const ConfirmationModal = ({ title, message, setDeleteItem, selectedItem, setClo
           <h3 className="font-bold text-lg">{title}</h3>
           <p className="py-4">{message}</p>
           <div className="modal-action">
-            <label onClick={handleSuccessAction} htmlFor="confirmation-modal" className="btn btn-error btn-sm">Confirm</label>
+            <label
+              onClick={handleSuccessAction}
+              htmlFor="confirmation-modal"
+              className="btn btn-error btn-sm"
+            >
+              Confirm
+            </label>
             <label
               onClick={handleCancelAction}
               htmlFor="confirmation-modal"

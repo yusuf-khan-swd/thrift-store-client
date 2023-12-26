@@ -27,99 +27,151 @@ import SellerRoute from "../SellerRoute/SellerRoute";
 
 const routes = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Main></Main>,
     errorElement: <DisplayError></DisplayError>,
     children: [
       {
-        path: '/',
-        element: <Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-        path: '/home',
-        element: <Home></Home>
+        path: "/home",
+        element: <Home></Home>,
       },
       {
-        path: '/categories',
-        element: <Categories></Categories>
+        path: "/categories",
+        element: <Categories></Categories>,
       },
       {
-        path: '/category/:id',
+        path: "/category/:id",
         element: <Products></Products>,
       },
       {
-        path: '/all-products',
-        element: <Products></Products>
+        path: "/all-products",
+        element: <Products></Products>,
       },
       {
-        path: '/blog',
-        element: <Blog></Blog>
+        path: "/blog",
+        element: <Blog></Blog>,
       },
       {
-        path: '/login',
-        element: <Login></Login>
+        path: "/login",
+        element: <Login></Login>,
       },
       {
-        path: '/register',
-        element: <Register></Register>
+        path: "/register",
+        element: <Register></Register>,
       },
     ],
   },
   {
-    path: '/dashboard',
-    element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     errorElement: <DisplayError></DisplayError>,
     children: [
       {
-        path: '/dashboard',
-        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+        path: "/dashboard",
+        element: (
+          <PrivateRoute>
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+        ),
       },
       {
-        path: '/dashboard/my-orders',
-        element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
+        path: "/dashboard/my-orders",
+        element: (
+          <BuyerRoute>
+            <MyOrders></MyOrders>
+          </BuyerRoute>
+        ),
       },
       {
-        path: '/dashboard/my-payment/:id',
-        element: <BuyerRoute><Payment></Payment></BuyerRoute>,
+        path: "/dashboard/my-payment/:id",
+        element: (
+          <BuyerRoute>
+            <Payment></Payment>
+          </BuyerRoute>
+        ),
       },
       {
-        path: '/dashboard/add-product',
-        element: <SellerRoute><AddAProduct></AddAProduct></SellerRoute>
+        path: "/dashboard/add-product",
+        element: (
+          <SellerRoute>
+            <AddAProduct></AddAProduct>
+          </SellerRoute>
+        ),
       },
       {
-        path: '/dashboard/my-products',
-        element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
+        path: "/dashboard/my-products",
+        element: (
+          <SellerRoute>
+            <MyProducts></MyProducts>
+          </SellerRoute>
+        ),
       },
       {
-        path: '/dashboard/my-buyers',
-        element: <SellerRoute><MyBuyers></MyBuyers></SellerRoute>
+        path: "/dashboard/my-buyers",
+        element: (
+          <SellerRoute>
+            <MyBuyers></MyBuyers>
+          </SellerRoute>
+        ),
       },
       {
-        path: '/dashboard/all-sellers',
-        element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
+        path: "/dashboard/all-sellers",
+        element: (
+          <AdminRoute>
+            <AllSellers></AllSellers>
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/all-buyers',
-        element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+        path: "/dashboard/all-buyers",
+        element: (
+          <AdminRoute>
+            <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/all-admins',
-        element: <AdminRoute><AllAdmin></AllAdmin></AdminRoute>
+        path: "/dashboard/all-admins",
+        element: (
+          <AdminRoute>
+            <AllAdmin></AllAdmin>
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/reported-items',
-        element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
+        path: "/dashboard/reported-items",
+        element: (
+          <AdminRoute>
+            <ReportedItems></ReportedItems>
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/add-category',
-        element: <AdminRoute><AddACategory></AddACategory></AdminRoute>
+        path: "/dashboard/add-category",
+        element: (
+          <AdminRoute>
+            <AddACategory></AddACategory>
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/all-categories',
-        element: <AdminRoute><AllCategories></AllCategories></AdminRoute>
+        path: "/dashboard/all-categories",
+        element: (
+          <AdminRoute>
+            <AllCategories></AllCategories>
+          </AdminRoute>
+        ),
       },
     ],
-  }
+  },
 ]);
 
 export default routes;

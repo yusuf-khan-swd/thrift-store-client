@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const OurStates = () => {
   return (
-    <div className='container mx-auto'>
-      <div className='m-2'>
+    <div className="container mx-auto">
+      <div className="m-2">
         <div className="px-4 pt-16 pb-8 mx-auto sm:max-w-xl md:max-w-full lg:w-full md:px-24 lg:px-8 lg:py-20 bg-white rounded-lg">
           <div className="max-w-xl mb-10 md:mx-auto text-center lg:max-w-2xl md:mb-12">
             <div>
@@ -15,7 +15,9 @@ const OurStates = () => {
               A place where you can find all your needs
             </h2>
             <p className="text-base text-gray-700 md:text-lg">
-              Successful people always see things working out. Alone, we don’t make much of a difference, but together, we are strong to face any problem.
+              Successful people always see things working out. Alone, we don’t
+              make much of a difference, but together, we are strong to face any
+              problem.
             </p>
           </div>
           <div className="relative w-full p-px mx-auto mb-4 overflow-hidden transition-shadow duration-300 border rounded lg:mb-8 lg:max-w-4xl group hover:shadow-xl">
