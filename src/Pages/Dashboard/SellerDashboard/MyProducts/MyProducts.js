@@ -107,7 +107,7 @@ const MyProducts = () => {
         Total Products: <span className="text-teal-500">{products.length}</span>
       </h2>
       <div className="h-8 flex justify-center items-center mt-2">
-        {isDataLoading && <Spinner></Spinner>}
+        {isDataLoading && <Spinner />}
       </div>
       <div className="overflow-x-auto m-2 lg:m-5">
         <div className="overflow-x-auto w-full">

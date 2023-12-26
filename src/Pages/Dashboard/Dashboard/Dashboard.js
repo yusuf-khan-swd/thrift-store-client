@@ -70,7 +70,7 @@ const Dashboard = () => {
     <div className="container mx-auto">
       <div className="mt-8 mb-24 m-2 w-11/12 mx-auto">
         <div className="h-8 flex justify-center items-center mt-2">
-          {isDataLoading && <Spinner></Spinner>}
+          {isDataLoading && <Spinner />}
         </div>
         <div className="card shadow-lg bg-white border w-full">
           <div className="card-body">

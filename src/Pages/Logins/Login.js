@@ -90,7 +90,7 @@ const Login = () => {
   return (
     <div className="container mx-auto p-3 mb-24">
       {token && <Navigate to={`${from}`} />}
-      <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
+      <div className="h-8">{isDataLoading && <Spinner />}</div>
       <div className="card max-w-sm mx-auto bg-white">
         <div className="card-body border rounded-md">
           <h2 className="card-title justify-center text-2xl cursor-pointer">

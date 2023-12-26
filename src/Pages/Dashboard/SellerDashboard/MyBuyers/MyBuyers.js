@@ -78,7 +78,7 @@ const MyBuyers = () => {
       <h2 className="text-3xl font-bold text-center cursor-pointer underline pt-4 pb-4 underline-offset-4 uppercase">
         Total Buyer: <span className="text-teal-500">{products.length}</span>
       </h2>
-      <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
+      <div className="h-8">{isDataLoading && <Spinner />}</div>
       {products.length !== 0 && (
         <div className="overflow-x-auto m-2 lg:m-5">
           <div className="overflow-x-auto w-full">

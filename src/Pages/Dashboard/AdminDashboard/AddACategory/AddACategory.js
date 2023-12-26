@@ -63,7 +63,7 @@ const AddACategory = () => {
 
   return (
     <div className="container mx-auto px-3">
-      <div className="h-8 mt-4">{isAdding && <Spinner></Spinner>}</div>
+      <div className="h-8 mt-4">{isAdding && <Spinner />}</div>
       <div className="card max-w-lg mx-auto bg-white mb-12">
         <div className="card-body border rounded-md">
           <h2 className="card-title justify-center text-2xl cursor-pointer">

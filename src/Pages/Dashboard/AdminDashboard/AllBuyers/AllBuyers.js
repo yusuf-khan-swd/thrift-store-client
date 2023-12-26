@@ -115,7 +115,7 @@ const AllBuyers = () => {
           Total Buyers - {buyers.length}
         </h2>
       </div>
-      <div className="h-8">{isDataLoading && <Spinner></Spinner>}</div>
+      <div className="h-8">{isDataLoading && <Spinner />}</div>
       <div className="overflow-x-auto m-2 lg:m-5">
         <table className="table table-zebra w-full">
           <thead>
