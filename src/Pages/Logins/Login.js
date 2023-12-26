@@ -143,12 +143,17 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <p className="text-center mt-2">
+      <p className="text-center my-2">
         New to thrift store? Please{" "}
         <Link to="/register" className="text-blue-600">
           register
         </Link>
       </p>
+      <div className="text-center">
+        <p>Buyer Credential - Email: buyer@buyer.com - Password: 123456</p>
+        <p>Seller Credential - Email: seller@seller.com - Password: 123456</p>
+        <p>Admin Credential - Email: admin@admin.com - Password: 123456</p>
+      </div>
     </div>
   );
 };
