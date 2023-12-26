@@ -28,40 +28,40 @@ import SellerRoute from "../SellerRoute/SellerRoute";
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Main></Main>,
-    errorElement: <DisplayError></DisplayError>,
+    element: <Main />,
+    errorElement: <DisplayError />,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/home",
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/categories",
-        element: <Categories></Categories>,
+        element: <Categories />,
       },
       {
         path: "/category/:id",
-        element: <Products></Products>,
+        element: <Products />,
       },
       {
         path: "/all-products",
-        element: <Products></Products>,
+        element: <Products />,
       },
       {
         path: "/blog",
-        element: <Blog></Blog>,
+        element: <Blog />,
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: <Login />,
       },
       {
         path: "/register",
-        element: <Register></Register>,
+        element: <Register />,
       },
     ],
   },
@@ -69,16 +69,16 @@ const routes = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <DashboardLayout></DashboardLayout>
+        <DashboardLayout />
       </PrivateRoute>
     ),
-    errorElement: <DisplayError></DisplayError>,
+    errorElement: <DisplayError />,
     children: [
       {
         path: "/dashboard",
         element: (
           <PrivateRoute>
-            <Dashboard></Dashboard>
+            <Dashboard />
           </PrivateRoute>
         ),
       },
@@ -86,7 +86,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/my-orders",
         element: (
           <BuyerRoute>
-            <MyOrders></MyOrders>
+            <MyOrders />
           </BuyerRoute>
         ),
       },
@@ -102,7 +102,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/add-product",
         element: (
           <SellerRoute>
-            <AddAProduct></AddAProduct>
+            <AddAProduct />
           </SellerRoute>
         ),
       },
@@ -110,7 +110,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/my-products",
         element: (
           <SellerRoute>
-            <MyProducts></MyProducts>
+            <MyProducts />
           </SellerRoute>
         ),
       },
@@ -118,7 +118,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/my-buyers",
         element: (
           <SellerRoute>
-            <MyBuyers></MyBuyers>
+            <MyBuyers />
           </SellerRoute>
         ),
       },
@@ -126,7 +126,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/all-sellers",
         element: (
           <AdminRoute>
-            <AllSellers></AllSellers>
+            <AllSellers />
           </AdminRoute>
         ),
       },
@@ -134,7 +134,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/all-buyers",
         element: (
           <AdminRoute>
-            <AllBuyers></AllBuyers>
+            <AllBuyers />
           </AdminRoute>
         ),
       },
@@ -142,7 +142,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/all-admins",
         element: (
           <AdminRoute>
-            <AllAdmin></AllAdmin>
+            <AllAdmin />
           </AdminRoute>
         ),
       },
@@ -150,7 +150,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/reported-items",
         element: (
           <AdminRoute>
-            <ReportedItems></ReportedItems>
+            <ReportedItems />
           </AdminRoute>
         ),
       },
@@ -158,7 +158,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/add-category",
         element: (
           <AdminRoute>
-            <AddACategory></AddACategory>
+            <AddACategory />
           </AdminRoute>
         ),
       },
@@ -166,7 +166,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/all-categories",
         element: (
           <AdminRoute>
-            <AllCategories></AllCategories>
+            <AllCategories />
           </AdminRoute>
         ),
       },
