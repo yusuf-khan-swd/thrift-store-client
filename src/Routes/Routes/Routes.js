@@ -45,11 +45,11 @@ const routes = createBrowserRouter([
       },
       {
         path: '/category/:id',
-        element: <PrivateRoute><Products></Products></PrivateRoute>,
+        element: <Products></Products>,
       },
       {
         path: '/all-products',
-        element: <PrivateRoute><Products></Products></PrivateRoute>
+        element: <Products></Products>
       },
       {
         path: '/blog',
