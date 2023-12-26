@@ -2,20 +2,20 @@
 
 ### Project live site [Thrift Store](https://thrift-store-88291.web.app/).
 
-Buyer Credential
+Admin Credential
 
-- Email: buyer@buyer.com
-- Password: password
+- Email: admin@admin.com
+- Password: 123456
 
 Seller Credential
 
 - Email: seller@seller.com
 - Password: password
 
-Admin Credential
+Buyer Credential
 
-- Email: admin@admin.com
-- Password: 123456
+- Email: buyer@buyer.com
+- Password: password
 
 ## `Useful Links`
 
