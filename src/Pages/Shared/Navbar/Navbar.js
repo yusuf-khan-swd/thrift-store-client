@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { FaUser } from "react-icons/fa";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import logo from "../../../assets/android-chrome-192x192.png";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import "./Navbar.css";
-import logo from "../../../assets/android-chrome-192x192.png";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -33,14 +33,13 @@ const Navbar = () => {
           Categories
         </NavLink>
       </li>
+      <li className="mb-1 lg:m-0 lg:mr-1">
+        <NavLink className={`rounded-lg`} to={`/category/${"all-products"}`}>
+          All Products
+        </NavLink>
+      </li>
       {user?.uid ? (
-        <>
-          <li className="mb-1 lg:m-0 lg:mr-1">
-            <NavLink className={`rounded-lg`} to={`/category/${'all-products'}`}>
-              All Products
-            </NavLink>
-          </li>
-        </>
+        <></>
       ) : (
         <li className="mb-1 lg:m-0 lg:mr-1">
           <NavLink className={`rounded-lg`} to="/login">
@@ -120,8 +119,7 @@ const Navbar = () => {
           <div className="navbar navbar-start hidden lg:flex w-3/4">
             <ul className="menu menu-horizontal p-0">{menuItems}</ul>
           </div>
-          {
-            user?.uid &&
+          {user?.uid && (
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <ul className="w-10 rounded-full">
@@ -130,7 +128,10 @@ const Navbar = () => {
                   </li>
                 </ul>
               </label>
-              <ul tabIndex={0} className="menu menu-compact bg-base-100 dropdown-content mt-3 p-2 shadow rounded-box w-52 text-slate-800">
+              <ul
+                tabIndex={0}
+                className="menu menu-compact bg-base-100 dropdown-content mt-3 p-2 shadow rounded-box w-52 text-slate-800"
+              >
                 <li className="mb-1 lg:m-0 lg:mr-1">
                   <NavLink className={`rounded-lg`} to="/dashboard">
                     Dashboard
@@ -143,7 +144,7 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
-          }
+          )}
         </div>
       </div>
     </div>
