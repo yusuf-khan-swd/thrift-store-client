@@ -38,6 +38,11 @@ const Navbar = () => {
           All Products
         </NavLink>
       </li>
+      <li className="mb-1 lg:m-0 lg:mr-1">
+        <NavLink className={`rounded-lg`} to="/blog">
+          Blog
+        </NavLink>
+      </li>
       {!user?.uid && (
         <li className="mb-1 lg:m-0 lg:mr-1">
           <NavLink className={`rounded-lg`} to="/login">
@@ -45,11 +50,6 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
-      <li className="mb-1 lg:m-0 lg:mr-1">
-        <NavLink className={`rounded-lg`} to="/blog">
-          Blog
-        </NavLink>
-      </li>
     </>
   );
 
