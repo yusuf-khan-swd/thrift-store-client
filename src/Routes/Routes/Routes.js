@@ -94,7 +94,7 @@ const routes = createBrowserRouter([
         path: "/dashboard/my-payment/:id",
         element: (
           <BuyerRoute>
-            <Payment></Payment>
+            <Payment />
           </BuyerRoute>
         ),
       },
