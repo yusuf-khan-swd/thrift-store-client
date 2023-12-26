@@ -150,8 +150,8 @@ const Login = () => {
         </Link>
       </p>
       <div className="text-center grid gap-1">
-        <p>Buyer Credential - buyer@buyer.com - Password: 123456</p>
-        <p>Seller Credential - seller@seller.com - Password: 123456</p>
+        <p>Buyer Credential - buyer@buyer.com - Password: password</p>
+        <p>Seller Credential - seller@seller.com - Password: password</p>
         <p>Admin Credential - admin@admin.com - Password: 123456</p>
       </div>
     </div>

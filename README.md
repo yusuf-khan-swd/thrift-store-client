@@ -5,12 +5,12 @@
 Buyer Credential
 
 - Email: buyer@buyer.com
-- Password: 123456
+- Password: password
 
 Seller Credential
 
 - Email: seller@seller.com
-- Password: 123456
+- Password: password
 
 Admin Credential
 
