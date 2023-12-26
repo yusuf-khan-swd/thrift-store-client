@@ -1,5 +1,7 @@
 # Thrift Store
 
+### Project live site [Thrift Store](https://thrift-store-88291.web.app/).
+
 Buyer Credential
 
 - Email: buyer@buyer.com
@@ -15,7 +17,11 @@ Admin Credential
 - Email: admin@admin.com
 - Password: 123456
 
-### Project live site [Thrift Store](https://thrift-store-88291.web.app/).
+## `Useful Links`
+
+**1. [Github Client Side Repository](https://github.com/yusuf-khan-swd/thrift-store-client)** \
+**2. [Github Server Side Repository](https://github.com/yusuf-khan-swd/thrift-store-server)** \
+**3. [Live Website](https://thrift-store-88291.web.app/)**
 
 ## Project Functionality :
 
