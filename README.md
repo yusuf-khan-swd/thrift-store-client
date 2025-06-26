@@ -1,3 +1,5 @@
+Testing local project connect with github
+
 # Thrift Store
 
 ### Project live site [Thrift Store](https://thrift-store-88291.web.app/).
